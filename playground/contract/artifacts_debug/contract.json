@@ -17,16 +17,32 @@
                     "name": "asset_count"
                 },
                 {
-                    "type": "string",
-                    "name": "asset_id"
-                },
-                {
                     "type": "uint64",
                     "name": "Amount"
                 }
             ],
             "returns": {
-                "type": "(string,string,uint64,string,uint64)"
+                "type": "(string,string,uint64,uint64)"
+            }
+        },
+        {
+            "name": "RegisterQues",
+            "args": [
+                {
+                    "type": "string",
+                    "name": "proposal_id"
+                },
+                {
+                    "type": "string",
+                    "name": "question_id"
+                },
+                {
+                    "type": "string",
+                    "name": "question"
+                }
+            ],
+            "returns": {
+                "type": "(string,string,string)"
             }
         },
         {
@@ -121,16 +137,12 @@
                     "name": "asset_count"
                 },
                 {
-                    "type": "string",
-                    "name": "asset_id"
-                },
-                {
                     "type": "uint64",
                     "name": "Amount"
                 }
             ],
             "returns": {
-                "type": "(string,string,uint64,string,uint64)"
+                "type": "(string,string,uint64,uint64)"
             }
         },
         {
@@ -158,47 +170,51 @@
             }
         },
         {
-            "name": "token_sell",
-            "args": [
-                {
-                    "type": "uint64",
-                    "name": "token_count"
-                },
-                {
-                    "type": "uint64",
-                    "name": "token_interchanged"
-                }
-            ],
-            "returns": {
-                "type": "uint64"
-            }
-        },
-        {
             "name": "token_buy",
             "args": [
                 {
-                    "type": "uint64",
-                    "name": "token_count"
+                    "type": "string",
+                    "name": "proposal_id"
+                },
+                {
+                    "type": "string",
+                    "name": "user_id"
                 },
                 {
                     "type": "uint64",
-                    "name": "token_interchanged"
+                    "name": "user_response"
+                },
+                {
+                    "type": "uint64",
+                    "name": "token_buy"
                 }
             ],
             "returns": {
-                "type": "uint64"
+                "type": "void"
             }
         },
         {
-            "name": "max_token_vote",
+            "name": "token_sell",
             "args": [
                 {
+                    "type": "string",
+                    "name": "proposal_id"
+                },
+                {
+                    "type": "string",
+                    "name": "user_id"
+                },
+                {
                     "type": "uint64",
-                    "name": "token_count"
+                    "name": "user_response"
+                },
+                {
+                    "type": "uint64",
+                    "name": "token_sell"
                 }
             ],
             "returns": {
-                "type": "uint64"
+                "type": "void"
             }
         },
         {
@@ -221,12 +237,16 @@
                     "name": "token_count"
                 },
                 {
+                    "type": "string",
+                    "name": "question_id"
+                },
+                {
                     "type": "uint64",
                     "name": "user_response"
                 }
             ],
             "returns": {
-                "type": "(string,string,uint64,uint64)"
+                "type": "(string,string,uint64,uint64,string)"
             }
         },
         {
@@ -235,6 +255,10 @@
                 {
                     "type": "string",
                     "name": "proposal_id"
+                },
+                {
+                    "type": "string",
+                    "name": "question_id"
                 }
             ],
             "returns": {
@@ -320,7 +344,7 @@
                 }
             ],
             "returns": {
-                "type": "(string,string,uint64,string,uint64)"
+                "type": "(string,string,uint64,uint64)"
             }
         },
         {
@@ -380,7 +404,7 @@
                 }
             ],
             "returns": {
-                "type": "(string,string,uint64,uint64)"
+                "type": "(string,string,uint64,uint64,string)"
             }
         }
     ],

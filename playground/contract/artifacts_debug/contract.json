@@ -62,26 +62,6 @@
             }
         },
         {
-            "name": "asset_token_register",
-            "args": [
-                {
-                    "type": "string",
-                    "name": "proposal_id"
-                },
-                {
-                    "type": "string",
-                    "name": "asset_id"
-                },
-                {
-                    "type": "string",
-                    "name": "asset_count"
-                }
-            ],
-            "returns": {
-                "type": "(string,string,string)"
-            }
-        },
-        {
             "name": "Registred_user_per_proposal",
             "args": [
                 {
@@ -122,31 +102,7 @@
             }
         },
         {
-            "name": "update_proposal",
-            "args": [
-                {
-                    "type": "string",
-                    "name": "proposal_id"
-                },
-                {
-                    "type": "string",
-                    "name": "proposal_name"
-                },
-                {
-                    "type": "uint64",
-                    "name": "asset_count"
-                },
-                {
-                    "type": "uint64",
-                    "name": "Amount"
-                }
-            ],
-            "returns": {
-                "type": "(string,string,uint64,uint64)"
-            }
-        },
-        {
-            "name": "Update_Users",
+            "name": "token_buy",
             "args": [
                 {
                     "type": "string",
@@ -161,24 +117,8 @@
                     "name": "asset_id"
                 },
                 {
-                    "type": "uint64",
-                    "name": "token_count"
-                }
-            ],
-            "returns": {
-                "type": "(string,string,uint64)"
-            }
-        },
-        {
-            "name": "token_buy",
-            "args": [
-                {
                     "type": "string",
-                    "name": "proposal_id"
-                },
-                {
-                    "type": "string",
-                    "name": "user_id"
+                    "name": "question_id"
                 },
                 {
                     "type": "uint64",
@@ -203,6 +143,14 @@
                 {
                     "type": "string",
                     "name": "user_id"
+                },
+                {
+                    "type": "string",
+                    "name": "asset_id"
+                },
+                {
+                    "type": "string",
+                    "name": "question_id"
                 },
                 {
                     "type": "uint64",
@@ -263,76 +211,6 @@
             ],
             "returns": {
                 "type": "uint64"
-            }
-        },
-        {
-            "name": "option_1",
-            "args": [],
-            "returns": {
-                "type": "void"
-            }
-        },
-        {
-            "name": "option_2",
-            "args": [],
-            "returns": {
-                "type": "void"
-            }
-        },
-        {
-            "name": "option_3",
-            "args": [],
-            "returns": {
-                "type": "void"
-            }
-        },
-        {
-            "name": "option_4",
-            "args": [],
-            "returns": {
-                "type": "void"
-            }
-        },
-        {
-            "name": "option_5",
-            "args": [],
-            "returns": {
-                "type": "void"
-            }
-        },
-        {
-            "name": "option_6",
-            "args": [],
-            "returns": {
-                "type": "void"
-            }
-        },
-        {
-            "name": "option_7",
-            "args": [],
-            "returns": {
-                "type": "void"
-            }
-        },
-        {
-            "name": "option_8",
-            "args": [],
-            "returns": {
-                "type": "void"
-            }
-        },
-        {
-            "name": "option_9",
-            "args": [],
-            "returns": {
-                "type": "void"
-            }
-        },
-        {
-            "name": "option_10",
-            "args": [],
-            "returns": {
-                "type": "void"
             }
         },
         {

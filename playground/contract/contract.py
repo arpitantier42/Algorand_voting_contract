@@ -1,4 +1,3 @@
-# Sample Hello World Beaker smart contract - the most basic starting point for an Algorand smart contract
 import beaker as bk
 import pyteal as pt
 from beaker.lib.storage import BoxMapping
@@ -10,8 +9,8 @@ class Proposal_Record(pt.abi.NamedTuple):
     Amount:pt.abi.Field[pt.abi.Uint64]=[]
     
 class asset_store(pt.abi.NamedTuple):
-     proposal_id:pt.abi.Field[pt.abi.String]
-     asset_id:pt.abi.Field[pt.abi.String]=[]
+    proposal_id:pt.abi.Field[pt.abi.String]
+    asset_id:pt.abi.Field[pt.abi.String]=[]
 
 class User_per_proposal_record(pt.abi.NamedTuple):
     proposal_id:pt.abi.Field[pt.abi.String]
@@ -41,28 +40,24 @@ class Proposal_Record_State:
     response_rec = BoxMapping(pt.abi.String,Response_store,prefix=pt.Bytes("@"))
     asset_str = BoxMapping(pt.abi.String,asset_store,prefix=pt.Bytes("$"))
     question_rec = BoxMapping(pt.abi.String,Question_store,prefix=pt.Bytes("Q"))
-  
+ 
 # Some Global Variable declaration
-    resultbuy =bk.GlobalStateValue(pt.TealType.uint64)
-    resultsell =bk.GlobalStateValue(pt.TealType.uint64)
-    max_token =bk.GlobalStateValue(pt.TealType.uint64)
-    result_proposal_id =bk.GlobalStateValue(pt.TealType.uint64)
 
+    result_proposal_id =bk.GlobalStateValue(
+        pt.TealType.uint64
+    )
     option1 = bk.GlobalStateValue(
         stack_type=pt.TealType.uint64,
         default=pt.Int(0),
     )
-
     option2 = bk.GlobalStateValue(
         stack_type=pt.TealType.uint64,
         default=pt.Int(0),
     )
-
     option3 = bk.GlobalStateValue(
         stack_type=pt.TealType.uint64,
         default=pt.Int(0),
     )
-
     option4 = bk.GlobalStateValue(
         stack_type=pt.TealType.uint64,
         default=pt.Int(0),
@@ -91,23 +86,11 @@ class Proposal_Record_State:
         stack_type=pt.TealType.uint64,
         default=pt.Int(0),
     )
-    
     res = bk.GlobalStateValue(
         stack_type=pt.TealType.uint64,
         default=pt.Int(0),
     )
-
     token_chk = bk.GlobalStateValue(
-        stack_type=pt.TealType.uint64,
-        default=pt.Int(0),
-        
-    )
-    max_option_count = bk.GlobalStateValue(
-        stack_type=pt.TealType.uint64,
-        default=pt.Int(0),
-        
-    )
-    max_option = bk.GlobalStateValue(
         stack_type=pt.TealType.uint64,
         default=pt.Int(0),
     )
@@ -117,13 +100,13 @@ app =(
      .apply(bk.unconditional_create_approval,initialize_global_state=True)
 )
 
-
 @app.external
 def Register_proposal(proposal_id:pt.abi.String, proposal_name:pt.abi.String,asset_count:pt.abi.Uint64,Amount:pt.abi.Uint64,* ,output:Proposal_Record) -> pt.Expr:
+
     proposal_store = Proposal_Record()
+
     return pt.Seq(
         proposal_store.set(proposal_id,proposal_name,asset_count,Amount),
-        # pt.Assert(app.state.proposal_rec[proposal_id.get()].exists()== pt.Int(0),comment="Proposal_ID already exists"
         pt.Assert(app.state.proposal_rec[proposal_id.get()].exists()== pt.Int(0),comment="Proposal_ID already exists"
         ),
         app.state.proposal_rec[proposal_id.get()].set(proposal_store),
@@ -132,157 +115,70 @@ def Register_proposal(proposal_id:pt.abi.String, proposal_name:pt.abi.String,ass
 
 @app.external
 def RegisterQues(proposal_id:pt.abi.String,question_id:pt.abi.String,question:pt.abi.String,* ,output:Question_store)->pt.Expr:
+
     proposal_get = Proposal_Record()
     question_store1=Question_store()
+      
     return pt.Seq(
         proposal_get.decode(app.state.proposal_rec[proposal_id.get()].get()),
         question_store1.set(proposal_id,question_id,question),
-         app.state.question_rec[question_id.get()].set(question_store1),
-         app.state.question_rec[question_id.get()].store_into(output),
- )
-
-@app.external
-def asset_register(proposal_id:pt.abi.String,asset_id:pt.abi.String,*,output:asset_store)->pt.Expr:
-    proposal_get = Proposal_Record()
-    asset_get = asset_store()
-    return pt.Seq(
-        proposal_get.decode(app.state.proposal_rec[proposal_id.get()].get()),
-        asset_get.set(proposal_id,asset_id),
-        pt.Assert(app.state.asset_str[asset_id.get()].exists()== pt.Int(0),comment="Proposal_ID already exists"),
-        app.state.asset_str[asset_id.get()].set(asset_get),
-        app.state.asset_str[asset_id.get()].store_into(output),
-    )
-
+        app.state.question_rec[question_id.get()].set(question_store1),
+        app.state.question_rec[question_id.get()].store_into(output),
+      )
 
 @app.external
 def Registred_user_per_proposal(proposal_id:pt.abi.String,user_id:pt.abi.String,*,output:User_per_proposal_record)-> pt.Expr:
+
     registred_user = User_per_proposal_record()
     proposal_get = Proposal_Record()
+
     return pt.Seq(
     registred_user.set(proposal_id,user_id),
     proposal_get.decode(app.state.proposal_rec[proposal_id.get()].get()),
     pt.Assert(app.state.user_rec[user_id.get()].exists()==pt.Int(0),comment="User_ID already exists"),
     app.state.user_rec[(user_id).get()].set(registred_user),
     app.state.user_rec[user_id.get()].store_into(output),
-    )
+                 )
+
+@app.external
+def asset_register(proposal_id:pt.abi.String,asset_id:pt.abi.String,*,output:asset_store)->pt.Expr:
+
+    proposal_get = Proposal_Record()
+    asset_get = asset_store()
+
+    return pt.Seq(
+        proposal_get.decode(app.state.proposal_rec[proposal_id.get()].get()),
+        asset_get.set(proposal_id,asset_id),
+        pt.Assert(app.state.asset_str[asset_id.get()].exists()== pt.Int(0),comment="Proposal_ID already exists"),
+        app.state.asset_str[asset_id.get()].set(asset_get),
+        app.state.asset_str[asset_id.get()].store_into(output),
+
+        )
 
 @app.external
 def Register_user_asset(proposal_id:pt.abi.String,user_id:pt.abi.String,
      asset_id:pt.abi.String,token_count:pt.abi.Uint64,*,output:User_asset_store)-> pt.Expr:
+    
     asset_register = User_asset_store()
     registred_user = User_per_proposal_record()
     existing_proposal_store = Proposal_Record()
     asset_get = asset_store()
+
     return pt.Seq(
-         existing_proposal_store.decode(app.state.proposal_rec[proposal_id.get()].get()),
-         registred_user.decode(app.state.user_rec[user_id.get()].get()),
-         asset_get.decode(app.state.asset_str[asset_id.get()].get()),
+        existing_proposal_store.decode(app.state.proposal_rec[proposal_id.get()].get()),
+        registred_user.decode(app.state.user_rec[user_id.get()].get()),
+        asset_get.decode(app.state.asset_str[asset_id.get()].get()),
         app.state.token_chk.set(token_count.get()),
         asset_register.set(user_id,asset_id,token_count),
         app.state.asset_rec[(asset_id).get()].set(asset_register),
         app.state.asset_rec[asset_id.get()].store_into(output),
     )
 
-
-
-@app.external
-def token_buy(proposal_id:pt.abi.String,
-              user_id:pt.abi.String,asset_id:pt.abi.String,question_id:pt.abi.String,user_response:pt.abi.Uint64,
-              token_buy:pt.abi.Uint64)->pt.Expr:
-    
-    proposal_get = Proposal_Record()
-    user_store = User_per_proposal_record()
-    question_store1=Question_store()
-    response_get = Response_store()
-
-    return pt.Seq(
-                question_store1.decode(app.state.question_rec[question_id.get()].get()),
-                response_get.decode(app.state.response_rec[asset_id.get()].get()),
-          user_store.decode(app.state.user_rec[user_id.get()].get()),
-          proposal_get.decode(app.state.proposal_rec[proposal_id.get()].get()),
-
-    pt.If (user_response.get() == pt.Int(1)).Then(
-            app.state.option1.increment(token_buy.get())
-            ).ElseIf(user_response.get() == pt.Int(2)).Then(
-            app.state.option2.increment(token_buy.get())
-            ).ElseIf
-    (user_response.get() == pt.Int(3)).Then(
-            app.state.option3.increment(token_buy.get())
-            ).ElseIf
-    (user_response.get() == pt.Int(4)).Then(
-            app.state.option4.increment(token_buy.get())
-            ).ElseIf
-    (user_response.get() == pt.Int(5)).Then(
-            app.state.option5.increment(token_buy.get())
-            ).ElseIf
-    (user_response.get() == pt.Int(6)).Then(
-            app.state.option6.increment(token_buy.get())
-            ).ElseIf
-    (user_response.get() == pt.Int(7)).Then(
-            app.state.option7.increment(token_buy.get())
-            ).ElseIf
-    (user_response.get() == pt.Int(8)).Then(
-            app.state.option8.increment(token_buy.get())
-            ).ElseIf
-    (user_response.get() == pt.Int(9)).Then(
-            app.state.option9.increment(token_buy.get())
-            ).ElseIf(
-                      user_response.get() == pt.Int(10)).Then(
-            app.state.option10.increment(token_buy.get())
-            )
-    )
-
-@app.external
-def token_sell(proposal_id:pt.abi.String,user_id:pt.abi.String,asset_id:pt.abi.String,question_id:pt.abi.String,
-               user_response:pt.abi.Uint64,
-               token_sell:pt.abi.Uint64)->pt.Expr:         
-      proposal_get = Proposal_Record()
-      user_store = User_per_proposal_record()
-      question_store1=Question_store()
-      response_get = Response_store()
-
-      return pt.Seq(
-            response_get.decode(app.state.response_rec[asset_id.get()].get()),
-            question_store1.decode(app.state.question_rec[question_id.get()].get()),
-             user_store.decode(app.state.user_rec[user_id.get()].get()),
-            proposal_get.decode(app.state.proposal_rec[proposal_id.get()].get()),
-
-    pt.If (user_response.get() == pt.Int(1)).Then(
-            app.state.option1.decrement(token_sell.get())
-            ).ElseIf(user_response.get() == pt.Int(2)).Then(
-            app.state.option2.decrement(token_sell.get())
-            ).ElseIf
-    (user_response.get() == pt.Int(3)).Then(
-            app.state.option3.decrement(token_sell.get())
-            ).ElseIf
-    (user_response.get() == pt.Int(4)).Then(
-            app.state.option4.decrement(token_sell.get())
-            ).ElseIf
-    (user_response.get() == pt.Int(5)).Then(
-            app.state.option5.decrement(token_sell.get())
-            ).ElseIf
-    (user_response.get() == pt.Int(6)).Then(
-            app.state.option6.decrement(token_sell.get())
-            ).ElseIf
-    (user_response.get() == pt.Int(7)).Then(
-            app.state.option7.decrement(token_sell.get())
-            ).ElseIf
-    (user_response.get() == pt.Int(8)).Then(
-            app.state.option8.decrement(token_sell.get())
-            ).ElseIf
-    (user_response.get() == pt.Int(9)).Then(
-            app.state.option9.decrement(token_sell.get())
-            ).ElseIf(
-                      user_response.get() == pt.Int(10)).Then(
-            app.state.option10.decrement(token_sell.get())
-            )
-    )
-
-# need to change user_id as a key to asset_id as a key
 @app.external
 def Voting_Record(proposal_id:pt.abi.String,user_id:pt.abi.String,asset_id:pt.abi.String,
                   token_count:pt.abi.Uint64,question_id:pt.abi.String,
                   user_response:pt.abi.Uint64,*,output:Response_store)-> pt.Expr:
+    
     proposal_get = Proposal_Record()
     user_store = User_per_proposal_record()
     asset_store = User_asset_store()
@@ -297,19 +193,18 @@ def Voting_Record(proposal_id:pt.abi.String,user_id:pt.abi.String,asset_id:pt.ab
         pt.Assert(app.state.response_rec[asset_id.get()].exists()==pt.Int(0),comment="User_ID already exists"),
         # here we have created a additional functionality user can input the token_count for the voting weightage.
         # He can input the amout on token count he want to use for voting.
-        # response_get.set(response_id,user_id,token_count), 
         response_get.set(user_id,asset_id,token_count,user_response,question_id),
         app.state.response_rec[asset_id.get()].set(response_get),
         app.state.response_rec[asset_id.get()].store_into(output),
-        pt.Assert(app.state.token_chk >=token_count.get(),comment="insuffiecient token_count"),
+        pt.Assert(token_count.get()<=app.state.token_chk,comment="insufficient token_count"),
                   
-         pt.If (user_response.get() == pt.Int(1)).Then(
+        pt.If (user_response.get() == pt.Int(1)).Then(
             app.state.option1.increment(token_count.get())
             ).ElseIf(
                 user_response.get() == pt.Int(2)).Then(
             app.state.option2.increment(token_count.get())
-           ).ElseIf(
-            user_response.get() == pt.Int(3)).Then(
+            ).ElseIf(
+              user_response.get() == pt.Int(3)).Then(
                 app.state.option3.increment(token_count.get())
             ).ElseIf(
                 user_response.get() == pt.Int(4)).Then(
@@ -332,18 +227,115 @@ def Voting_Record(proposal_id:pt.abi.String,user_id:pt.abi.String,asset_id:pt.ab
                 ).ElseIf(
                 user_response.get() == pt.Int(10)).Then(
                     app.state.option10.increment(token_count.get())
-                )       
+                )                
     )
 
 @app.external
+def token_buy(proposal_id:pt.abi.String,
+              user_id:pt.abi.String,asset_id:pt.abi.String,question_id:pt.abi.String,user_response:pt.abi.Uint64,
+              token_buy:pt.abi.Uint64)->pt.Expr:
+    
+    proposal_get = Proposal_Record()
+    user_store = User_per_proposal_record()
+    question_store1=Question_store()
+    response_get = Response_store()
+
+    return pt.Seq(
+                question_store1.decode(app.state.question_rec[question_id.get()].get()),
+                response_get.decode(app.state.response_rec[asset_id.get()].get()),
+                user_store.decode(app.state.user_rec[user_id.get()].get()),
+                proposal_get.decode(app.state.proposal_rec[proposal_id.get()].get()),
+
+    pt.If (user_response.get() == pt.Int(1)).Then(
+            app.state.option1.increment(token_buy.get())
+            ).ElseIf
+    (user_response.get() == pt.Int(2)).Then(
+            app.state.option2.increment(token_buy.get())
+            ).ElseIf
+    (user_response.get() == pt.Int(3)).Then(
+            app.state.option3.increment(token_buy.get())
+            ).ElseIf
+    (user_response.get() == pt.Int(4)).Then(
+            app.state.option4.increment(token_buy.get())
+            ).ElseIf
+    (user_response.get() == pt.Int(5)).Then(
+            app.state.option5.increment(token_buy.get())
+            ).ElseIf
+    (user_response.get() == pt.Int(6)).Then(
+            app.state.option6.increment(token_buy.get())
+            ).ElseIf
+    (user_response.get() == pt.Int(7)).Then(
+            app.state.option7.increment(token_buy.get())
+            ).ElseIf
+    (user_response.get() == pt.Int(8)).Then(
+            app.state.option8.increment(token_buy.get())
+            ).ElseIf
+    (user_response.get() == pt.Int(9)).Then(
+            app.state.option9.increment(token_buy.get())
+            ).ElseIf
+    (user_response.get() == pt.Int(10)).Then(
+            app.state.option10.increment(token_buy.get())
+            )
+    )
+
+@app.external
+def token_sell(proposal_id:pt.abi.String,user_id:pt.abi.String,asset_id:pt.abi.String,question_id:pt.abi.String,
+               user_response:pt.abi.Uint64,
+               token_sell:pt.abi.Uint64)->pt.Expr:  
+             
+      proposal_get = Proposal_Record()
+      user_store = User_per_proposal_record()
+      question_store1=Question_store()
+      response_get = Response_store()
+
+      return pt.Seq(
+            response_get.decode(app.state.response_rec[asset_id.get()].get()),
+            question_store1.decode(app.state.question_rec[question_id.get()].get()),
+            user_store.decode(app.state.user_rec[user_id.get()].get()),
+            proposal_get.decode(app.state.proposal_rec[proposal_id.get()].get()),
+     
+    pt.If (user_response.get() == pt.Int(1)).Then(
+            app.state.option1.decrement(token_sell.get())
+            ).ElseIf
+    (user_response.get() == pt.Int(2)).Then(
+            app.state.option2.decrement(token_sell.get())
+            ).ElseIf
+    (user_response.get() == pt.Int(3)).Then(
+            app.state.option3.decrement(token_sell.get())
+            ).ElseIf
+    (user_response.get() == pt.Int(4)).Then(
+            app.state.option4.decrement(token_sell.get())
+            ).ElseIf
+    (user_response.get() == pt.Int(5)).Then(
+            app.state.option5.decrement(token_sell.get())
+            ).ElseIf
+    (user_response.get() == pt.Int(6)).Then(
+            app.state.option6.decrement(token_sell.get())
+            ).ElseIf
+    (user_response.get() == pt.Int(7)).Then(
+            app.state.option7.decrement(token_sell.get())
+            ).ElseIf
+    (user_response.get() == pt.Int(8)).Then(
+            app.state.option8.decrement(token_sell.get())
+            ).ElseIf
+    (user_response.get() == pt.Int(9)).Then(
+            app.state.option9.decrement(token_sell.get())
+            ).ElseIf
+    (user_response.get() == pt.Int(10)).Then(
+            app.state.option10.decrement(token_sell.get())
+            )
+    )
+
+@app.external   
 def Result(proposal_id:pt.abi.String,
            question_id:pt.abi.String,*,output:pt.abi.String)-> pt.Expr:
+    
     proposal_get = Proposal_Record()
     app.state.result_proposal_id=app.state.result_proposal_id+pt.Int(1)
     question_store1=Question_store()
 
     return pt.Seq(
-                     question_store1.decode(app.state.question_rec[question_id.get()].get()),
+        question_store1.decode(app.state.question_rec[question_id.get()].get()),
         proposal_get.decode(app.state.proposal_rec[proposal_id.get()].get()),
         (maxi := pt.abi.Uint64()).set(app.state.option1.get()),
          pt.If (app.state.option2.get() > maxi.get()).Then(
@@ -370,6 +362,7 @@ def Result(proposal_id:pt.abi.String,
                         ).ElseIf(app.state.option10.get()>maxi.get()).Then(
                             maxi.set(app.state.option10.get()),      
                         ),
+                            
         pt.If(maxi.get() == app.state.option1.get()).Then(
             output.set(pt.Concat(pt.Bytes("option 1 is winner, "), question_id.get()))
         ).ElseIf(maxi.get()== app.state.option2.get()).Then(
@@ -418,16 +411,18 @@ def read_user_asset_store(proposal_id:pt.abi.String,user_id:pt.abi.String,asset_
         user_get.decode(app.state.user_rec[user_id.get()].get()),
         app.state.asset_rec[asset_id.get()].store_into(output)
         )
-
+    
 @app.external
-def read_user_response(user_id:pt.abi.String,*,output:Response_store)-> pt.Expr:
-    return app.state.response_rec[user_id.get()].store_into(output)
+def read_user_response(user_id:pt.abi.String,asset_id:pt.abi.String,proposal_id:pt.abi.String,*,output:Response_store)-> pt.Expr:
+    proposal_get = Proposal_Record()
+    user_get = User_per_proposal_record()
+    return pt.Seq(
+        proposal_get.decode(app.state.proposal_rec[proposal_id.get()].get()),
+        user_get.decode(app.state.user_rec[user_id.get()].get()),
+        app.state.response_rec[asset_id.get()].store_into(output))
 
 if __name__=="__main__":
     spec=app.build()
     print("Contract Created Successfully!!!!!!!!!!")
     spec.export("artifacts_debug")
-    
-
-
 

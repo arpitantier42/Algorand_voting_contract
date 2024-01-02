@@ -1,6 +1,6 @@
 #pragma version 8
 intcblock 0 1 65536 4
-bytecblock 0x 0x151f7c75 0x6f7074696f6e3130 0x6f7074696f6e32 0x6f7074696f6e33 0x6f7074696f6e34 0x6f7074696f6e35 0x6f7074696f6e36 0x6f7074696f6e37 0x6f7074696f6e38 0x6f7074696f6e39 0x6f7074696f6e31 0x5f 0x51 0x40 0x24 0x23 0x61737365745f616d6f756e745f737472 0x726573706f6e7365 0x746f6b656e5f63686b
+bytecblock 0x 0x151f7c75 0x6f7074696f6e3130 0x6f7074696f6e32 0x6f7074696f6e33 0x6f7074696f6e34 0x6f7074696f6e35 0x6f7074696f6e36 0x6f7074696f6e37 0x6f7074696f6e38 0x6f7074696f6e39 0x6f7074696f6e31 0x5f 0x51 0x40 0x24 0x61737365745f616d6f756e745f737472 0x726573706f6e7365 0x23 0x61737365745f616d6f756e745f63686b 0x746f6b656e5f63686b
 txn NumAppArgs
 intc_0 // 0
 ==
@@ -408,10 +408,10 @@ return
 // create
 create_0:
 proto 0 0
-pushbytes 0x61737365745f616d6f756e745f63686b // "asset_amount_chk"
+bytec 19 // "asset_amount_chk"
 intc_0 // 0
 app_global_put
-bytec 17 // "asset_amount_str"
+bytec 16 // "asset_amount_str"
 intc_0 // 0
 app_global_put
 bytec 11 // "option1"
@@ -447,13 +447,13 @@ app_global_put
 pushbytes 0x726573 // "res"
 intc_0 // 0
 app_global_put
-bytec 18 // "response"
+bytec 17 // "response"
 intc_0 // 0
 app_global_put
 pushbytes 0x726573756c745f70726f706f73616c5f6964 // "result_proposal_id"
 intc_0 // 0
 app_global_put
-bytec 19 // "token_chk"
+bytec 20 // "token_chk"
 intc_0 // 0
 app_global_put
 retsub
@@ -467,7 +467,49 @@ intc_0 // 0
 dup
 bytec_0 // ""
 dup
-bytec 17 // "asset_amount_str"
+bytec 11 // "option1"
+intc_0 // 0
+app_global_put
+bytec_3 // "option2"
+intc_0 // 0
+app_global_put
+bytec 4 // "option3"
+intc_0 // 0
+app_global_put
+bytec 5 // "option4"
+intc_0 // 0
+app_global_put
+bytec 6 // "option5"
+intc_0 // 0
+app_global_put
+bytec 7 // "option6"
+intc_0 // 0
+app_global_put
+bytec 8 // "option7"
+intc_0 // 0
+app_global_put
+bytec 9 // "option8"
+intc_0 // 0
+app_global_put
+bytec 10 // "option9"
+intc_0 // 0
+app_global_put
+bytec_2 // "option10"
+intc_0 // 0
+app_global_put
+bytec 20 // "token_chk"
+intc_0 // 0
+app_global_put
+bytec 17 // "response"
+intc_0 // 0
+app_global_put
+bytec 16 // "asset_amount_str"
+intc_0 // 0
+app_global_put
+bytec 19 // "asset_amount_chk"
+intc_0 // 0
+app_global_put
+bytec 16 // "asset_amount_str"
 frame_dig -2
 app_global_put
 frame_dig -4
@@ -832,36 +874,9 @@ intc_0 // 0
 dup
 bytec_0 // ""
 dup
-bytec 11 // "option1"
+bytec 19 // "asset_amount_chk"
 app_global_get
-bytec_3 // "option2"
-app_global_get
-+
-bytec 4 // "option3"
-app_global_get
-+
-bytec 5 // "option4"
-app_global_get
-+
-bytec 6 // "option5"
-app_global_get
-+
-bytec 7 // "option6"
-app_global_get
-+
-bytec 8 // "option7"
-app_global_get
-+
-bytec 9 // "option8"
-app_global_get
-+
-bytec 10 // "option9"
-app_global_get
-+
-bytec_2 // "option10"
-app_global_get
-+
-bytec 17 // "asset_amount_str"
+bytec 16 // "asset_amount_str"
 app_global_get
 <=
 assert
@@ -896,7 +911,7 @@ load 27
 assert
 load 26
 frame_bury 4
-bytec 19 // "token_chk"
+bytec 20 // "token_chk"
 frame_dig -1
 app_global_put
 frame_dig -3
@@ -935,19 +950,19 @@ concat
 frame_dig 7
 concat
 frame_bury 1
-bytec 16 // "#"
+bytec 18 // "#"
 frame_dig -2
 extract 2 0
 concat
 box_del
 pop
-bytec 16 // "#"
+bytec 18 // "#"
 frame_dig -2
 extract 2 0
 concat
 frame_dig 1
 box_put
-bytec 16 // "#"
+bytec 18 // "#"
 frame_dig -2
 extract 2 0
 concat
@@ -969,7 +984,7 @@ intc_0 // 0
 dup
 bytec_0 // ""
 dup
-bytec 18 // "response"
+bytec 17 // "response"
 frame_dig -1
 app_global_put
 frame_dig -6
@@ -992,7 +1007,7 @@ load 33
 assert
 load 32
 frame_bury 2
-bytec 16 // "#"
+bytec 18 // "#"
 frame_dig -4
 extract 2 0
 concat
@@ -1004,7 +1019,7 @@ assert
 load 34
 frame_bury 3
 frame_dig -3
-bytec 19 // "token_chk"
+bytec 20 // "token_chk"
 app_global_get
 ==
 // wrong token_count
@@ -1223,36 +1238,9 @@ frame_dig -3
 +
 app_global_put
 VotingRecord_6_l20:
-bytec 11 // "option1"
+bytec 19 // "asset_amount_chk"
 app_global_get
-bytec_3 // "option2"
-app_global_get
-+
-bytec 4 // "option3"
-app_global_get
-+
-bytec 5 // "option4"
-app_global_get
-+
-bytec 6 // "option5"
-app_global_get
-+
-bytec 7 // "option6"
-app_global_get
-+
-bytec 8 // "option7"
-app_global_get
-+
-bytec 9 // "option8"
-app_global_get
-+
-bytec 10 // "option9"
-app_global_get
-+
-bytec_2 // "option10"
-app_global_get
-+
-bytec 17 // "asset_amount_str"
+bytec 16 // "asset_amount_str"
 app_global_get
 <=
 assert
@@ -1264,7 +1252,7 @@ proto 6 0
 bytec_0 // ""
 dupn 3
 frame_dig -2
-bytec 18 // "response"
+bytec 17 // "response"
 app_global_get
 ==
 assert
@@ -1437,7 +1425,7 @@ proto 6 0
 bytec_0 // ""
 dupn 3
 frame_dig -2
-bytec 18 // "response"
+bytec 17 // "response"
 app_global_get
 ==
 assert
@@ -2098,7 +2086,7 @@ load 71
 assert
 load 70
 frame_bury 2
-bytec 16 // "#"
+bytec 18 // "#"
 frame_dig -1
 extract 2 0
 concat

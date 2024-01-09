@@ -98,7 +98,7 @@
                 }
             ],
             "returns": {
-                "type": "(string,string,uint64)"
+                "type": "string"
             }
         },
         {
@@ -111,10 +111,6 @@
                 {
                     "type": "string",
                     "name": "user_id"
-                },
-                {
-                    "type": "string",
-                    "name": "asset_id"
                 },
                 {
                     "type": "uint64",
@@ -130,7 +126,7 @@
                 }
             ],
             "returns": {
-                "type": "(string,string,uint64,uint64,string)"
+                "type": "(string,uint64,uint64,string)"
             }
         },
         {
@@ -143,10 +139,6 @@
                 {
                     "type": "string",
                     "name": "user_id"
-                },
-                {
-                    "type": "string",
-                    "name": "asset_id"
                 },
                 {
                     "type": "string",
@@ -175,10 +167,6 @@
                 {
                     "type": "string",
                     "name": "user_id"
-                },
-                {
-                    "type": "string",
-                    "name": "asset_id"
                 },
                 {
                     "type": "string",
@@ -215,6 +203,13 @@
         },
         {
             "name": "option_1",
+            "args": [],
+            "returns": {
+                "type": "uint64"
+            }
+        },
+        {
+            "name": "read_remaining",
             "args": [],
             "returns": {
                 "type": "uint64"
@@ -360,7 +355,7 @@
                 }
             ],
             "returns": {
-                "type": "(string,string,uint64,uint64,string)"
+                "type": "(string,uint64,uint64,string)"
             }
         }
     ],

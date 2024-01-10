@@ -202,6 +202,22 @@
             }
         },
         {
+            "name": "read_result",
+            "args": [
+                {
+                    "type": "string",
+                    "name": "proposal_id"
+                },
+                {
+                    "type": "string",
+                    "name": "question_id"
+                }
+            ],
+            "returns": {
+                "type": "(string,string,uint64)"
+            }
+        },
+        {
             "name": "option_1",
             "args": [],
             "returns": {
@@ -347,7 +363,7 @@
                 },
                 {
                     "type": "string",
-                    "name": "asset_id"
+                    "name": "question_id"
                 },
                 {
                     "type": "string",

@@ -479,9 +479,6 @@ app_global_put
 bytec 21 // "response"
 intc_0 // 0
 app_global_put
-pushbytes 0x726573756c745f70726f706f73616c5f6964 // "result_proposal_id"
-intc_0 // 0
-app_global_put
 bytec 18 // "user_amount_chk"
 intc_0 // 0
 app_global_put

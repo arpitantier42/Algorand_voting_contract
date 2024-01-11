@@ -101,6 +101,10 @@ class Proposal_Record_State:
         stack_type=pt.TealType.uint64,
         default=pt.Int(0),
     )
+    proposal_question_chk = bk.GlobalStateValue(
+        stack_type=pt.TealType.bytes,
+        default=pt.Bytes("0"),
+    )
  
 app =(
      bk.Application("Voting_Contract_fn_test",state = Proposal_Record_State())
@@ -138,7 +142,6 @@ def Register_proposal(proposal_id:pt.abi.String, proposal_name:pt.abi.String,ass
 
     app.state.proposal_rec[proposal_id.get()].set(proposal_store),
     app.state.proposal_rec[proposal_id.get()].store_into(output),
-
     )
 
 #Function to Register Multiple Questions
@@ -147,7 +150,7 @@ def RegisterQues(proposal_id:pt.abi.String,question_id:pt.abi.String,question:pt
 
     proposal_get = Proposal_Record()
     question_store1=Question_store()
-    
+                                                      
     return pt.Seq(
     app.state.option1.set(pt.Int(0)),
     app.state.option2.set(pt.Int(0)),
@@ -159,11 +162,13 @@ def RegisterQues(proposal_id:pt.abi.String,question_id:pt.abi.String,question:pt
     app.state.option8.set(pt.Int(0)),
     app.state.option9.set(pt.Int(0)),
     app.state.option10.set(pt.Int(0)),
+    app.state.proposal_question_chk.set(pt.Bytes("0")),
 
     proposal_get.decode(app.state.proposal_rec[proposal_id.get()].get()),
     question_store1.set(proposal_id,question_id,question),
     pt.Assert(app.state.question_rec[question_id.get()].exists()== pt.Int(0),comment="Proposal_ID already exists"),
 
+    app.state.proposal_question_chk.set(question_id.get()),
     app.state.question_rec[question_id.get()].set(question_store1),
     app.state.question_rec[question_id.get()].store_into(output),
     )
@@ -182,8 +187,8 @@ def Registred_user_per_proposal(proposal_id:pt.abi.String,user_id:pt.abi.String,
     pt.Assert(app.state.user_rec[user_id.get()].exists()==pt.Int(0),comment="User_ID already exists"),
     app.state.user_rec[(user_id).get()].set(registred_user),
     app.state.user_rec[user_id.get()].store_into(output),
-    
     )
+
 #Function to Register Assets in the proposal
 @app.external
 def asset_register(proposal_id:pt.abi.String,asset_id:pt.abi.String,*,output:asset_store)->pt.Expr:
@@ -198,7 +203,6 @@ def asset_register(proposal_id:pt.abi.String,asset_id:pt.abi.String,*,output:ass
 
     app.state.asset_str[asset_id.get()].set(asset_get),
     app.state.asset_str[asset_id.get()].store_into(output),
-
     )
 
 #Function to Register user per asset
@@ -252,7 +256,7 @@ def Voting_Record(proposal_id:pt.abi.String,user_id:pt.abi.String,
     response_get = Response_store()
     
     return pt.Seq(
-     
+    pt.Assert(app.state.proposal_question_chk==question_id.get()),
     pt.Assert(user_response.get()<=pt.Int(10)),
     pt.Assert(user_response.get()>=pt.Int(1)),
 
@@ -261,17 +265,14 @@ def Voting_Record(proposal_id:pt.abi.String,user_id:pt.abi.String,
     asset_store.decode(app.state.asset_rec[user_id.get()].get()),
 
     pt.If(app.state.response_rec[user_id.get()].exists()== pt.Int(0)).Then(
-
     response_get.set(user_id,token_count,user_response,question_id),
     app.state.response_rec[user_id.get()].set(response_get),
     app.state.response_rec[user_id.get()].store_into(output),
 
     ).Else(
-        response_get.decode(app.state.response_rec[user_id.get()].get()),
-
+    response_get.decode(app.state.response_rec[user_id.get()].get()),
     (user_question_store :=pt.abi.make(pt.abi.String)).set(response_get.question),
     pt.Assert(question_id.get()!=user_question_store.get()),
-
     response_get.set(user_id,token_count,user_response,question_id),
     app.state.response_rec[user_id.get()].set(response_get),
     app.state.response_rec[user_id.get()].store_into(output), 
@@ -312,7 +313,6 @@ def Voting_Record(proposal_id:pt.abi.String,user_id:pt.abi.String,
     user_response.get() == pt.Int(10)).Then(
         app.state.option10.increment(token_count.get())
     ),  
-
     )
 
 #Function to buy tokens in secondary market place
@@ -570,7 +570,6 @@ def Result(proposal_id:pt.abi.String,
     result_store1.set(proposal_id,question_id,result),
     app.state.result_rec[question_id.get()].set(result_store1),
     ),
-
     )
 
 #Function to show the result wrt question_id

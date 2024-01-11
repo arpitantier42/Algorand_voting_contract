@@ -1,6 +1,6 @@
 #pragma version 8
 intcblock 0 1 65536 12
-bytecblock 0x 0x151f7c75 0x52 0x40 0x23 0x61737365745f616d6f756e745f737472 0x6f7074696f6e3130 0x6f7074696f6e32 0x6f7074696f6e33 0x6f7074696f6e34 0x6f7074696f6e35 0x6f7074696f6e36 0x6f7074696f6e37 0x6f7074696f6e38 0x6f7074696f6e39 0x6f7074696f6e31 0x5f 0x51 0x757365725f616d6f756e745f63686b 0x24 0x61737365745f616d6f756e745f63686b
+bytecblock 0x 0x151f7c75 0x52 0x40 0x23 0x61737365745f616d6f756e745f737472 0x6f7074696f6e3130 0x6f7074696f6e32 0x6f7074696f6e33 0x6f7074696f6e34 0x6f7074696f6e35 0x6f7074696f6e36 0x6f7074696f6e37 0x6f7074696f6e38 0x6f7074696f6e39 0x6f7074696f6e31 0x5f 0x51 0x757365725f616d6f756e745f63686b 0x24 0x70726f706f73616c5f7175657374696f6e5f63686b 0x61737365745f616d6f756e745f63686b 0x30
 txn NumAppArgs
 intc_0 // 0
 ==
@@ -440,7 +440,7 @@ return
 // create
 create_0:
 proto 0 0
-bytec 20 // "asset_amount_chk"
+bytec 21 // "asset_amount_chk"
 intc_0 // 0
 app_global_put
 bytec 5 // "asset_amount_str"
@@ -475,6 +475,9 @@ intc_0 // 0
 app_global_put
 bytec 14 // "option9"
 intc_0 // 0
+app_global_put
+bytec 20 // "proposal_question_chk"
+bytec 22 // "0"
 app_global_put
 bytec 18 // "user_amount_chk"
 intc_0 // 0
@@ -523,7 +526,7 @@ app_global_put
 bytec 5 // "asset_amount_str"
 intc_0 // 0
 app_global_put
-bytec 20 // "asset_amount_chk"
+bytec 21 // "asset_amount_chk"
 intc_0 // 0
 app_global_put
 bytec 18 // "user_amount_chk"
@@ -532,7 +535,7 @@ app_global_put
 bytec 5 // "asset_amount_str"
 frame_dig -2
 app_global_put
-bytec 20 // "asset_amount_chk"
+bytec 21 // "asset_amount_chk"
 frame_dig -2
 app_global_put
 frame_dig -4
@@ -644,6 +647,9 @@ app_global_put
 bytec 6 // "option10"
 intc_0 // 0
 app_global_put
+bytec 20 // "proposal_question_chk"
+bytec 22 // "0"
+app_global_put
 frame_dig -3
 extract 2 0
 box_get
@@ -719,6 +725,10 @@ intc_0 // 0
 ==
 // Proposal_ID already exists
 assert
+bytec 20 // "proposal_question_chk"
+frame_dig -2
+extract 2 0
+app_global_put
 bytec 17 // "Q"
 frame_dig -2
 extract 2 0
@@ -1162,6 +1172,12 @@ dup
 bytec_0 // ""
 dup
 intc_0 // 0
+bytec 20 // "proposal_question_chk"
+app_global_get
+frame_dig -2
+extract 2 0
+==
+assert
 frame_dig -1
 pushint 10 // 10
 <=

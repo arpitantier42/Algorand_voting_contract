@@ -1,6 +1,6 @@
 #pragma version 8
 intcblock 0 1 65536 12
-bytecblock 0x 0x151f7c75 0x52 0x40 0x23 0x61737365745f616d6f756e745f737472 0x6f7074696f6e3130 0x6f7074696f6e32 0x6f7074696f6e33 0x6f7074696f6e34 0x6f7074696f6e35 0x6f7074696f6e36 0x6f7074696f6e37 0x6f7074696f6e38 0x6f7074696f6e39 0x6f7074696f6e31 0x5f 0x51 0x757365725f616d6f756e745f63686b 0x24 0x61737365745f616d6f756e745f63686b 0x726573706f6e7365
+bytecblock 0x 0x151f7c75 0x52 0x40 0x23 0x61737365745f616d6f756e745f737472 0x6f7074696f6e3130 0x6f7074696f6e32 0x6f7074696f6e33 0x6f7074696f6e34 0x6f7074696f6e35 0x6f7074696f6e36 0x6f7074696f6e37 0x6f7074696f6e38 0x6f7074696f6e39 0x6f7074696f6e31 0x5f 0x51 0x757365725f616d6f756e745f63686b 0x24 0x61737365745f616d6f756e745f63686b
 txn NumAppArgs
 intc_0 // 0
 ==
@@ -46,11 +46,11 @@ pushbytes 0x6203aa7b // "read_result(string,string)(string,string,uint64)"
 ==
 bnz main_l44
 txna ApplicationArgs 0
-pushbytes 0xe0a2f206 // "option_1()uint64"
+pushbytes 0xdab57e75 // "read_remaining()uint64"
 ==
 bnz main_l43
 txna ApplicationArgs 0
-pushbytes 0xdab57e75 // "read_remaining()uint64"
+pushbytes 0xe0a2f206 // "option_1()uint64"
 ==
 bnz main_l42
 txna ApplicationArgs 0
@@ -287,7 +287,7 @@ intc_0 // 0
 !=
 &&
 assert
-callsub readremainingcaster_38
+callsub option1caster_38
 intc_1 // 1
 return
 main_l43:
@@ -299,7 +299,7 @@ intc_0 // 0
 !=
 &&
 assert
-callsub option1caster_37
+callsub readremainingcaster_37
 intc_1 // 1
 return
 main_l44:
@@ -476,9 +476,6 @@ app_global_put
 bytec 14 // "option9"
 intc_0 // 0
 app_global_put
-bytec 21 // "response"
-intc_0 // 0
-app_global_put
 bytec 18 // "user_amount_chk"
 intc_0 // 0
 app_global_put
@@ -521,9 +518,6 @@ bytec 14 // "option9"
 intc_0 // 0
 app_global_put
 bytec 6 // "option10"
-intc_0 // 0
-app_global_put
-bytec 21 // "response"
 intc_0 // 0
 app_global_put
 bytec 5 // "asset_amount_str"
@@ -3177,20 +3171,20 @@ load 88
 frame_bury 0
 retsub
 
-// option_1
-option1_11:
+// read_remaining
+readremaining_11:
 proto 0 1
 intc_0 // 0
-bytec 15 // "option1"
+bytec 5 // "asset_amount_str"
 app_global_get
 frame_bury 0
 retsub
 
-// read_remaining
-readremaining_12:
+// option_1
+option1_12:
 proto 0 1
 intc_0 // 0
-bytec 5 // "asset_amount_str"
+bytec 15 // "option1"
 app_global_get
 frame_bury 0
 retsub
@@ -3652,11 +3646,11 @@ concat
 log
 retsub
 
-// option_1_caster
-option1caster_37:
+// read_remaining_caster
+readremainingcaster_37:
 proto 0 0
 intc_0 // 0
-callsub option1_11
+callsub readremaining_11
 frame_bury 0
 bytec_1 // 0x151f7c75
 frame_dig 0
@@ -3665,11 +3659,11 @@ concat
 log
 retsub
 
-// read_remaining_caster
-readremainingcaster_38:
+// option_1_caster
+option1caster_38:
 proto 0 0
 intc_0 // 0
-callsub readremaining_12
+callsub option1_12
 frame_bury 0
 bytec_1 // 0x151f7c75
 frame_dig 0

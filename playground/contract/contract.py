@@ -89,10 +89,6 @@ class Proposal_Record_State:
         stack_type=pt.TealType.uint64,
         default=pt.Int(0),
     )
-    response = bk.GlobalStateValue(
-        stack_type=pt.TealType.uint64,
-        default=pt.Int(0),
-    )
     asset_amount_str = bk.GlobalStateValue(
         stack_type=pt.TealType.uint64,
         default=pt.Int(0),
@@ -128,7 +124,6 @@ def Register_proposal(proposal_id:pt.abi.String, proposal_name:pt.abi.String,ass
     app.state.option8.set(pt.Int(0)),
     app.state.option9.set(pt.Int(0)),
     app.state.option10.set(pt.Int(0)),
-    app.state.response.set(pt.Int(0)),
     app.state.asset_amount_str.set(pt.Int(0)),
     app.state.asset_amount_chk.set(pt.Int(0)),
     app.state.user_amount_chk.set(pt.Int(0)),
@@ -171,7 +166,7 @@ def RegisterQues(proposal_id:pt.abi.String,question_id:pt.abi.String,question:pt
 
     app.state.question_rec[question_id.get()].set(question_store1),
     app.state.question_rec[question_id.get()].store_into(output),
-      )
+    )
 
 #Function to Register user per proposal
 @app.external
@@ -184,11 +179,10 @@ def Registred_user_per_proposal(proposal_id:pt.abi.String,user_id:pt.abi.String,
     registred_user.set(proposal_id,user_id),
     proposal_get.decode(app.state.proposal_rec[proposal_id.get()].get()),
 
-
     pt.Assert(app.state.user_rec[user_id.get()].exists()==pt.Int(0),comment="User_ID already exists"),
     app.state.user_rec[(user_id).get()].set(registred_user),
     app.state.user_rec[user_id.get()].store_into(output),
-
+    
     )
 #Function to Register Assets in the proposal
 @app.external
@@ -266,7 +260,6 @@ def Voting_Record(proposal_id:pt.abi.String,user_id:pt.abi.String,
     user_store.decode(app.state.user_rec[user_id.get()].get()),
     asset_store.decode(app.state.asset_rec[user_id.get()].get()),
 
-
     pt.If(app.state.response_rec[user_id.get()].exists()== pt.Int(0)).Then(
 
     response_get.set(user_id,token_count,user_response,question_id),
@@ -336,16 +329,12 @@ def token_buy(proposal_id:pt.abi.String,
 
     return pt.Seq(
 
-
     response_get.decode(app.state.response_rec[user_id.get()].get()),
     (user_response_store :=pt.abi.make(pt.abi.Uint64)).set(response_get.user_response),
     pt.Assert(user_response.get()==user_response_store.get()),
 
-
     response_get.decode(app.state.response_rec[user_id.get()].get()),
-
     (user_question_store :=pt.abi.make(pt.abi.String)).set(response_get.question),
-
     pt.Assert(question_id.get()==user_question_store.get()),
 
     question_store1.decode(app.state.question_rec[question_id.get()].get(),),
@@ -356,11 +345,9 @@ def token_buy(proposal_id:pt.abi.String,
     pt.Assert(token_buy.get()<=app.state.asset_amount_str.get()),
 
     asset_store.decode(app.state.asset_rec[user_id.get()].get()),
-
     (user_token_store :=pt.abi.make(pt.abi.Uint64)).set(asset_store.User_Token),
     app.state.user_amount_chk.set(user_token_store.get()+token_buy.get()),
     (amt_chk := pt.abi.Uint64()).set(app.state.user_amount_chk.get()),
-
 
     (user_asset_store :=pt.abi.make(pt.abi.String)).set(asset_store.asset_id),
     (amt_chk1:= pt.abi.String()).set(user_asset_store.get()),
@@ -368,15 +355,12 @@ def token_buy(proposal_id:pt.abi.String,
     asset_store.set(user_id,amt_chk1,amt_chk),
     app.state.asset_rec[user_id.get()].set(asset_store),
 
-
     (user_response_store :=pt.abi.make(pt.abi.Uint64)).set(response_get.User_Token),
     (amt_chk2:= pt.abi.Uint64()).set(user_response_store.get()+token_buy.get()),
     response_get.set(user_id,amt_chk2,user_response,question_id),
     app.state.response_rec[user_id.get()].set(response_get),
 
-
     app.state.asset_amount_str.decrement(token_buy.get()),
-
 
     pt.If (user_response.get() == pt.Int(1)).Then(
             app.state.option1.increment(token_buy.get())
@@ -427,17 +411,14 @@ def token_sell(proposal_id:pt.abi.String,user_id:pt.abi.String,question_id:pt.ab
     (user_response_store :=pt.abi.make(pt.abi.Uint64)).set(response_get.user_response),
     pt.Assert(user_response.get()==user_response_store.get()),
 
-
     response_get.decode(app.state.response_rec[user_id.get()].get()),
     (user_question_store :=pt.abi.make(pt.abi.String)).set(response_get.question),
     pt.Assert(question_id.get()==user_question_store.get()),
-
 
     response_get.decode(app.state.response_rec[user_id.get()].get()),
     question_store1.decode(app.state.question_rec[question_id.get()].get()),
     user_store.decode(app.state.user_rec[user_id.get()].get()),
     proposal_get.decode(app.state.proposal_rec[proposal_id.get()].get()),
-
 
     asset_store.decode(app.state.asset_rec[user_id.get()].get()),
     (user_token_store :=pt.abi.make(pt.abi.Uint64)).set(asset_store.User_Token),
@@ -445,19 +426,16 @@ def token_sell(proposal_id:pt.abi.String,user_id:pt.abi.String,question_id:pt.ab
     app.state.user_amount_chk.set(user_token_store.get()-token_sell.get()),
     (amt_chk := pt.abi.Uint64()).set(app.state.user_amount_chk.get()),
 
-
     (user_asset_store :=pt.abi.make(pt.abi.String)).set(asset_store.asset_id),
     (amt_chk1:= pt.abi.String()).set(user_asset_store.get()),
     asset_store.set(user_id,amt_chk1,amt_chk),
     app.state.asset_rec[user_id.get()].set(asset_store),
 
-    
     (user_response_store :=pt.abi.make(pt.abi.Uint64)).set(response_get.User_Token),
     (amt_chk2:= pt.abi.Uint64()).set(user_response_store.get()-token_sell.get()),
     response_get.set(user_id,amt_chk2,user_response,question_id),
     app.state.response_rec[user_id.get()].set(response_get),
     
-
     app.state.asset_amount_str.increment(token_sell.get()),
     pt.If (user_response.get() == pt.Int(1)).Then(
             app.state.option1.decrement(token_sell.get())
@@ -595,7 +573,7 @@ def Result(proposal_id:pt.abi.String,
 
     )
 
-#function to show the result wrt question_id
+#Function to show the result wrt question_id
 @app.external
 def read_result(proposal_id:pt.abi.String,question_id:pt.abi.String,*,output:Result_store)->pt.Expr:
     proposal_get = Proposal_Record()
@@ -605,17 +583,16 @@ def read_result(proposal_id:pt.abi.String,question_id:pt.abi.String,*,output:Res
     question_store1.decode(app.state.question_rec[question_id.get()].get()),
     proposal_get.decode(app.state.proposal_rec[proposal_id.get()].get()),
     app.state.result_rec[question_id.get()].store_into(output)
-
     )
 
-# Read Functions for the Proposal
-@app.external
-def option_1(*,output:pt.abi.Uint64)-> pt.Expr:
-    return (output.set(app.state.option1.get()))
-
+#Read Functions for the Proposal
 @app.external
 def read_remaining(*,output:pt.abi.Uint64)-> pt.Expr:
     return (output.set(app.state.asset_amount_str.get()))
+
+@app.external
+def option_1(*,output:pt.abi.Uint64)-> pt.Expr:
+    return (output.set(app.state.option1.get()))
 
 @app.external
 def option_2(*,output:pt.abi.Uint64)-> pt.Expr:
@@ -660,7 +637,6 @@ def read_proposal_store(proposal_id:pt.abi.String,*,output:Proposal_Record)-> pt
 @app.external
 def read_asset_id(asset_id:pt.abi.String,*,output:asset_store)-> pt.Expr:
     return app.state.asset_str[asset_id.get()].store_into(output)
-
 
 @app.external
 def read_user_proposal_store(proposal_id:pt.abi.String,user_id:pt.abi.String,*,output:User_per_proposal_record)-> pt.Expr:

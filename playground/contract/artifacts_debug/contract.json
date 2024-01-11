@@ -218,14 +218,14 @@
             }
         },
         {
-            "name": "option_1",
+            "name": "read_remaining",
             "args": [],
             "returns": {
                 "type": "uint64"
             }
         },
         {
-            "name": "read_remaining",
+            "name": "option_1",
             "args": [],
             "returns": {
                 "type": "uint64"

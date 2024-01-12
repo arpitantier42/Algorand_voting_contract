@@ -1,485 +1,231 @@
 #pragma version 8
-intcblock 0 1 65536 12
-bytecblock 0x 0x151f7c75 0x52 0x40 0x23 0x61737365745f616d6f756e745f737472 0x6f7074696f6e3130 0x6f7074696f6e32 0x6f7074696f6e33 0x6f7074696f6e34 0x6f7074696f6e35 0x6f7074696f6e36 0x6f7074696f6e37 0x6f7074696f6e38 0x6f7074696f6e39 0x6f7074696f6e31 0x5f 0x51 0x757365725f616d6f756e745f63686b 0x24 0x70726f706f73616c5f7175657374696f6e5f63686b 0x61737365745f616d6f756e745f63686b 0x30
+intcblock 0 82 65536 1
+bytecblock 0x4f 0x 0x52 0x40 0x23 0x61737365745f616d6f756e745f737472 0x151f7c75 0x5f 0x51 0x757365725f616d6f756e745f63686b 0x24 0x70726f706f73616c5f7175657374696f6e5f63686b 0x61737365745f616d6f756e745f63686b 0x30
 txn NumAppArgs
 intc_0 // 0
 ==
-bnz main_l54
+bnz main_l26
 txna ApplicationArgs 0
 pushbytes 0x67908c35 // "Register_proposal(string,string,uint64,uint64)(string,string,uint64,uint64)"
 ==
-bnz main_l53
+bnz main_l25
 txna ApplicationArgs 0
 pushbytes 0xe09f8279 // "RegisterQues(string,string,string)(string,string,string)"
 ==
-bnz main_l52
+bnz main_l24
 txna ApplicationArgs 0
 pushbytes 0x7e1fba41 // "Registred_user_per_proposal(string,string)(string,string)"
 ==
-bnz main_l51
+bnz main_l23
 txna ApplicationArgs 0
 pushbytes 0xd79fdd1a // "asset_register(string,string)(string,string)"
 ==
-bnz main_l50
+bnz main_l22
 txna ApplicationArgs 0
 pushbytes 0xd17d3443 // "Register_user_asset(string,string,string,uint64)string"
 ==
-bnz main_l49
+bnz main_l21
 txna ApplicationArgs 0
 pushbytes 0xf60b4992 // "Voting_Record(string,string,uint64,string,uint64)(string,uint64,uint64,string)"
 ==
-bnz main_l48
+bnz main_l20
 txna ApplicationArgs 0
 pushbytes 0xe3ac9ad4 // "token_buy(string,string,string,uint64,uint64)void"
 ==
-bnz main_l47
+bnz main_l19
 txna ApplicationArgs 0
 pushbytes 0xe268e2f0 // "token_sell(string,string,string,uint64,uint64)void"
 ==
-bnz main_l46
+bnz main_l18
 txna ApplicationArgs 0
 pushbytes 0x64889a1c // "Result(string,string)string"
 ==
-bnz main_l45
-txna ApplicationArgs 0
-pushbytes 0x6203aa7b // "read_result(string,string)(string,string,uint64)"
-==
-bnz main_l44
+bnz main_l17
 txna ApplicationArgs 0
 pushbytes 0xdab57e75 // "read_remaining()uint64"
 ==
-bnz main_l43
+bnz main_l16
 txna ApplicationArgs 0
-pushbytes 0xe0a2f206 // "option_1()uint64"
+pushbytes 0x909e9f76 // "option_1(string)uint64"
 ==
-bnz main_l42
+bnz main_l15
 txna ApplicationArgs 0
-pushbytes 0x3a1f57a3 // "option_2()uint64"
+pushbytes 0xe7ef1a08 // "option_2(string)uint64"
 ==
-bnz main_l41
-txna ApplicationArgs 0
-pushbytes 0x94eecda1 // "option_3()uint64"
+bnz main_l14
+err
+main_l14:
+txn OnCompletion
+intc_0 // NoOp
 ==
-bnz main_l40
-txna ApplicationArgs 0
-pushbytes 0xbfcbb7f4 // "option_4()uint64"
+txn ApplicationID
+intc_0 // 0
+!=
+&&
+assert
+callsub option2caster_24
+intc_3 // 1
+return
+main_l15:
+txn OnCompletion
+intc_0 // NoOp
 ==
-bnz main_l39
-txna ApplicationArgs 0
-pushbytes 0x7297bf75 // "option_5()uint64"
+txn ApplicationID
+intc_0 // 0
+!=
+&&
+assert
+callsub option1caster_23
+intc_3 // 1
+return
+main_l16:
+txn OnCompletion
+intc_0 // NoOp
 ==
-bnz main_l38
-txna ApplicationArgs 0
-pushbytes 0xf6897368 // "option_6()uint64"
+txn ApplicationID
+intc_0 // 0
+!=
+&&
+assert
+callsub readremainingcaster_22
+intc_3 // 1
+return
+main_l17:
+txn OnCompletion
+intc_0 // NoOp
 ==
-bnz main_l37
-txna ApplicationArgs 0
-pushbytes 0xe834ae2d // "option_7()uint64"
+txn ApplicationID
+intc_0 // 0
+!=
+&&
+assert
+callsub Resultcaster_21
+intc_3 // 1
+return
+main_l18:
+txn OnCompletion
+intc_0 // NoOp
 ==
-bnz main_l36
-txna ApplicationArgs 0
-pushbytes 0xf14a190d // "option_8()uint64"
+txn ApplicationID
+intc_0 // 0
+!=
+&&
+assert
+callsub tokensellcaster_20
+intc_3 // 1
+return
+main_l19:
+txn OnCompletion
+intc_0 // NoOp
 ==
-bnz main_l35
-txna ApplicationArgs 0
-pushbytes 0xc1de4916 // "option_9()uint64"
+txn ApplicationID
+intc_0 // 0
+!=
+&&
+assert
+callsub tokenbuycaster_19
+intc_3 // 1
+return
+main_l20:
+txn OnCompletion
+intc_0 // NoOp
 ==
-bnz main_l34
-txna ApplicationArgs 0
-pushbytes 0xb765df00 // "option_10()uint64"
+txn ApplicationID
+intc_0 // 0
+!=
+&&
+assert
+callsub VotingRecordcaster_18
+intc_3 // 1
+return
+main_l21:
+txn OnCompletion
+intc_0 // NoOp
 ==
-bnz main_l33
-txna ApplicationArgs 0
-pushbytes 0x2c9b47bc // "read_proposal_store(string)(string,string,uint64,uint64)"
+txn ApplicationID
+intc_0 // 0
+!=
+&&
+assert
+callsub Registeruserassetcaster_17
+intc_3 // 1
+return
+main_l22:
+txn OnCompletion
+intc_0 // NoOp
 ==
-bnz main_l32
-txna ApplicationArgs 0
-pushbytes 0xb948dd04 // "read_asset_id(string)(string,string)"
+txn ApplicationID
+intc_0 // 0
+!=
+&&
+assert
+callsub assetregistercaster_16
+intc_3 // 1
+return
+main_l23:
+txn OnCompletion
+intc_0 // NoOp
 ==
-bnz main_l31
-txna ApplicationArgs 0
-pushbytes 0xfaa055d4 // "read_user_proposal_store(string,string)(string,string)"
+txn ApplicationID
+intc_0 // 0
+!=
+&&
+assert
+callsub Registreduserperproposalcaster_15
+intc_3 // 1
+return
+main_l24:
+txn OnCompletion
+intc_0 // NoOp
 ==
-bnz main_l30
-txna ApplicationArgs 0
-pushbytes 0x4e9fa00f // "read_user_asset_store(string,string,string)(string,string,uint64)"
+txn ApplicationID
+intc_0 // 0
+!=
+&&
+assert
+callsub RegisterQuescaster_14
+intc_3 // 1
+return
+main_l25:
+txn OnCompletion
+intc_0 // NoOp
 ==
-bnz main_l29
-txna ApplicationArgs 0
-pushbytes 0xabcd5ce4 // "read_user_response(string,string,string)(string,uint64,uint64,string)"
+txn ApplicationID
+intc_0 // 0
+!=
+&&
+assert
+callsub Registerproposalcaster_13
+intc_3 // 1
+return
+main_l26:
+txn OnCompletion
+intc_0 // NoOp
 ==
 bnz main_l28
 err
 main_l28:
-txn OnCompletion
-intc_0 // NoOp
-==
-txn ApplicationID
-intc_0 // 0
-!=
-&&
-assert
-callsub readuserresponsecaster_52
-intc_1 // 1
-return
-main_l29:
-txn OnCompletion
-intc_0 // NoOp
-==
-txn ApplicationID
-intc_0 // 0
-!=
-&&
-assert
-callsub readuserassetstorecaster_51
-intc_1 // 1
-return
-main_l30:
-txn OnCompletion
-intc_0 // NoOp
-==
-txn ApplicationID
-intc_0 // 0
-!=
-&&
-assert
-callsub readuserproposalstorecaster_50
-intc_1 // 1
-return
-main_l31:
-txn OnCompletion
-intc_0 // NoOp
-==
-txn ApplicationID
-intc_0 // 0
-!=
-&&
-assert
-callsub readassetidcaster_49
-intc_1 // 1
-return
-main_l32:
-txn OnCompletion
-intc_0 // NoOp
-==
-txn ApplicationID
-intc_0 // 0
-!=
-&&
-assert
-callsub readproposalstorecaster_48
-intc_1 // 1
-return
-main_l33:
-txn OnCompletion
-intc_0 // NoOp
-==
-txn ApplicationID
-intc_0 // 0
-!=
-&&
-assert
-callsub option10caster_47
-intc_1 // 1
-return
-main_l34:
-txn OnCompletion
-intc_0 // NoOp
-==
-txn ApplicationID
-intc_0 // 0
-!=
-&&
-assert
-callsub option9caster_46
-intc_1 // 1
-return
-main_l35:
-txn OnCompletion
-intc_0 // NoOp
-==
-txn ApplicationID
-intc_0 // 0
-!=
-&&
-assert
-callsub option8caster_45
-intc_1 // 1
-return
-main_l36:
-txn OnCompletion
-intc_0 // NoOp
-==
-txn ApplicationID
-intc_0 // 0
-!=
-&&
-assert
-callsub option7caster_44
-intc_1 // 1
-return
-main_l37:
-txn OnCompletion
-intc_0 // NoOp
-==
-txn ApplicationID
-intc_0 // 0
-!=
-&&
-assert
-callsub option6caster_43
-intc_1 // 1
-return
-main_l38:
-txn OnCompletion
-intc_0 // NoOp
-==
-txn ApplicationID
-intc_0 // 0
-!=
-&&
-assert
-callsub option5caster_42
-intc_1 // 1
-return
-main_l39:
-txn OnCompletion
-intc_0 // NoOp
-==
-txn ApplicationID
-intc_0 // 0
-!=
-&&
-assert
-callsub option4caster_41
-intc_1 // 1
-return
-main_l40:
-txn OnCompletion
-intc_0 // NoOp
-==
-txn ApplicationID
-intc_0 // 0
-!=
-&&
-assert
-callsub option3caster_40
-intc_1 // 1
-return
-main_l41:
-txn OnCompletion
-intc_0 // NoOp
-==
-txn ApplicationID
-intc_0 // 0
-!=
-&&
-assert
-callsub option2caster_39
-intc_1 // 1
-return
-main_l42:
-txn OnCompletion
-intc_0 // NoOp
-==
-txn ApplicationID
-intc_0 // 0
-!=
-&&
-assert
-callsub option1caster_38
-intc_1 // 1
-return
-main_l43:
-txn OnCompletion
-intc_0 // NoOp
-==
-txn ApplicationID
-intc_0 // 0
-!=
-&&
-assert
-callsub readremainingcaster_37
-intc_1 // 1
-return
-main_l44:
-txn OnCompletion
-intc_0 // NoOp
-==
-txn ApplicationID
-intc_0 // 0
-!=
-&&
-assert
-callsub readresultcaster_36
-intc_1 // 1
-return
-main_l45:
-txn OnCompletion
-intc_0 // NoOp
-==
-txn ApplicationID
-intc_0 // 0
-!=
-&&
-assert
-callsub Resultcaster_35
-intc_1 // 1
-return
-main_l46:
-txn OnCompletion
-intc_0 // NoOp
-==
-txn ApplicationID
-intc_0 // 0
-!=
-&&
-assert
-callsub tokensellcaster_34
-intc_1 // 1
-return
-main_l47:
-txn OnCompletion
-intc_0 // NoOp
-==
-txn ApplicationID
-intc_0 // 0
-!=
-&&
-assert
-callsub tokenbuycaster_33
-intc_1 // 1
-return
-main_l48:
-txn OnCompletion
-intc_0 // NoOp
-==
-txn ApplicationID
-intc_0 // 0
-!=
-&&
-assert
-callsub VotingRecordcaster_32
-intc_1 // 1
-return
-main_l49:
-txn OnCompletion
-intc_0 // NoOp
-==
-txn ApplicationID
-intc_0 // 0
-!=
-&&
-assert
-callsub Registeruserassetcaster_31
-intc_1 // 1
-return
-main_l50:
-txn OnCompletion
-intc_0 // NoOp
-==
-txn ApplicationID
-intc_0 // 0
-!=
-&&
-assert
-callsub assetregistercaster_30
-intc_1 // 1
-return
-main_l51:
-txn OnCompletion
-intc_0 // NoOp
-==
-txn ApplicationID
-intc_0 // 0
-!=
-&&
-assert
-callsub Registreduserperproposalcaster_29
-intc_1 // 1
-return
-main_l52:
-txn OnCompletion
-intc_0 // NoOp
-==
-txn ApplicationID
-intc_0 // 0
-!=
-&&
-assert
-callsub RegisterQuescaster_28
-intc_1 // 1
-return
-main_l53:
-txn OnCompletion
-intc_0 // NoOp
-==
-txn ApplicationID
-intc_0 // 0
-!=
-&&
-assert
-callsub Registerproposalcaster_27
-intc_1 // 1
-return
-main_l54:
-txn OnCompletion
-intc_0 // NoOp
-==
-bnz main_l56
-err
-main_l56:
 txn ApplicationID
 intc_0 // 0
 ==
 assert
 callsub create_0
-intc_1 // 1
+intc_3 // 1
 return
 
 // create
 create_0:
 proto 0 0
-bytec 21 // "asset_amount_chk"
+bytec 12 // "asset_amount_chk"
 intc_0 // 0
 app_global_put
 bytec 5 // "asset_amount_str"
 intc_0 // 0
 app_global_put
-bytec 15 // "option1"
-intc_0 // 0
+bytec 11 // "proposal_question_chk"
+bytec 13 // "0"
 app_global_put
-bytec 6 // "option10"
-intc_0 // 0
-app_global_put
-bytec 7 // "option2"
-intc_0 // 0
-app_global_put
-bytec 8 // "option3"
-intc_0 // 0
-app_global_put
-bytec 9 // "option4"
-intc_0 // 0
-app_global_put
-bytec 10 // "option5"
-intc_0 // 0
-app_global_put
-bytec 11 // "option6"
-intc_0 // 0
-app_global_put
-bytec 12 // "option7"
-intc_0 // 0
-app_global_put
-bytec 13 // "option8"
-intc_0 // 0
-app_global_put
-bytec 14 // "option9"
-intc_0 // 0
-app_global_put
-bytec 20 // "proposal_question_chk"
-bytec 22 // "0"
-app_global_put
-bytec 18 // "user_amount_chk"
+bytec 9 // "user_amount_chk"
 intc_0 // 0
 app_global_put
 retsub
@@ -487,55 +233,25 @@ retsub
 // Register_proposal
 Registerproposal_1:
 proto 4 1
-bytec_0 // ""
+bytec_1 // ""
 dup
 intc_0 // 0
 dup
-bytec_0 // ""
+bytec_1 // ""
 dup
-bytec 15 // "option1"
-intc_0 // 0
-app_global_put
-bytec 7 // "option2"
-intc_0 // 0
-app_global_put
-bytec 8 // "option3"
-intc_0 // 0
-app_global_put
-bytec 9 // "option4"
-intc_0 // 0
-app_global_put
-bytec 10 // "option5"
-intc_0 // 0
-app_global_put
-bytec 11 // "option6"
-intc_0 // 0
-app_global_put
-bytec 12 // "option7"
-intc_0 // 0
-app_global_put
-bytec 13 // "option8"
-intc_0 // 0
-app_global_put
-bytec 14 // "option9"
-intc_0 // 0
-app_global_put
-bytec 6 // "option10"
-intc_0 // 0
-app_global_put
 bytec 5 // "asset_amount_str"
 intc_0 // 0
 app_global_put
-bytec 21 // "asset_amount_chk"
+bytec 12 // "asset_amount_chk"
 intc_0 // 0
 app_global_put
-bytec 18 // "user_amount_chk"
+bytec 9 // "user_amount_chk"
 intc_0 // 0
 app_global_put
 bytec 5 // "asset_amount_str"
 frame_dig -2
 app_global_put
-bytec 21 // "asset_amount_chk"
+bytec 12 // "asset_amount_chk"
 frame_dig -2
 app_global_put
 frame_dig -4
@@ -609,45 +325,81 @@ retsub
 // RegisterQues
 RegisterQues_2:
 proto 3 1
-bytec_0 // ""
-dupn 2
+bytec_1 // ""
+dupn 3
+intc_0 // 0
+dupn 11
+bytec_1 // ""
+dup
 intc_0 // 0
 dup
-bytec_0 // ""
+bytec_1 // ""
 dup
-bytec 15 // "option1"
+bytec 11 // "proposal_question_chk"
+bytec 13 // "0"
+app_global_put
 intc_0 // 0
-app_global_put
-bytec 7 // "option2"
+frame_bury 4
 intc_0 // 0
-app_global_put
-bytec 8 // "option3"
+frame_bury 5
 intc_0 // 0
-app_global_put
-bytec 9 // "option4"
+frame_bury 6
 intc_0 // 0
-app_global_put
-bytec 10 // "option5"
+frame_bury 7
 intc_0 // 0
-app_global_put
-bytec 11 // "option6"
+frame_bury 8
 intc_0 // 0
-app_global_put
-bytec 12 // "option7"
+frame_bury 9
 intc_0 // 0
-app_global_put
-bytec 13 // "option8"
+frame_bury 10
 intc_0 // 0
-app_global_put
-bytec 14 // "option9"
+frame_bury 11
 intc_0 // 0
-app_global_put
-bytec 6 // "option10"
+frame_bury 12
 intc_0 // 0
-app_global_put
-bytec 20 // "proposal_question_chk"
-bytec 22 // "0"
-app_global_put
+frame_bury 13
+frame_dig -2
+frame_bury 17
+frame_dig 17
+frame_bury 16
+intc_1 // 82
+frame_bury 14
+frame_dig 14
+itob
+extract 6 0
+frame_dig 4
+itob
+concat
+frame_dig 5
+itob
+concat
+frame_dig 6
+itob
+concat
+frame_dig 7
+itob
+concat
+frame_dig 8
+itob
+concat
+frame_dig 9
+itob
+concat
+frame_dig 10
+itob
+concat
+frame_dig 11
+itob
+concat
+frame_dig 12
+itob
+concat
+frame_dig 13
+itob
+concat
+frame_dig 16
+concat
+frame_bury 3
 frame_dig -3
 extract 2 0
 box_get
@@ -658,60 +410,60 @@ assert
 load 4
 frame_bury 1
 frame_dig -3
-frame_bury 6
-frame_dig 6
-frame_bury 5
+frame_bury 21
+frame_dig 21
+frame_bury 20
 pushint 6 // 6
-frame_bury 3
-frame_dig 3
-frame_dig 6
+frame_bury 18
+frame_dig 18
+frame_dig 21
 len
 +
-frame_bury 4
-frame_dig 4
+frame_bury 19
+frame_dig 19
 intc_2 // 65536
 <
 assert
-frame_dig 3
+frame_dig 18
 itob
 extract 6 0
 frame_dig -2
-frame_bury 6
-frame_dig 5
-frame_dig 6
+frame_bury 21
+frame_dig 20
+frame_dig 21
 concat
-frame_bury 5
-frame_dig 4
-frame_bury 3
-frame_dig 3
-frame_dig 6
+frame_bury 20
+frame_dig 19
+frame_bury 18
+frame_dig 18
+frame_dig 21
 len
 +
-frame_bury 4
-frame_dig 4
+frame_bury 19
+frame_dig 19
 intc_2 // 65536
 <
 assert
-frame_dig 3
+frame_dig 18
 itob
 extract 6 0
 concat
 frame_dig -1
-frame_bury 6
-frame_dig 5
-frame_dig 6
+frame_bury 21
+frame_dig 20
+frame_dig 21
 concat
-frame_bury 5
-frame_dig 4
-frame_bury 3
-frame_dig 3
+frame_bury 20
+frame_dig 19
+frame_bury 18
+frame_dig 18
 itob
 extract 6 0
 concat
-frame_dig 5
+frame_dig 20
 concat
 frame_bury 2
-bytec 17 // "Q"
+bytec 8 // "Q"
 frame_dig -2
 extract 2 0
 concat
@@ -723,23 +475,23 @@ intc_0 // 0
 ==
 // Proposal_ID already exists
 assert
-bytec 20 // "proposal_question_chk"
+bytec 11 // "proposal_question_chk"
 frame_dig -2
 extract 2 0
 app_global_put
-bytec 17 // "Q"
+bytec 8 // "Q"
 frame_dig -2
 extract 2 0
 concat
 box_del
 pop
-bytec 17 // "Q"
+bytec 8 // "Q"
 frame_dig -2
 extract 2 0
 concat
 frame_dig 2
 box_put
-bytec 17 // "Q"
+bytec 8 // "Q"
 frame_dig -2
 extract 2 0
 concat
@@ -755,11 +507,11 @@ retsub
 // Registred_user_per_proposal
 Registreduserperproposal_3:
 proto 2 1
-bytec_0 // ""
+bytec_1 // ""
 dupn 2
 intc_0 // 0
 dup
-bytec_0 // ""
+bytec_1 // ""
 dup
 frame_dig -2
 frame_bury 6
@@ -803,7 +555,7 @@ load 11
 assert
 load 10
 frame_bury 2
-bytec 16 // "_"
+bytec 7 // "_"
 frame_dig -1
 extract 2 0
 concat
@@ -815,19 +567,19 @@ intc_0 // 0
 ==
 // User_ID already exists
 assert
-bytec 16 // "_"
+bytec 7 // "_"
 frame_dig -1
 extract 2 0
 concat
 box_del
 pop
-bytec 16 // "_"
+bytec 7 // "_"
 frame_dig -1
 extract 2 0
 concat
 frame_dig 1
 box_put
-bytec 16 // "_"
+bytec 7 // "_"
 frame_dig -1
 extract 2 0
 concat
@@ -843,11 +595,11 @@ retsub
 // asset_register
 assetregister_4:
 proto 2 1
-bytec_0 // ""
+bytec_1 // ""
 dupn 2
 intc_0 // 0
 dup
-bytec_0 // ""
+bytec_1 // ""
 dup
 frame_dig -2
 extract 2 0
@@ -891,7 +643,7 @@ concat
 frame_dig 5
 concat
 frame_bury 2
-bytec 19 // "$"
+bytec 10 // "$"
 frame_dig -1
 extract 2 0
 concat
@@ -903,19 +655,19 @@ intc_0 // 0
 ==
 // Proposal_ID already exists
 assert
-bytec 19 // "$"
+bytec 10 // "$"
 frame_dig -1
 extract 2 0
 concat
 box_del
 pop
-bytec 19 // "$"
+bytec 10 // "$"
 frame_dig -1
 extract 2 0
 concat
 frame_dig 2
 box_put
-bytec 19 // "$"
+bytec 10 // "$"
 frame_dig -1
 extract 2 0
 concat
@@ -931,15 +683,15 @@ retsub
 // Register_user_asset
 Registeruserasset_5:
 proto 4 1
-bytec_0 // ""
+bytec_1 // ""
 dupn 4
 intc_0 // 0
 dup
-bytec_0 // ""
+bytec_1 // ""
 dupn 2
 intc_0 // 0
 dupn 2
-bytec_0 // ""
+bytec_1 // ""
 dup
 bytec 5 // "asset_amount_str"
 app_global_get
@@ -955,7 +707,7 @@ load 23
 assert
 load 22
 frame_bury 3
-bytec 16 // "_"
+bytec 7 // "_"
 frame_dig -3
 extract 2 0
 concat
@@ -966,7 +718,7 @@ load 25
 assert
 load 24
 frame_bury 2
-bytec 19 // "$"
+bytec 10 // "$"
 frame_dig -2
 extract 2 0
 concat
@@ -1025,7 +777,7 @@ frame_dig -3
 frame_bury 14
 frame_dig 14
 frame_bury 13
-intc_3 // 12
+pushint 12 // 12
 frame_bury 11
 frame_dig 11
 frame_dig 14
@@ -1092,7 +844,7 @@ frame_dig -3
 frame_bury 8
 frame_dig 8
 frame_bury 7
-intc_3 // 12
+pushint 12 // 12
 frame_bury 5
 frame_dig 5
 frame_dig 8
@@ -1159,18 +911,57 @@ retsub
 // Voting_Record
 VotingRecord_6:
 proto 5 1
-bytec_0 // ""
-dupn 4
+bytec_1 // ""
+dupn 5
 intc_0 // 0
 dup
-bytec_0 // ""
+bytec_1 // ""
 dupn 2
 intc_0 // 0
 dup
-bytec_0 // ""
+bytec_1 // ""
 dup
 intc_0 // 0
-bytec 20 // "proposal_question_chk"
+dupn 12
+bytec_1 // ""
+dup
+intc_0 // 0
+dup
+bytec_1 // ""
+dup
+intc_0 // 0
+dup
+bytec_1 // ""
+dup
+intc_0 // 0
+dup
+bytec_1 // ""
+dup
+intc_0 // 0
+dup
+bytec_1 // ""
+dup
+intc_0 // 0
+dup
+bytec_1 // ""
+dup
+intc_0 // 0
+dup
+bytec_1 // ""
+dup
+intc_0 // 0
+dup
+bytec_1 // ""
+dup
+intc_0 // 0
+dup
+bytec_1 // ""
+dup
+intc_0 // 0
+dup
+bytec_1 // ""
+dup
+bytec 11 // "proposal_question_chk"
 app_global_get
 frame_dig -2
 extract 2 0
@@ -1181,7 +972,7 @@ pushint 10 // 10
 <=
 assert
 frame_dig -1
-intc_1 // 1
+intc_3 // 1
 >=
 assert
 frame_dig -5
@@ -1193,7 +984,7 @@ load 37
 assert
 load 36
 frame_bury 1
-bytec 16 // "_"
+bytec 7 // "_"
 frame_dig -4
 extract 2 0
 concat
@@ -1244,29 +1035,29 @@ extract_uint16
 dig 1
 len
 substring3
-frame_bury 9
+frame_bury 10
 frame_dig -2
 extract 2 0
-frame_dig 9
+frame_dig 10
 extract 2 0
 !=
 assert
 frame_dig -4
+frame_bury 14
+frame_dig 14
 frame_bury 13
-frame_dig 13
-frame_bury 12
 pushint 20 // 20
-frame_bury 10
-frame_dig 10
-frame_dig 13
-len
-+
 frame_bury 11
 frame_dig 11
+frame_dig 14
+len
++
+frame_bury 12
+frame_dig 12
 intc_2 // 65536
 <
 assert
-frame_dig 10
+frame_dig 11
 itob
 extract 6 0
 frame_dig -3
@@ -1276,18 +1067,18 @@ frame_dig -1
 itob
 concat
 frame_dig -2
+frame_bury 14
+frame_dig 13
+frame_dig 14
+concat
 frame_bury 13
 frame_dig 12
-frame_dig 13
-concat
-frame_bury 12
+frame_bury 11
 frame_dig 11
-frame_bury 10
-frame_dig 10
 itob
 extract 6 0
 concat
-frame_dig 12
+frame_dig 13
 concat
 frame_bury 4
 bytec_3 // "@"
@@ -1328,13 +1119,53 @@ frame_bury 3
 frame_dig 3
 pushint 4 // 4
 extract_uint64
-frame_bury 14
-frame_dig 14
+frame_bury 15
+frame_dig 15
 frame_dig -3
 ==
 assert
+frame_dig 5
+pushint 2 // 2
+extract_uint64
+frame_bury 16
+frame_dig 5
+pushint 10 // 10
+extract_uint64
+frame_bury 17
+frame_dig 5
+pushint 18 // 18
+extract_uint64
+frame_bury 18
+frame_dig 5
+pushint 26 // 26
+extract_uint64
+frame_bury 19
+frame_dig 5
+pushint 34 // 34
+extract_uint64
+frame_bury 20
+frame_dig 5
+pushint 42 // 42
+extract_uint64
+frame_bury 21
+frame_dig 5
+pushint 50 // 50
+extract_uint64
+frame_bury 22
+frame_dig 5
+pushint 58 // 58
+extract_uint64
+frame_bury 23
+frame_dig 5
+pushint 66 // 66
+extract_uint64
+frame_bury 24
+frame_dig 5
+pushint 74 // 74
+extract_uint64
+frame_bury 25
 frame_dig -1
-intc_1 // 1
+intc_3 // 1
 ==
 bnz VotingRecord_6_l21
 frame_dig -1
@@ -1373,102 +1204,732 @@ frame_dig -1
 pushint 10 // 10
 ==
 bz VotingRecord_6_l23
-bytec 6 // "option10"
-bytec 6 // "option10"
-app_global_get
+bytec_0 // "O"
+frame_dig -2
+extract 2 0
+concat
+box_get
+store 71
+store 70
+load 71
+assert
+load 70
+frame_bury 5
+frame_dig 17
 frame_dig -3
 +
-app_global_put
+frame_bury 24
+frame_dig -2
+frame_bury 65
+frame_dig 65
+frame_bury 64
+intc_1 // 82
+frame_bury 62
+frame_dig 62
+itob
+extract 6 0
+frame_dig 16
+itob
+concat
+frame_dig 17
+itob
+concat
+frame_dig 18
+itob
+concat
+frame_dig 19
+itob
+concat
+frame_dig 20
+itob
+concat
+frame_dig 21
+itob
+concat
+frame_dig 22
+itob
+concat
+frame_dig 23
+itob
+concat
+frame_dig 24
+itob
+concat
+frame_dig 25
+itob
+concat
+frame_dig 64
+concat
+frame_bury 5
+bytec_0 // "O"
+frame_dig -2
+extract 2 0
+concat
+box_del
+pop
+bytec_0 // "O"
+frame_dig -2
+extract 2 0
+concat
+frame_dig 5
+box_put
 b VotingRecord_6_l23
 VotingRecord_6_l13:
-bytec 14 // "option9"
-bytec 14 // "option9"
-app_global_get
+bytec_0 // "O"
+frame_dig -2
+extract 2 0
+concat
+box_get
+store 69
+store 68
+load 69
+assert
+load 68
+frame_bury 5
+frame_dig 17
 frame_dig -3
 +
-app_global_put
+frame_bury 24
+frame_dig -2
+frame_bury 61
+frame_dig 61
+frame_bury 60
+intc_1 // 82
+frame_bury 58
+frame_dig 58
+itob
+extract 6 0
+frame_dig 16
+itob
+concat
+frame_dig 17
+itob
+concat
+frame_dig 18
+itob
+concat
+frame_dig 19
+itob
+concat
+frame_dig 20
+itob
+concat
+frame_dig 21
+itob
+concat
+frame_dig 22
+itob
+concat
+frame_dig 23
+itob
+concat
+frame_dig 24
+itob
+concat
+frame_dig 25
+itob
+concat
+frame_dig 60
+concat
+frame_bury 5
+bytec_0 // "O"
+frame_dig -2
+extract 2 0
+concat
+box_del
+pop
+bytec_0 // "O"
+frame_dig -2
+extract 2 0
+concat
+frame_dig 5
+box_put
 b VotingRecord_6_l23
 VotingRecord_6_l14:
-bytec 13 // "option8"
-bytec 13 // "option8"
-app_global_get
+bytec_0 // "O"
+frame_dig -2
+extract 2 0
+concat
+box_get
+store 67
+store 66
+load 67
+assert
+load 66
+frame_bury 5
+frame_dig 17
 frame_dig -3
 +
-app_global_put
+frame_bury 23
+frame_dig -2
+frame_bury 57
+frame_dig 57
+frame_bury 56
+intc_1 // 82
+frame_bury 54
+frame_dig 54
+itob
+extract 6 0
+frame_dig 16
+itob
+concat
+frame_dig 17
+itob
+concat
+frame_dig 18
+itob
+concat
+frame_dig 19
+itob
+concat
+frame_dig 20
+itob
+concat
+frame_dig 21
+itob
+concat
+frame_dig 22
+itob
+concat
+frame_dig 23
+itob
+concat
+frame_dig 24
+itob
+concat
+frame_dig 25
+itob
+concat
+frame_dig 56
+concat
+frame_bury 5
+bytec_0 // "O"
+frame_dig -2
+extract 2 0
+concat
+box_del
+pop
+bytec_0 // "O"
+frame_dig -2
+extract 2 0
+concat
+frame_dig 5
+box_put
 b VotingRecord_6_l23
 VotingRecord_6_l15:
-bytec 12 // "option7"
-bytec 12 // "option7"
-app_global_get
+bytec_0 // "O"
+frame_dig -2
+extract 2 0
+concat
+box_get
+store 65
+store 64
+load 65
+assert
+load 64
+frame_bury 5
+frame_dig 17
 frame_dig -3
 +
-app_global_put
+frame_bury 22
+frame_dig -2
+frame_bury 53
+frame_dig 53
+frame_bury 52
+intc_1 // 82
+frame_bury 50
+frame_dig 50
+itob
+extract 6 0
+frame_dig 16
+itob
+concat
+frame_dig 17
+itob
+concat
+frame_dig 18
+itob
+concat
+frame_dig 19
+itob
+concat
+frame_dig 20
+itob
+concat
+frame_dig 21
+itob
+concat
+frame_dig 22
+itob
+concat
+frame_dig 23
+itob
+concat
+frame_dig 24
+itob
+concat
+frame_dig 25
+itob
+concat
+frame_dig 52
+concat
+frame_bury 5
+bytec_0 // "O"
+frame_dig -2
+extract 2 0
+concat
+box_del
+pop
+bytec_0 // "O"
+frame_dig -2
+extract 2 0
+concat
+frame_dig 5
+box_put
 b VotingRecord_6_l23
 VotingRecord_6_l16:
-bytec 11 // "option6"
-bytec 11 // "option6"
-app_global_get
+bytec_0 // "O"
+frame_dig -2
+extract 2 0
+concat
+box_get
+store 63
+store 62
+load 63
+assert
+load 62
+frame_bury 5
+frame_dig 17
 frame_dig -3
 +
-app_global_put
+frame_bury 21
+frame_dig -2
+frame_bury 49
+frame_dig 49
+frame_bury 48
+intc_1 // 82
+frame_bury 46
+frame_dig 46
+itob
+extract 6 0
+frame_dig 16
+itob
+concat
+frame_dig 17
+itob
+concat
+frame_dig 18
+itob
+concat
+frame_dig 19
+itob
+concat
+frame_dig 20
+itob
+concat
+frame_dig 21
+itob
+concat
+frame_dig 22
+itob
+concat
+frame_dig 23
+itob
+concat
+frame_dig 24
+itob
+concat
+frame_dig 25
+itob
+concat
+frame_dig 48
+concat
+frame_bury 5
+bytec_0 // "O"
+frame_dig -2
+extract 2 0
+concat
+box_del
+pop
+bytec_0 // "O"
+frame_dig -2
+extract 2 0
+concat
+frame_dig 5
+box_put
 b VotingRecord_6_l23
 VotingRecord_6_l17:
-bytec 10 // "option5"
-bytec 10 // "option5"
-app_global_get
+bytec_0 // "O"
+frame_dig -2
+extract 2 0
+concat
+box_get
+store 61
+store 60
+load 61
+assert
+load 60
+frame_bury 5
+frame_dig 17
 frame_dig -3
 +
-app_global_put
+frame_bury 20
+frame_dig -2
+frame_bury 45
+frame_dig 45
+frame_bury 44
+intc_1 // 82
+frame_bury 42
+frame_dig 42
+itob
+extract 6 0
+frame_dig 16
+itob
+concat
+frame_dig 17
+itob
+concat
+frame_dig 18
+itob
+concat
+frame_dig 19
+itob
+concat
+frame_dig 20
+itob
+concat
+frame_dig 21
+itob
+concat
+frame_dig 22
+itob
+concat
+frame_dig 23
+itob
+concat
+frame_dig 24
+itob
+concat
+frame_dig 25
+itob
+concat
+frame_dig 44
+concat
+frame_bury 5
+bytec_0 // "O"
+frame_dig -2
+extract 2 0
+concat
+box_del
+pop
+bytec_0 // "O"
+frame_dig -2
+extract 2 0
+concat
+frame_dig 5
+box_put
 b VotingRecord_6_l23
 VotingRecord_6_l18:
-bytec 9 // "option4"
-bytec 9 // "option4"
-app_global_get
+bytec_0 // "O"
+frame_dig -2
+extract 2 0
+concat
+box_get
+store 59
+store 58
+load 59
+assert
+load 58
+frame_bury 5
+frame_dig 17
 frame_dig -3
 +
-app_global_put
+frame_bury 19
+frame_dig -2
+frame_bury 41
+frame_dig 41
+frame_bury 40
+intc_1 // 82
+frame_bury 38
+frame_dig 38
+itob
+extract 6 0
+frame_dig 16
+itob
+concat
+frame_dig 17
+itob
+concat
+frame_dig 18
+itob
+concat
+frame_dig 19
+itob
+concat
+frame_dig 20
+itob
+concat
+frame_dig 21
+itob
+concat
+frame_dig 22
+itob
+concat
+frame_dig 23
+itob
+concat
+frame_dig 24
+itob
+concat
+frame_dig 25
+itob
+concat
+frame_dig 40
+concat
+frame_bury 5
+bytec_0 // "O"
+frame_dig -2
+extract 2 0
+concat
+box_del
+pop
+bytec_0 // "O"
+frame_dig -2
+extract 2 0
+concat
+frame_dig 5
+box_put
 b VotingRecord_6_l23
 VotingRecord_6_l19:
-bytec 8 // "option3"
-bytec 8 // "option3"
-app_global_get
+bytec_0 // "O"
+frame_dig -2
+extract 2 0
+concat
+box_get
+store 57
+store 56
+load 57
+assert
+load 56
+frame_bury 5
+frame_dig 17
 frame_dig -3
 +
-app_global_put
+frame_bury 18
+frame_dig -2
+frame_bury 37
+frame_dig 37
+frame_bury 36
+intc_1 // 82
+frame_bury 34
+frame_dig 34
+itob
+extract 6 0
+frame_dig 16
+itob
+concat
+frame_dig 17
+itob
+concat
+frame_dig 18
+itob
+concat
+frame_dig 19
+itob
+concat
+frame_dig 20
+itob
+concat
+frame_dig 21
+itob
+concat
+frame_dig 22
+itob
+concat
+frame_dig 23
+itob
+concat
+frame_dig 24
+itob
+concat
+frame_dig 25
+itob
+concat
+frame_dig 36
+concat
+frame_bury 5
+bytec_0 // "O"
+frame_dig -2
+extract 2 0
+concat
+box_del
+pop
+bytec_0 // "O"
+frame_dig -2
+extract 2 0
+concat
+frame_dig 5
+box_put
 b VotingRecord_6_l23
 VotingRecord_6_l20:
-bytec 7 // "option2"
-bytec 7 // "option2"
-app_global_get
+bytec_0 // "O"
+frame_dig -2
+extract 2 0
+concat
+box_get
+store 55
+store 54
+load 55
+assert
+load 54
+frame_bury 5
+frame_dig 17
 frame_dig -3
 +
-app_global_put
+frame_bury 17
+frame_dig -2
+frame_bury 33
+frame_dig 33
+frame_bury 32
+intc_1 // 82
+frame_bury 30
+frame_dig 30
+itob
+extract 6 0
+frame_dig 16
+itob
+concat
+frame_dig 17
+itob
+concat
+frame_dig 18
+itob
+concat
+frame_dig 19
+itob
+concat
+frame_dig 20
+itob
+concat
+frame_dig 21
+itob
+concat
+frame_dig 22
+itob
+concat
+frame_dig 23
+itob
+concat
+frame_dig 24
+itob
+concat
+frame_dig 25
+itob
+concat
+frame_dig 32
+concat
+frame_bury 5
+bytec_0 // "O"
+frame_dig -2
+extract 2 0
+concat
+box_del
+pop
+bytec_0 // "O"
+frame_dig -2
+extract 2 0
+concat
+frame_dig 5
+box_put
 b VotingRecord_6_l23
 VotingRecord_6_l21:
-bytec 15 // "option1"
-bytec 15 // "option1"
-app_global_get
+bytec_0 // "O"
+frame_dig -2
+extract 2 0
+concat
+box_get
+store 53
+store 52
+load 53
+assert
+load 52
+frame_bury 5
+frame_dig 16
 frame_dig -3
 +
-app_global_put
+frame_bury 16
+frame_dig -2
+frame_bury 29
+frame_dig 29
+frame_bury 28
+intc_1 // 82
+frame_bury 26
+frame_dig 26
+itob
+extract 6 0
+frame_dig 16
+itob
+concat
+frame_dig 17
+itob
+concat
+frame_dig 18
+itob
+concat
+frame_dig 19
+itob
+concat
+frame_dig 20
+itob
+concat
+frame_dig 21
+itob
+concat
+frame_dig 22
+itob
+concat
+frame_dig 23
+itob
+concat
+frame_dig 24
+itob
+concat
+frame_dig 25
+itob
+concat
+frame_dig 28
+concat
+frame_bury 5
+bytec_0 // "O"
+frame_dig -2
+extract 2 0
+concat
+box_del
+pop
+bytec_0 // "O"
+frame_dig -2
+extract 2 0
+concat
+frame_dig 5
+box_put
 b VotingRecord_6_l23
 VotingRecord_6_l22:
 frame_dig -4
+frame_bury 9
+frame_dig 9
 frame_bury 8
-frame_dig 8
-frame_bury 7
 pushint 20 // 20
-frame_bury 5
-frame_dig 5
-frame_dig 8
-len
-+
 frame_bury 6
 frame_dig 6
+frame_dig 9
+len
++
+frame_bury 7
+frame_dig 7
 intc_2 // 65536
 <
 assert
-frame_dig 5
+frame_dig 6
 itob
 extract 6 0
 frame_dig -3
@@ -1478,18 +1939,18 @@ frame_dig -1
 itob
 concat
 frame_dig -2
+frame_bury 9
+frame_dig 8
+frame_dig 9
+concat
 frame_bury 8
 frame_dig 7
-frame_dig 8
-concat
-frame_bury 7
+frame_bury 6
 frame_dig 6
-frame_bury 5
-frame_dig 5
 itob
 extract 6 0
 concat
-frame_dig 7
+frame_dig 8
 concat
 frame_bury 4
 bytec_3 // "@"
@@ -1522,39 +1983,79 @@ retsub
 // token_buy
 tokenbuy_7:
 proto 5 0
-bytec_0 // ""
-dupn 4
+bytec_1 // ""
+dupn 5
 intc_0 // 0
-bytec_0 // ""
-intc_0 // 0
-dup
-bytec_0 // ""
-dup
+bytec_1 // ""
 intc_0 // 0
 dup
-bytec_0 // ""
+bytec_1 // ""
+dup
+intc_0 // 0
+dup
+bytec_1 // ""
 dup
 intc_0 // 0
 dupn 3
-bytec_0 // ""
+bytec_1 // ""
+dup
+intc_0 // 0
+dupn 11
+bytec_1 // ""
+dup
+intc_0 // 0
+dup
+bytec_1 // ""
+dup
+intc_0 // 0
+dup
+bytec_1 // ""
+dup
+intc_0 // 0
+dup
+bytec_1 // ""
+dup
+intc_0 // 0
+dup
+bytec_1 // ""
+dup
+intc_0 // 0
+dup
+bytec_1 // ""
+dup
+intc_0 // 0
+dup
+bytec_1 // ""
+dup
+intc_0 // 0
+dup
+bytec_1 // ""
+dup
+intc_0 // 0
+dup
+bytec_1 // ""
+dup
+intc_0 // 0
+dup
+bytec_1 // ""
 dup
 bytec_3 // "@"
 frame_dig -4
 extract 2 0
 concat
 box_get
-store 53
-store 52
-load 53
+store 73
+store 72
+load 73
 assert
-load 52
+load 72
 frame_bury 3
 frame_dig 3
 pushint 10 // 10
 extract_uint64
-frame_bury 5
+frame_bury 6
 frame_dig -2
-frame_dig 5
+frame_dig 6
 ==
 assert
 bytec_3 // "@"
@@ -1562,11 +2063,11 @@ frame_dig -4
 extract 2 0
 concat
 box_get
-store 55
-store 54
-load 55
+store 75
+store 74
+load 75
 assert
-load 54
+load 74
 frame_bury 3
 frame_dig 3
 frame_dig 3
@@ -1575,54 +2076,54 @@ extract_uint16
 dig 1
 len
 substring3
-frame_bury 6
+frame_bury 7
 frame_dig -3
 extract 2 0
-frame_dig 6
+frame_dig 7
 extract 2 0
 ==
 assert
-bytec 17 // "Q"
+bytec 8 // "Q"
 frame_dig -3
 extract 2 0
 concat
 box_get
-store 57
-store 56
-load 57
+store 77
+store 76
+load 77
 assert
-load 56
+load 76
 frame_bury 2
 bytec_3 // "@"
 frame_dig -4
 extract 2 0
 concat
 box_get
-store 59
-store 58
-load 59
+store 79
+store 78
+load 79
 assert
-load 58
+load 78
 frame_bury 3
-bytec 16 // "_"
+bytec 7 // "_"
 frame_dig -4
 extract 2 0
 concat
 box_get
-store 61
-store 60
-load 61
+store 81
+store 80
+load 81
 assert
-load 60
+load 80
 frame_bury 1
 frame_dig -5
 extract 2 0
 box_get
-store 63
-store 62
-load 63
+store 83
+store 82
+load 83
 assert
-load 62
+load 82
 frame_bury 0
 frame_dig -1
 bytec 5 // "asset_amount_str"
@@ -1634,24 +2135,24 @@ frame_dig -4
 extract 2 0
 concat
 box_get
-store 65
-store 64
-load 65
+store 85
+store 84
+load 85
 assert
-load 64
+load 84
 frame_bury 4
 frame_dig 4
 pushint 4 // 4
 extract_uint64
-frame_bury 7
-bytec 18 // "user_amount_chk"
-frame_dig 7
+frame_bury 8
+bytec 9 // "user_amount_chk"
+frame_dig 8
 frame_dig -1
 +
 app_global_put
-bytec 18 // "user_amount_chk"
+bytec 9 // "user_amount_chk"
 app_global_get
-frame_bury 8
+frame_bury 9
 frame_dig 4
 frame_dig 4
 pushint 2 // 2
@@ -1659,51 +2160,51 @@ extract_uint16
 dig 1
 len
 substring3
-frame_bury 9
-frame_dig 9
-extract 2 0
 frame_bury 10
 frame_dig 10
+extract 2 0
+frame_bury 11
+frame_dig 11
 len
 itob
 extract 6 0
-frame_dig 10
-concat
-frame_bury 10
-frame_dig -4
-frame_bury 14
-frame_dig 14
-frame_bury 13
-intc_3 // 12
-frame_bury 11
 frame_dig 11
-frame_dig 14
-len
-+
+concat
+frame_bury 11
+frame_dig -4
+frame_bury 15
+frame_dig 15
+frame_bury 14
+pushint 12 // 12
 frame_bury 12
 frame_dig 12
+frame_dig 15
+len
++
+frame_bury 13
+frame_dig 13
 intc_2 // 65536
 <
 assert
-frame_dig 11
+frame_dig 12
 itob
 extract 6 0
-frame_dig 10
+frame_dig 11
+frame_bury 15
+frame_dig 14
+frame_dig 15
+concat
 frame_bury 14
 frame_dig 13
-frame_dig 14
-concat
-frame_bury 13
+frame_bury 12
 frame_dig 12
-frame_bury 11
-frame_dig 11
 itob
 extract 6 0
 concat
-frame_dig 8
+frame_dig 9
 itob
 concat
-frame_dig 13
+frame_dig 14
 concat
 frame_bury 4
 bytec 4 // "#"
@@ -1721,48 +2222,48 @@ box_put
 frame_dig 3
 pushint 2 // 2
 extract_uint64
-frame_bury 15
-frame_dig 15
+frame_bury 16
+frame_dig 16
 frame_dig -1
 +
-frame_bury 16
-frame_dig -4
-frame_bury 20
-frame_dig 20
-frame_bury 19
-pushint 20 // 20
 frame_bury 17
-frame_dig 17
-frame_dig 20
-len
-+
+frame_dig -4
+frame_bury 21
+frame_dig 21
+frame_bury 20
+pushint 20 // 20
 frame_bury 18
 frame_dig 18
+frame_dig 21
+len
++
+frame_bury 19
+frame_dig 19
 intc_2 // 65536
 <
 assert
-frame_dig 17
+frame_dig 18
 itob
 extract 6 0
-frame_dig 16
+frame_dig 17
 itob
 concat
 frame_dig -2
 itob
 concat
 frame_dig -3
+frame_bury 21
+frame_dig 20
+frame_dig 21
+concat
 frame_bury 20
 frame_dig 19
-frame_dig 20
-concat
-frame_bury 19
+frame_bury 18
 frame_dig 18
-frame_bury 17
-frame_dig 17
 itob
 extract 6 0
 concat
-frame_dig 19
+frame_dig 20
 concat
 frame_bury 3
 bytec_3 // "@"
@@ -1783,8 +2284,59 @@ app_global_get
 frame_dig -1
 -
 app_global_put
+bytec_0 // "O"
+frame_dig -3
+extract 2 0
+concat
+box_get
+store 87
+store 86
+load 87
+assert
+load 86
+frame_bury 5
+frame_dig 5
+pushint 2 // 2
+extract_uint64
+frame_bury 22
+frame_dig 5
+pushint 10 // 10
+extract_uint64
+frame_bury 23
+frame_dig 5
+pushint 18 // 18
+extract_uint64
+frame_bury 24
+frame_dig 5
+pushint 26 // 26
+extract_uint64
+frame_bury 25
+frame_dig 5
+pushint 34 // 34
+extract_uint64
+frame_bury 26
+frame_dig 5
+pushint 42 // 42
+extract_uint64
+frame_bury 27
+frame_dig 5
+pushint 50 // 50
+extract_uint64
+frame_bury 28
+frame_dig 5
+pushint 58 // 58
+extract_uint64
+frame_bury 29
+frame_dig 5
+pushint 66 // 66
+extract_uint64
+frame_bury 30
+frame_dig 5
+pushint 74 // 74
+extract_uint64
+frame_bury 31
 frame_dig -2
-intc_1 // 1
+intc_3 // 1
 ==
 bnz tokenbuy_7_l19
 frame_dig -2
@@ -1823,123 +2375,793 @@ frame_dig -2
 pushint 10 // 10
 ==
 bz tokenbuy_7_l20
-bytec 6 // "option10"
-bytec 6 // "option10"
-app_global_get
+bytec_0 // "O"
+frame_dig -3
+extract 2 0
+concat
+box_get
+store 107
+store 106
+load 107
+assert
+load 106
+frame_bury 5
+frame_dig 22
 frame_dig -1
 +
-app_global_put
+frame_bury 22
+frame_dig -3
+frame_bury 71
+frame_dig 71
+frame_bury 70
+intc_1 // 82
+frame_bury 68
+frame_dig 68
+itob
+extract 6 0
+frame_dig 22
+itob
+concat
+frame_dig 23
+itob
+concat
+frame_dig 24
+itob
+concat
+frame_dig 25
+itob
+concat
+frame_dig 26
+itob
+concat
+frame_dig 27
+itob
+concat
+frame_dig 28
+itob
+concat
+frame_dig 29
+itob
+concat
+frame_dig 30
+itob
+concat
+frame_dig 31
+itob
+concat
+frame_dig 70
+concat
+frame_bury 5
+bytec_0 // "O"
+frame_dig -3
+extract 2 0
+concat
+box_del
+pop
+bytec_0 // "O"
+frame_dig -3
+extract 2 0
+concat
+frame_dig 5
+box_put
 b tokenbuy_7_l20
 tokenbuy_7_l11:
-bytec 14 // "option9"
-bytec 14 // "option9"
-app_global_get
+bytec_0 // "O"
+frame_dig -3
+extract 2 0
+concat
+box_get
+store 105
+store 104
+load 105
+assert
+load 104
+frame_bury 5
+frame_dig 22
 frame_dig -1
 +
-app_global_put
+frame_bury 22
+frame_dig -3
+frame_bury 67
+frame_dig 67
+frame_bury 66
+intc_1 // 82
+frame_bury 64
+frame_dig 64
+itob
+extract 6 0
+frame_dig 22
+itob
+concat
+frame_dig 23
+itob
+concat
+frame_dig 24
+itob
+concat
+frame_dig 25
+itob
+concat
+frame_dig 26
+itob
+concat
+frame_dig 27
+itob
+concat
+frame_dig 28
+itob
+concat
+frame_dig 29
+itob
+concat
+frame_dig 30
+itob
+concat
+frame_dig 31
+itob
+concat
+frame_dig 66
+concat
+frame_bury 5
+bytec_0 // "O"
+frame_dig -3
+extract 2 0
+concat
+box_del
+pop
+bytec_0 // "O"
+frame_dig -3
+extract 2 0
+concat
+frame_dig 5
+box_put
 b tokenbuy_7_l20
 tokenbuy_7_l12:
-bytec 13 // "option8"
-bytec 13 // "option8"
-app_global_get
+bytec_0 // "O"
+frame_dig -3
+extract 2 0
+concat
+box_get
+store 103
+store 102
+load 103
+assert
+load 102
+frame_bury 5
+frame_dig 22
 frame_dig -1
 +
-app_global_put
+frame_bury 22
+frame_dig -3
+frame_bury 63
+frame_dig 63
+frame_bury 62
+intc_1 // 82
+frame_bury 60
+frame_dig 60
+itob
+extract 6 0
+frame_dig 22
+itob
+concat
+frame_dig 23
+itob
+concat
+frame_dig 24
+itob
+concat
+frame_dig 25
+itob
+concat
+frame_dig 26
+itob
+concat
+frame_dig 27
+itob
+concat
+frame_dig 28
+itob
+concat
+frame_dig 29
+itob
+concat
+frame_dig 30
+itob
+concat
+frame_dig 31
+itob
+concat
+frame_dig 62
+concat
+frame_bury 5
+bytec_0 // "O"
+frame_dig -3
+extract 2 0
+concat
+box_del
+pop
+bytec_0 // "O"
+frame_dig -3
+extract 2 0
+concat
+frame_dig 5
+box_put
 b tokenbuy_7_l20
 tokenbuy_7_l13:
-bytec 12 // "option7"
-bytec 12 // "option7"
-app_global_get
+bytec_0 // "O"
+frame_dig -3
+extract 2 0
+concat
+box_get
+store 101
+store 100
+load 101
+assert
+load 100
+frame_bury 5
+frame_dig 22
 frame_dig -1
 +
-app_global_put
+frame_bury 22
+frame_dig -3
+frame_bury 59
+frame_dig 59
+frame_bury 58
+intc_1 // 82
+frame_bury 56
+frame_dig 56
+itob
+extract 6 0
+frame_dig 22
+itob
+concat
+frame_dig 23
+itob
+concat
+frame_dig 24
+itob
+concat
+frame_dig 25
+itob
+concat
+frame_dig 26
+itob
+concat
+frame_dig 27
+itob
+concat
+frame_dig 28
+itob
+concat
+frame_dig 29
+itob
+concat
+frame_dig 30
+itob
+concat
+frame_dig 31
+itob
+concat
+frame_dig 58
+concat
+frame_bury 5
+bytec_0 // "O"
+frame_dig -3
+extract 2 0
+concat
+box_del
+pop
+bytec_0 // "O"
+frame_dig -3
+extract 2 0
+concat
+frame_dig 5
+box_put
 b tokenbuy_7_l20
 tokenbuy_7_l14:
-bytec 11 // "option6"
-bytec 11 // "option6"
-app_global_get
+bytec_0 // "O"
+frame_dig -3
+extract 2 0
+concat
+box_get
+store 99
+store 98
+load 99
+assert
+load 98
+frame_bury 5
+frame_dig 22
 frame_dig -1
 +
-app_global_put
+frame_bury 22
+frame_dig -3
+frame_bury 55
+frame_dig 55
+frame_bury 54
+intc_1 // 82
+frame_bury 52
+frame_dig 52
+itob
+extract 6 0
+frame_dig 22
+itob
+concat
+frame_dig 23
+itob
+concat
+frame_dig 24
+itob
+concat
+frame_dig 25
+itob
+concat
+frame_dig 26
+itob
+concat
+frame_dig 27
+itob
+concat
+frame_dig 28
+itob
+concat
+frame_dig 29
+itob
+concat
+frame_dig 30
+itob
+concat
+frame_dig 31
+itob
+concat
+frame_dig 54
+concat
+frame_bury 5
+bytec_0 // "O"
+frame_dig -3
+extract 2 0
+concat
+box_del
+pop
+bytec_0 // "O"
+frame_dig -3
+extract 2 0
+concat
+frame_dig 5
+box_put
 b tokenbuy_7_l20
 tokenbuy_7_l15:
-bytec 10 // "option5"
-bytec 10 // "option5"
-app_global_get
+bytec_0 // "O"
+frame_dig -3
+extract 2 0
+concat
+box_get
+store 97
+store 96
+load 97
+assert
+load 96
+frame_bury 5
+frame_dig 22
 frame_dig -1
 +
-app_global_put
+frame_bury 22
+frame_dig -3
+frame_bury 51
+frame_dig 51
+frame_bury 50
+intc_1 // 82
+frame_bury 48
+frame_dig 48
+itob
+extract 6 0
+frame_dig 22
+itob
+concat
+frame_dig 23
+itob
+concat
+frame_dig 24
+itob
+concat
+frame_dig 25
+itob
+concat
+frame_dig 26
+itob
+concat
+frame_dig 27
+itob
+concat
+frame_dig 28
+itob
+concat
+frame_dig 29
+itob
+concat
+frame_dig 30
+itob
+concat
+frame_dig 31
+itob
+concat
+frame_dig 50
+concat
+frame_bury 5
+bytec_0 // "O"
+frame_dig -3
+extract 2 0
+concat
+box_del
+pop
+bytec_0 // "O"
+frame_dig -3
+extract 2 0
+concat
+frame_dig 5
+box_put
 b tokenbuy_7_l20
 tokenbuy_7_l16:
-bytec 9 // "option4"
-bytec 9 // "option4"
-app_global_get
+bytec_0 // "O"
+frame_dig -3
+extract 2 0
+concat
+box_get
+store 95
+store 94
+load 95
+assert
+load 94
+frame_bury 5
+frame_dig 22
 frame_dig -1
 +
-app_global_put
+frame_bury 22
+frame_dig -3
+frame_bury 47
+frame_dig 47
+frame_bury 46
+intc_1 // 82
+frame_bury 44
+frame_dig 44
+itob
+extract 6 0
+frame_dig 22
+itob
+concat
+frame_dig 23
+itob
+concat
+frame_dig 24
+itob
+concat
+frame_dig 25
+itob
+concat
+frame_dig 26
+itob
+concat
+frame_dig 27
+itob
+concat
+frame_dig 28
+itob
+concat
+frame_dig 29
+itob
+concat
+frame_dig 30
+itob
+concat
+frame_dig 31
+itob
+concat
+frame_dig 46
+concat
+frame_bury 5
+bytec_0 // "O"
+frame_dig -3
+extract 2 0
+concat
+box_del
+pop
+bytec_0 // "O"
+frame_dig -3
+extract 2 0
+concat
+frame_dig 5
+box_put
 b tokenbuy_7_l20
 tokenbuy_7_l17:
-bytec 8 // "option3"
-bytec 8 // "option3"
-app_global_get
+bytec_0 // "O"
+frame_dig -3
+extract 2 0
+concat
+box_get
+store 93
+store 92
+load 93
+assert
+load 92
+frame_bury 5
+frame_dig 22
 frame_dig -1
 +
-app_global_put
+frame_bury 22
+frame_dig -3
+frame_bury 43
+frame_dig 43
+frame_bury 42
+intc_1 // 82
+frame_bury 40
+frame_dig 40
+itob
+extract 6 0
+frame_dig 22
+itob
+concat
+frame_dig 23
+itob
+concat
+frame_dig 24
+itob
+concat
+frame_dig 25
+itob
+concat
+frame_dig 26
+itob
+concat
+frame_dig 27
+itob
+concat
+frame_dig 28
+itob
+concat
+frame_dig 29
+itob
+concat
+frame_dig 30
+itob
+concat
+frame_dig 31
+itob
+concat
+frame_dig 42
+concat
+frame_bury 5
+bytec_0 // "O"
+frame_dig -3
+extract 2 0
+concat
+box_del
+pop
+bytec_0 // "O"
+frame_dig -3
+extract 2 0
+concat
+frame_dig 5
+box_put
 b tokenbuy_7_l20
 tokenbuy_7_l18:
-bytec 7 // "option2"
-bytec 7 // "option2"
-app_global_get
+bytec_0 // "O"
+frame_dig -3
+extract 2 0
+concat
+box_get
+store 91
+store 90
+load 91
+assert
+load 90
+frame_bury 5
+frame_dig 22
 frame_dig -1
 +
-app_global_put
+frame_bury 22
+frame_dig -3
+frame_bury 39
+frame_dig 39
+frame_bury 38
+intc_1 // 82
+frame_bury 36
+frame_dig 36
+itob
+extract 6 0
+frame_dig 22
+itob
+concat
+frame_dig 23
+itob
+concat
+frame_dig 24
+itob
+concat
+frame_dig 25
+itob
+concat
+frame_dig 26
+itob
+concat
+frame_dig 27
+itob
+concat
+frame_dig 28
+itob
+concat
+frame_dig 29
+itob
+concat
+frame_dig 30
+itob
+concat
+frame_dig 31
+itob
+concat
+frame_dig 38
+concat
+frame_bury 5
+bytec_0 // "O"
+frame_dig -3
+extract 2 0
+concat
+box_del
+pop
+bytec_0 // "O"
+frame_dig -3
+extract 2 0
+concat
+frame_dig 5
+box_put
 b tokenbuy_7_l20
 tokenbuy_7_l19:
-bytec 15 // "option1"
-bytec 15 // "option1"
-app_global_get
+bytec_0 // "O"
+frame_dig -3
+extract 2 0
+concat
+box_get
+store 89
+store 88
+load 89
+assert
+load 88
+frame_bury 5
+frame_dig 22
 frame_dig -1
 +
-app_global_put
+frame_bury 22
+frame_dig -3
+frame_bury 35
+frame_dig 35
+frame_bury 34
+intc_1 // 82
+frame_bury 32
+frame_dig 32
+itob
+extract 6 0
+frame_dig 22
+itob
+concat
+frame_dig 23
+itob
+concat
+frame_dig 24
+itob
+concat
+frame_dig 25
+itob
+concat
+frame_dig 26
+itob
+concat
+frame_dig 27
+itob
+concat
+frame_dig 28
+itob
+concat
+frame_dig 29
+itob
+concat
+frame_dig 30
+itob
+concat
+frame_dig 31
+itob
+concat
+frame_dig 34
+concat
+frame_bury 5
+bytec_0 // "O"
+frame_dig -3
+extract 2 0
+concat
+box_del
+pop
+bytec_0 // "O"
+frame_dig -3
+extract 2 0
+concat
+frame_dig 5
+box_put
 tokenbuy_7_l20:
 retsub
 
 // token_sell
 tokensell_8:
 proto 5 0
-bytec_0 // ""
-dupn 4
+bytec_1 // ""
+dupn 5
 intc_0 // 0
-bytec_0 // ""
-intc_0 // 0
-dup
-bytec_0 // ""
-dup
+bytec_1 // ""
 intc_0 // 0
 dup
-bytec_0 // ""
+bytec_1 // ""
+dup
+intc_0 // 0
+dup
+bytec_1 // ""
 dup
 intc_0 // 0
 dupn 3
-bytec_0 // ""
+bytec_1 // ""
+dup
+intc_0 // 0
+dupn 11
+bytec_1 // ""
+dup
+intc_0 // 0
+dup
+bytec_1 // ""
+dup
+intc_0 // 0
+dup
+bytec_1 // ""
+dup
+intc_0 // 0
+dup
+bytec_1 // ""
+dup
+intc_0 // 0
+dup
+bytec_1 // ""
+dup
+intc_0 // 0
+dup
+bytec_1 // ""
+dup
+intc_0 // 0
+dup
+bytec_1 // ""
+dup
+intc_0 // 0
+dup
+bytec_1 // ""
+dup
+intc_0 // 0
+dup
+bytec_1 // ""
+dup
+intc_0 // 0
+dup
+bytec_1 // ""
 dup
 bytec_3 // "@"
 frame_dig -4
 extract 2 0
 concat
 box_get
-store 67
-store 66
-load 67
+store 109
+store 108
+load 109
 assert
-load 66
+load 108
 frame_bury 3
 frame_dig 3
 pushint 10 // 10
 extract_uint64
-frame_bury 5
+frame_bury 6
 frame_dig -2
-frame_dig 5
+frame_dig 6
 ==
 assert
 bytec_3 // "@"
@@ -1947,11 +3169,11 @@ frame_dig -4
 extract 2 0
 concat
 box_get
-store 69
-store 68
-load 69
+store 111
+store 110
+load 111
 assert
-load 68
+load 110
 frame_bury 3
 frame_dig 3
 frame_dig 3
@@ -1960,10 +3182,10 @@ extract_uint16
 dig 1
 len
 substring3
-frame_bury 6
+frame_bury 7
 frame_dig -3
 extract 2 0
-frame_dig 6
+frame_dig 7
 extract 2 0
 ==
 assert
@@ -1972,70 +3194,70 @@ frame_dig -4
 extract 2 0
 concat
 box_get
-store 71
-store 70
-load 71
+store 113
+store 112
+load 113
 assert
-load 70
+load 112
 frame_bury 3
-bytec 17 // "Q"
+bytec 8 // "Q"
 frame_dig -3
 extract 2 0
 concat
 box_get
-store 73
-store 72
-load 73
+store 115
+store 114
+load 115
 assert
-load 72
+load 114
 frame_bury 2
-bytec 16 // "_"
+bytec 7 // "_"
 frame_dig -4
 extract 2 0
 concat
 box_get
-store 75
-store 74
-load 75
+store 117
+store 116
+load 117
 assert
-load 74
+load 116
 frame_bury 1
 frame_dig -5
 extract 2 0
 box_get
-store 77
-store 76
-load 77
+store 119
+store 118
+load 119
 assert
-load 76
+load 118
 frame_bury 0
 bytec 4 // "#"
 frame_dig -4
 extract 2 0
 concat
 box_get
-store 79
-store 78
-load 79
+store 121
+store 120
+load 121
 assert
-load 78
+load 120
 frame_bury 4
 frame_dig 4
 pushint 4 // 4
 extract_uint64
-frame_bury 7
+frame_bury 8
 frame_dig -1
-frame_dig 7
+frame_dig 8
 <=
 assert
-bytec 18 // "user_amount_chk"
-frame_dig 7
+bytec 9 // "user_amount_chk"
+frame_dig 8
 frame_dig -1
 -
 app_global_put
-bytec 18 // "user_amount_chk"
+bytec 9 // "user_amount_chk"
 app_global_get
-frame_bury 8
+frame_bury 9
 frame_dig 4
 frame_dig 4
 pushint 2 // 2
@@ -2043,51 +3265,51 @@ extract_uint16
 dig 1
 len
 substring3
-frame_bury 9
-frame_dig 9
-extract 2 0
 frame_bury 10
 frame_dig 10
+extract 2 0
+frame_bury 11
+frame_dig 11
 len
 itob
 extract 6 0
-frame_dig 10
-concat
-frame_bury 10
-frame_dig -4
-frame_bury 14
-frame_dig 14
-frame_bury 13
-intc_3 // 12
-frame_bury 11
 frame_dig 11
-frame_dig 14
-len
-+
+concat
+frame_bury 11
+frame_dig -4
+frame_bury 15
+frame_dig 15
+frame_bury 14
+pushint 12 // 12
 frame_bury 12
 frame_dig 12
+frame_dig 15
+len
++
+frame_bury 13
+frame_dig 13
 intc_2 // 65536
 <
 assert
-frame_dig 11
+frame_dig 12
 itob
 extract 6 0
-frame_dig 10
+frame_dig 11
+frame_bury 15
+frame_dig 14
+frame_dig 15
+concat
 frame_bury 14
 frame_dig 13
-frame_dig 14
-concat
-frame_bury 13
+frame_bury 12
 frame_dig 12
-frame_bury 11
-frame_dig 11
 itob
 extract 6 0
 concat
-frame_dig 8
+frame_dig 9
 itob
 concat
-frame_dig 13
+frame_dig 14
 concat
 frame_bury 4
 bytec 4 // "#"
@@ -2105,48 +3327,48 @@ box_put
 frame_dig 3
 pushint 2 // 2
 extract_uint64
-frame_bury 15
-frame_dig 15
+frame_bury 16
+frame_dig 16
 frame_dig -1
 -
-frame_bury 16
-frame_dig -4
-frame_bury 20
-frame_dig 20
-frame_bury 19
-pushint 20 // 20
 frame_bury 17
-frame_dig 17
-frame_dig 20
-len
-+
+frame_dig -4
+frame_bury 21
+frame_dig 21
+frame_bury 20
+pushint 20 // 20
 frame_bury 18
 frame_dig 18
+frame_dig 21
+len
++
+frame_bury 19
+frame_dig 19
 intc_2 // 65536
 <
 assert
-frame_dig 17
+frame_dig 18
 itob
 extract 6 0
-frame_dig 16
+frame_dig 17
 itob
 concat
 frame_dig -2
 itob
 concat
 frame_dig -3
+frame_bury 21
+frame_dig 20
+frame_dig 21
+concat
 frame_bury 20
 frame_dig 19
-frame_dig 20
-concat
-frame_bury 19
+frame_bury 18
 frame_dig 18
-frame_bury 17
-frame_dig 17
 itob
 extract 6 0
 concat
-frame_dig 19
+frame_dig 20
 concat
 frame_bury 3
 bytec_3 // "@"
@@ -2167,8 +3389,59 @@ app_global_get
 frame_dig -1
 +
 app_global_put
+bytec_0 // "O"
+frame_dig -3
+extract 2 0
+concat
+box_get
+store 123
+store 122
+load 123
+assert
+load 122
+frame_bury 5
+frame_dig 5
+pushint 2 // 2
+extract_uint64
+frame_bury 22
+frame_dig 5
+pushint 10 // 10
+extract_uint64
+frame_bury 23
+frame_dig 5
+pushint 18 // 18
+extract_uint64
+frame_bury 24
+frame_dig 5
+pushint 26 // 26
+extract_uint64
+frame_bury 25
+frame_dig 5
+pushint 34 // 34
+extract_uint64
+frame_bury 26
+frame_dig 5
+pushint 42 // 42
+extract_uint64
+frame_bury 27
+frame_dig 5
+pushint 50 // 50
+extract_uint64
+frame_bury 28
+frame_dig 5
+pushint 58 // 58
+extract_uint64
+frame_bury 29
+frame_dig 5
+pushint 66 // 66
+extract_uint64
+frame_bury 30
+frame_dig 5
+pushint 74 // 74
+extract_uint64
+frame_bury 31
 frame_dig -2
-intc_1 // 1
+intc_3 // 1
 ==
 bnz tokensell_8_l19
 frame_dig -2
@@ -2207,257 +3480,918 @@ frame_dig -2
 pushint 10 // 10
 ==
 bz tokensell_8_l20
-bytec 6 // "option10"
-bytec 6 // "option10"
-app_global_get
+bytec_0 // "O"
+frame_dig -3
+extract 2 0
+concat
+box_get
+store 143
+store 142
+load 143
+assert
+load 142
+frame_bury 5
+frame_dig 22
 frame_dig -1
 -
-app_global_put
+frame_bury 22
+frame_dig -3
+frame_bury 71
+frame_dig 71
+frame_bury 70
+intc_1 // 82
+frame_bury 68
+frame_dig 68
+itob
+extract 6 0
+frame_dig 22
+itob
+concat
+frame_dig 23
+itob
+concat
+frame_dig 24
+itob
+concat
+frame_dig 25
+itob
+concat
+frame_dig 26
+itob
+concat
+frame_dig 27
+itob
+concat
+frame_dig 28
+itob
+concat
+frame_dig 29
+itob
+concat
+frame_dig 30
+itob
+concat
+frame_dig 31
+itob
+concat
+frame_dig 70
+concat
+frame_bury 5
+bytec_0 // "O"
+frame_dig -3
+extract 2 0
+concat
+box_del
+pop
+bytec_0 // "O"
+frame_dig -3
+extract 2 0
+concat
+frame_dig 5
+box_put
 b tokensell_8_l20
 tokensell_8_l11:
-bytec 14 // "option9"
-bytec 14 // "option9"
-app_global_get
+bytec_0 // "O"
+frame_dig -3
+extract 2 0
+concat
+box_get
+store 141
+store 140
+load 141
+assert
+load 140
+frame_bury 5
+frame_dig 22
 frame_dig -1
 -
-app_global_put
+frame_bury 22
+frame_dig -3
+frame_bury 67
+frame_dig 67
+frame_bury 66
+intc_1 // 82
+frame_bury 64
+frame_dig 64
+itob
+extract 6 0
+frame_dig 22
+itob
+concat
+frame_dig 23
+itob
+concat
+frame_dig 24
+itob
+concat
+frame_dig 25
+itob
+concat
+frame_dig 26
+itob
+concat
+frame_dig 27
+itob
+concat
+frame_dig 28
+itob
+concat
+frame_dig 29
+itob
+concat
+frame_dig 30
+itob
+concat
+frame_dig 31
+itob
+concat
+frame_dig 66
+concat
+frame_bury 5
+bytec_0 // "O"
+frame_dig -3
+extract 2 0
+concat
+box_del
+pop
+bytec_0 // "O"
+frame_dig -3
+extract 2 0
+concat
+frame_dig 5
+box_put
 b tokensell_8_l20
 tokensell_8_l12:
-bytec 13 // "option8"
-bytec 13 // "option8"
-app_global_get
+bytec_0 // "O"
+frame_dig -3
+extract 2 0
+concat
+box_get
+store 139
+store 138
+load 139
+assert
+load 138
+frame_bury 5
+frame_dig 22
 frame_dig -1
 -
-app_global_put
+frame_bury 22
+frame_dig -3
+frame_bury 63
+frame_dig 63
+frame_bury 62
+intc_1 // 82
+frame_bury 60
+frame_dig 60
+itob
+extract 6 0
+frame_dig 22
+itob
+concat
+frame_dig 23
+itob
+concat
+frame_dig 24
+itob
+concat
+frame_dig 25
+itob
+concat
+frame_dig 26
+itob
+concat
+frame_dig 27
+itob
+concat
+frame_dig 28
+itob
+concat
+frame_dig 29
+itob
+concat
+frame_dig 30
+itob
+concat
+frame_dig 31
+itob
+concat
+frame_dig 62
+concat
+frame_bury 5
+bytec_0 // "O"
+frame_dig -3
+extract 2 0
+concat
+box_del
+pop
+bytec_0 // "O"
+frame_dig -3
+extract 2 0
+concat
+frame_dig 5
+box_put
 b tokensell_8_l20
 tokensell_8_l13:
-bytec 12 // "option7"
-bytec 12 // "option7"
-app_global_get
+bytec_0 // "O"
+frame_dig -3
+extract 2 0
+concat
+box_get
+store 137
+store 136
+load 137
+assert
+load 136
+frame_bury 5
+frame_dig 22
 frame_dig -1
 -
-app_global_put
+frame_bury 22
+frame_dig -3
+frame_bury 59
+frame_dig 59
+frame_bury 58
+intc_1 // 82
+frame_bury 56
+frame_dig 56
+itob
+extract 6 0
+frame_dig 22
+itob
+concat
+frame_dig 23
+itob
+concat
+frame_dig 24
+itob
+concat
+frame_dig 25
+itob
+concat
+frame_dig 26
+itob
+concat
+frame_dig 27
+itob
+concat
+frame_dig 28
+itob
+concat
+frame_dig 29
+itob
+concat
+frame_dig 30
+itob
+concat
+frame_dig 31
+itob
+concat
+frame_dig 58
+concat
+frame_bury 5
+bytec_0 // "O"
+frame_dig -3
+extract 2 0
+concat
+box_del
+pop
+bytec_0 // "O"
+frame_dig -3
+extract 2 0
+concat
+frame_dig 5
+box_put
 b tokensell_8_l20
 tokensell_8_l14:
-bytec 11 // "option6"
-bytec 11 // "option6"
-app_global_get
+bytec_0 // "O"
+frame_dig -3
+extract 2 0
+concat
+box_get
+store 135
+store 134
+load 135
+assert
+load 134
+frame_bury 5
+frame_dig 22
 frame_dig -1
 -
-app_global_put
+frame_bury 22
+frame_dig -3
+frame_bury 55
+frame_dig 55
+frame_bury 54
+intc_1 // 82
+frame_bury 52
+frame_dig 52
+itob
+extract 6 0
+frame_dig 22
+itob
+concat
+frame_dig 23
+itob
+concat
+frame_dig 24
+itob
+concat
+frame_dig 25
+itob
+concat
+frame_dig 26
+itob
+concat
+frame_dig 27
+itob
+concat
+frame_dig 28
+itob
+concat
+frame_dig 29
+itob
+concat
+frame_dig 30
+itob
+concat
+frame_dig 31
+itob
+concat
+frame_dig 54
+concat
+frame_bury 5
+bytec_0 // "O"
+frame_dig -3
+extract 2 0
+concat
+box_del
+pop
+bytec_0 // "O"
+frame_dig -3
+extract 2 0
+concat
+frame_dig 5
+box_put
 b tokensell_8_l20
 tokensell_8_l15:
-bytec 10 // "option5"
-bytec 10 // "option5"
-app_global_get
+bytec_0 // "O"
+frame_dig -3
+extract 2 0
+concat
+box_get
+store 133
+store 132
+load 133
+assert
+load 132
+frame_bury 5
+frame_dig 22
 frame_dig -1
 -
-app_global_put
+frame_bury 22
+frame_dig -3
+frame_bury 51
+frame_dig 51
+frame_bury 50
+intc_1 // 82
+frame_bury 48
+frame_dig 48
+itob
+extract 6 0
+frame_dig 22
+itob
+concat
+frame_dig 23
+itob
+concat
+frame_dig 24
+itob
+concat
+frame_dig 25
+itob
+concat
+frame_dig 26
+itob
+concat
+frame_dig 27
+itob
+concat
+frame_dig 28
+itob
+concat
+frame_dig 29
+itob
+concat
+frame_dig 30
+itob
+concat
+frame_dig 31
+itob
+concat
+frame_dig 50
+concat
+frame_bury 5
+bytec_0 // "O"
+frame_dig -3
+extract 2 0
+concat
+box_del
+pop
+bytec_0 // "O"
+frame_dig -3
+extract 2 0
+concat
+frame_dig 5
+box_put
 b tokensell_8_l20
 tokensell_8_l16:
-bytec 9 // "option4"
-bytec 9 // "option4"
-app_global_get
+bytec_0 // "O"
+frame_dig -3
+extract 2 0
+concat
+box_get
+store 131
+store 130
+load 131
+assert
+load 130
+frame_bury 5
+frame_dig 22
 frame_dig -1
 -
-app_global_put
+frame_bury 22
+frame_dig -3
+frame_bury 47
+frame_dig 47
+frame_bury 46
+intc_1 // 82
+frame_bury 44
+frame_dig 44
+itob
+extract 6 0
+frame_dig 22
+itob
+concat
+frame_dig 23
+itob
+concat
+frame_dig 24
+itob
+concat
+frame_dig 25
+itob
+concat
+frame_dig 26
+itob
+concat
+frame_dig 27
+itob
+concat
+frame_dig 28
+itob
+concat
+frame_dig 29
+itob
+concat
+frame_dig 30
+itob
+concat
+frame_dig 31
+itob
+concat
+frame_dig 46
+concat
+frame_bury 5
+bytec_0 // "O"
+frame_dig -3
+extract 2 0
+concat
+box_del
+pop
+bytec_0 // "O"
+frame_dig -3
+extract 2 0
+concat
+frame_dig 5
+box_put
 b tokensell_8_l20
 tokensell_8_l17:
-bytec 8 // "option3"
-bytec 8 // "option3"
-app_global_get
+bytec_0 // "O"
+frame_dig -3
+extract 2 0
+concat
+box_get
+store 129
+store 128
+load 129
+assert
+load 128
+frame_bury 5
+frame_dig 22
 frame_dig -1
 -
-app_global_put
+frame_bury 22
+frame_dig -3
+frame_bury 43
+frame_dig 43
+frame_bury 42
+intc_1 // 82
+frame_bury 40
+frame_dig 40
+itob
+extract 6 0
+frame_dig 22
+itob
+concat
+frame_dig 23
+itob
+concat
+frame_dig 24
+itob
+concat
+frame_dig 25
+itob
+concat
+frame_dig 26
+itob
+concat
+frame_dig 27
+itob
+concat
+frame_dig 28
+itob
+concat
+frame_dig 29
+itob
+concat
+frame_dig 30
+itob
+concat
+frame_dig 31
+itob
+concat
+frame_dig 42
+concat
+frame_bury 5
+bytec_0 // "O"
+frame_dig -3
+extract 2 0
+concat
+box_del
+pop
+bytec_0 // "O"
+frame_dig -3
+extract 2 0
+concat
+frame_dig 5
+box_put
 b tokensell_8_l20
 tokensell_8_l18:
-bytec 7 // "option2"
-bytec 7 // "option2"
-app_global_get
+bytec_0 // "O"
+frame_dig -3
+extract 2 0
+concat
+box_get
+store 127
+store 126
+load 127
+assert
+load 126
+frame_bury 5
+frame_dig 22
 frame_dig -1
 -
-app_global_put
+frame_bury 22
+frame_dig -3
+frame_bury 39
+frame_dig 39
+frame_bury 38
+intc_1 // 82
+frame_bury 36
+frame_dig 36
+itob
+extract 6 0
+frame_dig 22
+itob
+concat
+frame_dig 23
+itob
+concat
+frame_dig 24
+itob
+concat
+frame_dig 25
+itob
+concat
+frame_dig 26
+itob
+concat
+frame_dig 27
+itob
+concat
+frame_dig 28
+itob
+concat
+frame_dig 29
+itob
+concat
+frame_dig 30
+itob
+concat
+frame_dig 31
+itob
+concat
+frame_dig 38
+concat
+frame_bury 5
+bytec_0 // "O"
+frame_dig -3
+extract 2 0
+concat
+box_del
+pop
+bytec_0 // "O"
+frame_dig -3
+extract 2 0
+concat
+frame_dig 5
+box_put
 b tokensell_8_l20
 tokensell_8_l19:
-bytec 15 // "option1"
-bytec 15 // "option1"
-app_global_get
+bytec_0 // "O"
+frame_dig -3
+extract 2 0
+concat
+box_get
+store 125
+store 124
+load 125
+assert
+load 124
+frame_bury 5
+frame_dig 22
 frame_dig -1
 -
-app_global_put
+frame_bury 22
+frame_dig -3
+frame_bury 35
+frame_dig 35
+frame_bury 34
+intc_1 // 82
+frame_bury 32
+frame_dig 32
+itob
+extract 6 0
+frame_dig 22
+itob
+concat
+frame_dig 23
+itob
+concat
+frame_dig 24
+itob
+concat
+frame_dig 25
+itob
+concat
+frame_dig 26
+itob
+concat
+frame_dig 27
+itob
+concat
+frame_dig 28
+itob
+concat
+frame_dig 29
+itob
+concat
+frame_dig 30
+itob
+concat
+frame_dig 31
+itob
+concat
+frame_dig 34
+concat
+frame_bury 5
+bytec_0 // "O"
+frame_dig -3
+extract 2 0
+concat
+box_del
+pop
+bytec_0 // "O"
+frame_dig -3
+extract 2 0
+concat
+frame_dig 5
+box_put
 tokensell_8_l20:
 retsub
 
 // Result
 Result_9:
 proto 2 1
-bytec_0 // ""
-dupn 3
+bytec_1 // ""
+dupn 4
 intc_0 // 0
-dupn 3
-bytec_0 // ""
+dupn 13
+bytec_1 // ""
 dup
 intc_0 // 0
 dupn 2
-bytec_0 // ""
+bytec_1 // ""
 dup
 intc_0 // 0
 dupn 2
-bytec_0 // ""
+bytec_1 // ""
 dup
 intc_0 // 0
 dupn 2
-bytec_0 // ""
+bytec_1 // ""
 dup
 intc_0 // 0
 dupn 2
-bytec_0 // ""
+bytec_1 // ""
 dup
 intc_0 // 0
 dupn 2
-bytec_0 // ""
+bytec_1 // ""
 dup
 intc_0 // 0
 dupn 2
-bytec_0 // ""
+bytec_1 // ""
 dup
 intc_0 // 0
 dupn 2
-bytec_0 // ""
+bytec_1 // ""
 dup
 intc_0 // 0
 dupn 2
-bytec_0 // ""
+bytec_1 // ""
 dup
 intc_0 // 0
 dupn 2
-bytec_0 // ""
+bytec_1 // ""
 dup
-bytec 17 // "Q"
+bytec 8 // "Q"
 frame_dig -1
 extract 2 0
 concat
 box_get
-store 81
-store 80
-load 81
+store 145
+store 144
+load 145
 assert
-load 80
+load 144
 frame_bury 2
 frame_dig -2
 extract 2 0
 box_get
-store 83
-store 82
-load 83
+store 147
+store 146
+load 147
 assert
-load 82
+load 146
 frame_bury 1
-bytec 15 // "option1"
-app_global_get
+bytec_0 // "O"
+frame_dig -1
+extract 2 0
+concat
+box_get
+store 149
+store 148
+load 149
+assert
+load 148
 frame_bury 4
-bytec 7 // "option2"
-app_global_get
 frame_dig 4
+pushint 2 // 2
+extract_uint64
+frame_bury 5
+frame_dig 4
+pushint 10 // 10
+extract_uint64
+frame_bury 6
+frame_dig 4
+pushint 18 // 18
+extract_uint64
+frame_bury 7
+frame_dig 4
+pushint 26 // 26
+extract_uint64
+frame_bury 8
+frame_dig 4
+pushint 34 // 34
+extract_uint64
+frame_bury 9
+frame_dig 4
+pushint 42 // 42
+extract_uint64
+frame_bury 10
+frame_dig 4
+pushint 50 // 50
+extract_uint64
+frame_bury 11
+frame_dig 4
+pushint 58 // 58
+extract_uint64
+frame_bury 12
+frame_dig 4
+pushint 66 // 66
+extract_uint64
+frame_bury 13
+frame_dig 4
+pushint 74 // 74
+extract_uint64
+frame_bury 14
+frame_dig 5
+frame_bury 15
+frame_dig 6
+frame_dig 15
 >
 bnz Result_9_l37
 Result_9_l1:
-bytec 8 // "option3"
-app_global_get
-frame_dig 4
+frame_dig 7
+frame_dig 15
 >
 bnz Result_9_l36
 Result_9_l2:
-bytec 9 // "option4"
-app_global_get
-frame_dig 4
+frame_dig 8
+frame_dig 15
 >
 bnz Result_9_l35
 Result_9_l3:
-bytec 10 // "option5"
-app_global_get
-frame_dig 4
+frame_dig 9
+frame_dig 15
 >
 bnz Result_9_l34
 Result_9_l4:
-bytec 11 // "option6"
-app_global_get
-frame_dig 4
+frame_dig 10
+frame_dig 15
 >
 bnz Result_9_l33
 Result_9_l5:
-bytec 12 // "option7"
-app_global_get
-frame_dig 4
+frame_dig 11
+frame_dig 15
 >
 bnz Result_9_l32
 Result_9_l6:
-bytec 13 // "option8"
-app_global_get
-frame_dig 4
+frame_dig 12
+frame_dig 15
 >
 bnz Result_9_l31
 Result_9_l7:
-bytec 14 // "option9"
-app_global_get
-frame_dig 4
+frame_dig 13
+frame_dig 15
 >
 bnz Result_9_l30
 Result_9_l8:
-bytec 6 // "option10"
-app_global_get
-frame_dig 4
+frame_dig 14
+frame_dig 15
 >
 bnz Result_9_l29
 Result_9_l9:
-frame_dig 4
-bytec 15 // "option1"
-app_global_get
+frame_dig 15
+frame_dig 5
 ==
 bnz Result_9_l28
-frame_dig 4
-bytec 7 // "option2"
-app_global_get
+frame_dig 15
+frame_dig 6
 ==
 bnz Result_9_l27
-frame_dig 4
-bytec 8 // "option3"
-app_global_get
+frame_dig 15
+frame_dig 7
 ==
 bnz Result_9_l26
-frame_dig 4
-bytec 9 // "option4"
-app_global_get
+frame_dig 15
+frame_dig 8
 ==
 bnz Result_9_l25
-frame_dig 4
-bytec 10 // "option5"
-app_global_get
+frame_dig 15
+frame_dig 9
 ==
 bnz Result_9_l24
-frame_dig 4
-bytec 11 // "option6"
-app_global_get
+frame_dig 15
+frame_dig 10
 ==
 bnz Result_9_l23
-frame_dig 4
-bytec 12 // "option7"
-app_global_get
+frame_dig 15
+frame_dig 11
 ==
 bnz Result_9_l22
-frame_dig 4
-bytec 13 // "option8"
-app_global_get
+frame_dig 15
+frame_dig 12
 ==
 bnz Result_9_l21
-frame_dig 4
-bytec 14 // "option9"
-app_global_get
+frame_dig 15
+frame_dig 13
 ==
 bnz Result_9_l20
-frame_dig 4
-bytec 6 // "option10"
-app_global_get
+frame_dig 15
+frame_dig 14
 ==
 bz Result_9_l38
 pushbytes 0x6f7074696f6e2031302069732077696e6e65722c20 // "option 10 is winner, "
@@ -2473,41 +4407,41 @@ frame_dig 0
 concat
 frame_bury 0
 pushint 10 // 10
-frame_bury 50
+frame_bury 61
 frame_dig -2
-frame_bury 54
-frame_dig 54
-frame_bury 53
-intc_3 // 12
-frame_bury 51
-frame_dig 51
-frame_dig 54
+frame_bury 65
+frame_dig 65
+frame_bury 64
+pushint 12 // 12
+frame_bury 62
+frame_dig 62
+frame_dig 65
 len
 +
-frame_bury 52
-frame_dig 52
+frame_bury 63
+frame_dig 63
 intc_2 // 65536
 <
 assert
-frame_dig 51
+frame_dig 62
 itob
 extract 6 0
 frame_dig -1
-frame_bury 54
-frame_dig 53
-frame_dig 54
+frame_bury 65
+frame_dig 64
+frame_dig 65
 concat
-frame_bury 53
-frame_dig 52
-frame_bury 51
-frame_dig 51
+frame_bury 64
+frame_dig 63
+frame_bury 62
+frame_dig 62
 itob
 extract 6 0
 concat
-frame_dig 50
+frame_dig 61
 itob
 concat
-frame_dig 53
+frame_dig 64
 concat
 frame_bury 3
 bytec_2 // "R"
@@ -2537,41 +4471,41 @@ frame_dig 0
 concat
 frame_bury 0
 pushint 9 // 9
-frame_bury 45
+frame_bury 56
 frame_dig -2
-frame_bury 49
-frame_dig 49
-frame_bury 48
-intc_3 // 12
-frame_bury 46
-frame_dig 46
-frame_dig 49
+frame_bury 60
+frame_dig 60
+frame_bury 59
+pushint 12 // 12
+frame_bury 57
+frame_dig 57
+frame_dig 60
 len
 +
-frame_bury 47
-frame_dig 47
+frame_bury 58
+frame_dig 58
 intc_2 // 65536
 <
 assert
-frame_dig 46
+frame_dig 57
 itob
 extract 6 0
 frame_dig -1
-frame_bury 49
-frame_dig 48
-frame_dig 49
+frame_bury 60
+frame_dig 59
+frame_dig 60
 concat
-frame_bury 48
-frame_dig 47
-frame_bury 46
-frame_dig 46
+frame_bury 59
+frame_dig 58
+frame_bury 57
+frame_dig 57
 itob
 extract 6 0
 concat
-frame_dig 45
+frame_dig 56
 itob
 concat
-frame_dig 48
+frame_dig 59
 concat
 frame_bury 3
 bytec_2 // "R"
@@ -2601,41 +4535,41 @@ frame_dig 0
 concat
 frame_bury 0
 pushint 8 // 8
-frame_bury 40
+frame_bury 51
 frame_dig -2
-frame_bury 44
-frame_dig 44
-frame_bury 43
-intc_3 // 12
-frame_bury 41
-frame_dig 41
-frame_dig 44
+frame_bury 55
+frame_dig 55
+frame_bury 54
+pushint 12 // 12
+frame_bury 52
+frame_dig 52
+frame_dig 55
 len
 +
-frame_bury 42
-frame_dig 42
+frame_bury 53
+frame_dig 53
 intc_2 // 65536
 <
 assert
-frame_dig 41
+frame_dig 52
 itob
 extract 6 0
 frame_dig -1
-frame_bury 44
-frame_dig 43
-frame_dig 44
+frame_bury 55
+frame_dig 54
+frame_dig 55
 concat
-frame_bury 43
-frame_dig 42
-frame_bury 41
-frame_dig 41
+frame_bury 54
+frame_dig 53
+frame_bury 52
+frame_dig 52
 itob
 extract 6 0
 concat
-frame_dig 40
+frame_dig 51
 itob
 concat
-frame_dig 43
+frame_dig 54
 concat
 frame_bury 3
 bytec_2 // "R"
@@ -2665,41 +4599,41 @@ frame_dig 0
 concat
 frame_bury 0
 pushint 7 // 7
-frame_bury 35
+frame_bury 46
 frame_dig -2
-frame_bury 39
-frame_dig 39
-frame_bury 38
-intc_3 // 12
-frame_bury 36
-frame_dig 36
-frame_dig 39
+frame_bury 50
+frame_dig 50
+frame_bury 49
+pushint 12 // 12
+frame_bury 47
+frame_dig 47
+frame_dig 50
 len
 +
-frame_bury 37
-frame_dig 37
+frame_bury 48
+frame_dig 48
 intc_2 // 65536
 <
 assert
-frame_dig 36
+frame_dig 47
 itob
 extract 6 0
 frame_dig -1
-frame_bury 39
-frame_dig 38
-frame_dig 39
+frame_bury 50
+frame_dig 49
+frame_dig 50
 concat
-frame_bury 38
-frame_dig 37
-frame_bury 36
-frame_dig 36
+frame_bury 49
+frame_dig 48
+frame_bury 47
+frame_dig 47
 itob
 extract 6 0
 concat
-frame_dig 35
+frame_dig 46
 itob
 concat
-frame_dig 38
+frame_dig 49
 concat
 frame_bury 3
 bytec_2 // "R"
@@ -2729,41 +4663,41 @@ frame_dig 0
 concat
 frame_bury 0
 pushint 6 // 6
-frame_bury 30
+frame_bury 41
 frame_dig -2
-frame_bury 34
-frame_dig 34
-frame_bury 33
-intc_3 // 12
-frame_bury 31
-frame_dig 31
-frame_dig 34
+frame_bury 45
+frame_dig 45
+frame_bury 44
+pushint 12 // 12
+frame_bury 42
+frame_dig 42
+frame_dig 45
 len
 +
-frame_bury 32
-frame_dig 32
+frame_bury 43
+frame_dig 43
 intc_2 // 65536
 <
 assert
-frame_dig 31
+frame_dig 42
 itob
 extract 6 0
 frame_dig -1
-frame_bury 34
-frame_dig 33
-frame_dig 34
+frame_bury 45
+frame_dig 44
+frame_dig 45
 concat
-frame_bury 33
-frame_dig 32
-frame_bury 31
-frame_dig 31
+frame_bury 44
+frame_dig 43
+frame_bury 42
+frame_dig 42
 itob
 extract 6 0
 concat
-frame_dig 30
+frame_dig 41
 itob
 concat
-frame_dig 33
+frame_dig 44
 concat
 frame_bury 3
 bytec_2 // "R"
@@ -2793,41 +4727,41 @@ frame_dig 0
 concat
 frame_bury 0
 pushint 5 // 5
-frame_bury 25
+frame_bury 36
 frame_dig -2
-frame_bury 29
-frame_dig 29
-frame_bury 28
-intc_3 // 12
-frame_bury 26
-frame_dig 26
-frame_dig 29
+frame_bury 40
+frame_dig 40
+frame_bury 39
+pushint 12 // 12
+frame_bury 37
+frame_dig 37
+frame_dig 40
 len
 +
-frame_bury 27
-frame_dig 27
+frame_bury 38
+frame_dig 38
 intc_2 // 65536
 <
 assert
-frame_dig 26
+frame_dig 37
 itob
 extract 6 0
 frame_dig -1
-frame_bury 29
-frame_dig 28
-frame_dig 29
+frame_bury 40
+frame_dig 39
+frame_dig 40
 concat
-frame_bury 28
-frame_dig 27
-frame_bury 26
-frame_dig 26
+frame_bury 39
+frame_dig 38
+frame_bury 37
+frame_dig 37
 itob
 extract 6 0
 concat
-frame_dig 25
+frame_dig 36
 itob
 concat
-frame_dig 28
+frame_dig 39
 concat
 frame_bury 3
 bytec_2 // "R"
@@ -2857,41 +4791,41 @@ frame_dig 0
 concat
 frame_bury 0
 pushint 4 // 4
-frame_bury 20
+frame_bury 31
 frame_dig -2
-frame_bury 24
-frame_dig 24
-frame_bury 23
-intc_3 // 12
-frame_bury 21
-frame_dig 21
-frame_dig 24
+frame_bury 35
+frame_dig 35
+frame_bury 34
+pushint 12 // 12
+frame_bury 32
+frame_dig 32
+frame_dig 35
 len
 +
-frame_bury 22
-frame_dig 22
+frame_bury 33
+frame_dig 33
 intc_2 // 65536
 <
 assert
-frame_dig 21
+frame_dig 32
 itob
 extract 6 0
 frame_dig -1
-frame_bury 24
-frame_dig 23
-frame_dig 24
+frame_bury 35
+frame_dig 34
+frame_dig 35
 concat
-frame_bury 23
-frame_dig 22
-frame_bury 21
-frame_dig 21
+frame_bury 34
+frame_dig 33
+frame_bury 32
+frame_dig 32
 itob
 extract 6 0
 concat
-frame_dig 20
+frame_dig 31
 itob
 concat
-frame_dig 23
+frame_dig 34
 concat
 frame_bury 3
 bytec_2 // "R"
@@ -2921,41 +4855,41 @@ frame_dig 0
 concat
 frame_bury 0
 pushint 3 // 3
-frame_bury 15
+frame_bury 26
 frame_dig -2
-frame_bury 19
-frame_dig 19
-frame_bury 18
-intc_3 // 12
-frame_bury 16
-frame_dig 16
-frame_dig 19
+frame_bury 30
+frame_dig 30
+frame_bury 29
+pushint 12 // 12
+frame_bury 27
+frame_dig 27
+frame_dig 30
 len
 +
-frame_bury 17
-frame_dig 17
+frame_bury 28
+frame_dig 28
 intc_2 // 65536
 <
 assert
-frame_dig 16
+frame_dig 27
 itob
 extract 6 0
 frame_dig -1
-frame_bury 19
-frame_dig 18
-frame_dig 19
+frame_bury 30
+frame_dig 29
+frame_dig 30
 concat
-frame_bury 18
-frame_dig 17
-frame_bury 16
-frame_dig 16
+frame_bury 29
+frame_dig 28
+frame_bury 27
+frame_dig 27
 itob
 extract 6 0
 concat
-frame_dig 15
+frame_dig 26
 itob
 concat
-frame_dig 18
+frame_dig 29
 concat
 frame_bury 3
 bytec_2 // "R"
@@ -2985,41 +4919,41 @@ frame_dig 0
 concat
 frame_bury 0
 pushint 2 // 2
-frame_bury 10
+frame_bury 21
 frame_dig -2
-frame_bury 14
-frame_dig 14
-frame_bury 13
-intc_3 // 12
-frame_bury 11
-frame_dig 11
-frame_dig 14
+frame_bury 25
+frame_dig 25
+frame_bury 24
+pushint 12 // 12
+frame_bury 22
+frame_dig 22
+frame_dig 25
 len
 +
-frame_bury 12
-frame_dig 12
+frame_bury 23
+frame_dig 23
 intc_2 // 65536
 <
 assert
-frame_dig 11
+frame_dig 22
 itob
 extract 6 0
 frame_dig -1
-frame_bury 14
-frame_dig 13
-frame_dig 14
+frame_bury 25
+frame_dig 24
+frame_dig 25
 concat
-frame_bury 13
-frame_dig 12
-frame_bury 11
-frame_dig 11
+frame_bury 24
+frame_dig 23
+frame_bury 22
+frame_dig 22
 itob
 extract 6 0
 concat
-frame_dig 10
+frame_dig 21
 itob
 concat
-frame_dig 13
+frame_dig 24
 concat
 frame_bury 3
 bytec_2 // "R"
@@ -3048,42 +4982,42 @@ extract 6 0
 frame_dig 0
 concat
 frame_bury 0
-intc_1 // 1
-frame_bury 5
+intc_3 // 1
+frame_bury 16
 frame_dig -2
-frame_bury 9
-frame_dig 9
-frame_bury 8
-intc_3 // 12
-frame_bury 6
-frame_dig 6
-frame_dig 9
+frame_bury 20
+frame_dig 20
+frame_bury 19
+pushint 12 // 12
+frame_bury 17
+frame_dig 17
+frame_dig 20
 len
 +
-frame_bury 7
-frame_dig 7
+frame_bury 18
+frame_dig 18
 intc_2 // 65536
 <
 assert
-frame_dig 6
+frame_dig 17
 itob
 extract 6 0
 frame_dig -1
-frame_bury 9
-frame_dig 8
-frame_dig 9
+frame_bury 20
+frame_dig 19
+frame_dig 20
 concat
-frame_bury 8
-frame_dig 7
-frame_bury 6
-frame_dig 6
+frame_bury 19
+frame_dig 18
+frame_bury 17
+frame_dig 17
 itob
 extract 6 0
 concat
-frame_dig 5
+frame_dig 16
 itob
 concat
-frame_dig 8
+frame_dig 19
 concat
 frame_bury 3
 bytec_2 // "R"
@@ -3100,93 +5034,46 @@ frame_dig 3
 box_put
 b Result_9_l38
 Result_9_l29:
-bytec 6 // "option10"
-app_global_get
-frame_bury 4
+frame_dig 14
+frame_bury 15
 b Result_9_l9
 Result_9_l30:
-bytec 14 // "option9"
-app_global_get
-frame_bury 4
+frame_dig 13
+frame_bury 15
 b Result_9_l8
 Result_9_l31:
-bytec 13 // "option8"
-app_global_get
-frame_bury 4
+frame_dig 12
+frame_bury 15
 b Result_9_l7
 Result_9_l32:
-bytec 12 // "option7"
-app_global_get
-frame_bury 4
+frame_dig 11
+frame_bury 15
 b Result_9_l6
 Result_9_l33:
-bytec 11 // "option6"
-app_global_get
-frame_bury 4
+frame_dig 10
+frame_bury 15
 b Result_9_l5
 Result_9_l34:
-bytec 10 // "option5"
-app_global_get
-frame_bury 4
+frame_dig 9
+frame_bury 15
 b Result_9_l4
 Result_9_l35:
-bytec 9 // "option4"
-app_global_get
-frame_bury 4
+frame_dig 8
+frame_bury 15
 b Result_9_l3
 Result_9_l36:
-bytec 8 // "option3"
-app_global_get
-frame_bury 4
+frame_dig 7
+frame_bury 15
 b Result_9_l2
 Result_9_l37:
-bytec 7 // "option2"
-app_global_get
-frame_bury 4
+frame_dig 6
+frame_bury 15
 b Result_9_l1
 Result_9_l38:
 retsub
 
-// read_result
-readresult_10:
-proto 2 1
-bytec_0 // ""
-dupn 2
-bytec 17 // "Q"
-frame_dig -1
-extract 2 0
-concat
-box_get
-store 85
-store 84
-load 85
-assert
-load 84
-frame_bury 2
-frame_dig -2
-extract 2 0
-box_get
-store 87
-store 86
-load 87
-assert
-load 86
-frame_bury 1
-bytec_2 // "R"
-frame_dig -1
-extract 2 0
-concat
-box_get
-store 89
-store 88
-load 89
-assert
-load 88
-frame_bury 0
-retsub
-
 // read_remaining
-readremaining_11:
+readremaining_10:
 proto 0 1
 intc_0 // 0
 bytec 5 // "asset_amount_str"
@@ -3195,234 +5082,59 @@ frame_bury 0
 retsub
 
 // option_1
-option1_12:
-proto 0 1
+option1_11:
+proto 1 1
 intc_0 // 0
-bytec 15 // "option1"
-app_global_get
+bytec_1 // ""
+intc_0 // 0
+bytec_0 // "O"
+frame_dig -1
+extract 2 0
+concat
+box_get
+store 151
+store 150
+load 151
+assert
+load 150
+frame_bury 1
+frame_dig 1
+pushint 2 // 2
+extract_uint64
+frame_bury 2
+frame_dig 2
 frame_bury 0
 retsub
 
 // option_2
-option2_13:
-proto 0 1
-intc_0 // 0
-bytec 7 // "option2"
-app_global_get
-frame_bury 0
-retsub
-
-// option_3
-option3_14:
-proto 0 1
-intc_0 // 0
-bytec 8 // "option3"
-app_global_get
-frame_bury 0
-retsub
-
-// option_4
-option4_15:
-proto 0 1
-intc_0 // 0
-bytec 9 // "option4"
-app_global_get
-frame_bury 0
-retsub
-
-// option_5
-option5_16:
-proto 0 1
-intc_0 // 0
-bytec 10 // "option5"
-app_global_get
-frame_bury 0
-retsub
-
-// option_6
-option6_17:
-proto 0 1
-intc_0 // 0
-bytec 11 // "option6"
-app_global_get
-frame_bury 0
-retsub
-
-// option_7
-option7_18:
-proto 0 1
-intc_0 // 0
-bytec 12 // "option7"
-app_global_get
-frame_bury 0
-retsub
-
-// option_8
-option8_19:
-proto 0 1
-intc_0 // 0
-bytec 13 // "option8"
-app_global_get
-frame_bury 0
-retsub
-
-// option_9
-option9_20:
-proto 0 1
-intc_0 // 0
-bytec 14 // "option9"
-app_global_get
-frame_bury 0
-retsub
-
-// option_10
-option10_21:
-proto 0 1
-intc_0 // 0
-bytec 6 // "option10"
-app_global_get
-frame_bury 0
-retsub
-
-// read_proposal_store
-readproposalstore_22:
+option2_12:
 proto 1 1
-bytec_0 // ""
-frame_dig -1
-extract 2 0
-box_get
-store 91
-store 90
-load 91
-assert
-load 90
-frame_bury 0
-retsub
-
-// read_asset_id
-readassetid_23:
-proto 1 1
-bytec_0 // ""
-bytec 19 // "$"
+intc_0 // 0
+bytec_1 // ""
+intc_0 // 0
+bytec_0 // "O"
 frame_dig -1
 extract 2 0
 concat
 box_get
-store 93
-store 92
-load 93
+store 153
+store 152
+load 153
 assert
-load 92
-frame_bury 0
-retsub
-
-// read_user_proposal_store
-readuserproposalstore_24:
-proto 2 1
-bytec_0 // ""
-dup
-frame_dig -2
-extract 2 0
-box_get
-store 95
-store 94
-load 95
-assert
-load 94
+load 152
 frame_bury 1
-bytec 16 // "_"
-frame_dig -1
-extract 2 0
-concat
-box_get
-store 97
-store 96
-load 97
-assert
-load 96
-frame_bury 0
-retsub
-
-// read_user_asset_store
-readuserassetstore_25:
-proto 3 1
-bytec_0 // ""
-dupn 2
-frame_dig -3
-extract 2 0
-box_get
-store 99
-store 98
-load 99
-assert
-load 98
-frame_bury 1
-bytec 16 // "_"
-frame_dig -2
-extract 2 0
-concat
-box_get
-store 101
-store 100
-load 101
-assert
-load 100
+frame_dig 1
+pushint 10 // 10
+extract_uint64
 frame_bury 2
-bytec 4 // "#"
-frame_dig -2
-extract 2 0
-concat
-box_get
-store 103
-store 102
-load 103
-assert
-load 102
-frame_bury 0
-retsub
-
-// read_user_response
-readuserresponse_26:
-proto 3 1
-bytec_0 // ""
-dupn 2
-frame_dig -1
-extract 2 0
-box_get
-store 105
-store 104
-load 105
-assert
-load 104
-frame_bury 1
-bytec 16 // "_"
-frame_dig -3
-extract 2 0
-concat
-box_get
-store 107
-store 106
-load 107
-assert
-load 106
-frame_bury 2
-bytec_3 // "@"
-frame_dig -3
-extract 2 0
-concat
-box_get
-store 109
-store 108
-load 109
-assert
-load 108
+frame_dig 2
 frame_bury 0
 retsub
 
 // Register_proposal_caster
-Registerproposalcaster_27:
+Registerproposalcaster_13:
 proto 0 0
-bytec_0 // ""
+bytec_1 // ""
 dupn 2
 intc_0 // 0
 dup
@@ -3442,16 +5154,16 @@ frame_dig 3
 frame_dig 4
 callsub Registerproposal_1
 frame_bury 0
-bytec_1 // 0x151f7c75
+bytec 6 // 0x151f7c75
 frame_dig 0
 concat
 log
 retsub
 
 // RegisterQues_caster
-RegisterQuescaster_28:
+RegisterQuescaster_14:
 proto 0 0
-bytec_0 // ""
+bytec_1 // ""
 dupn 3
 txna ApplicationArgs 1
 frame_bury 1
@@ -3464,16 +5176,16 @@ frame_dig 2
 frame_dig 3
 callsub RegisterQues_2
 frame_bury 0
-bytec_1 // 0x151f7c75
+bytec 6 // 0x151f7c75
 frame_dig 0
 concat
 log
 retsub
 
 // Registred_user_per_proposal_caster
-Registreduserperproposalcaster_29:
+Registreduserperproposalcaster_15:
 proto 0 0
-bytec_0 // ""
+bytec_1 // ""
 dupn 2
 txna ApplicationArgs 1
 frame_bury 1
@@ -3483,16 +5195,16 @@ frame_dig 1
 frame_dig 2
 callsub Registreduserperproposal_3
 frame_bury 0
-bytec_1 // 0x151f7c75
+bytec 6 // 0x151f7c75
 frame_dig 0
 concat
 log
 retsub
 
 // asset_register_caster
-assetregistercaster_30:
+assetregistercaster_16:
 proto 0 0
-bytec_0 // ""
+bytec_1 // ""
 dupn 2
 txna ApplicationArgs 1
 frame_bury 1
@@ -3502,16 +5214,16 @@ frame_dig 1
 frame_dig 2
 callsub assetregister_4
 frame_bury 0
-bytec_1 // 0x151f7c75
+bytec 6 // 0x151f7c75
 frame_dig 0
 concat
 log
 retsub
 
 // Register_user_asset_caster
-Registeruserassetcaster_31:
+Registeruserassetcaster_17:
 proto 0 0
-bytec_0 // ""
+bytec_1 // ""
 dupn 3
 intc_0 // 0
 txna ApplicationArgs 1
@@ -3529,19 +5241,19 @@ frame_dig 3
 frame_dig 4
 callsub Registeruserasset_5
 frame_bury 0
-bytec_1 // 0x151f7c75
+bytec 6 // 0x151f7c75
 frame_dig 0
 concat
 log
 retsub
 
 // Voting_Record_caster
-VotingRecordcaster_32:
+VotingRecordcaster_18:
 proto 0 0
-bytec_0 // ""
+bytec_1 // ""
 dupn 2
 intc_0 // 0
-bytec_0 // ""
+bytec_1 // ""
 intc_0 // 0
 txna ApplicationArgs 1
 frame_bury 1
@@ -3562,16 +5274,16 @@ frame_dig 4
 frame_dig 5
 callsub VotingRecord_6
 frame_bury 0
-bytec_1 // 0x151f7c75
+bytec 6 // 0x151f7c75
 frame_dig 0
 concat
 log
 retsub
 
 // token_buy_caster
-tokenbuycaster_33:
+tokenbuycaster_19:
 proto 0 0
-bytec_0 // ""
+bytec_1 // ""
 dupn 2
 intc_0 // 0
 dup
@@ -3596,9 +5308,9 @@ callsub tokenbuy_7
 retsub
 
 // token_sell_caster
-tokensellcaster_34:
+tokensellcaster_20:
 proto 0 0
-bytec_0 // ""
+bytec_1 // ""
 dupn 2
 intc_0 // 0
 dup
@@ -3623,9 +5335,9 @@ callsub tokensell_8
 retsub
 
 // Result_caster
-Resultcaster_35:
+Resultcaster_21:
 proto 0 0
-bytec_0 // ""
+bytec_1 // ""
 dupn 2
 txna ApplicationArgs 1
 frame_bury 1
@@ -3635,38 +5347,19 @@ frame_dig 1
 frame_dig 2
 callsub Result_9
 frame_bury 0
-bytec_1 // 0x151f7c75
-frame_dig 0
-concat
-log
-retsub
-
-// read_result_caster
-readresultcaster_36:
-proto 0 0
-bytec_0 // ""
-dupn 2
-txna ApplicationArgs 1
-frame_bury 1
-txna ApplicationArgs 2
-frame_bury 2
-frame_dig 1
-frame_dig 2
-callsub readresult_10
-frame_bury 0
-bytec_1 // 0x151f7c75
+bytec 6 // 0x151f7c75
 frame_dig 0
 concat
 log
 retsub
 
 // read_remaining_caster
-readremainingcaster_37:
+readremainingcaster_22:
 proto 0 0
 intc_0 // 0
-callsub readremaining_11
+callsub readremaining_10
 frame_bury 0
-bytec_1 // 0x151f7c75
+bytec 6 // 0x151f7c75
 frame_dig 0
 itob
 concat
@@ -3674,12 +5367,16 @@ log
 retsub
 
 // option_1_caster
-option1caster_38:
+option1caster_23:
 proto 0 0
 intc_0 // 0
-callsub option1_12
+bytec_1 // ""
+txna ApplicationArgs 1
+frame_bury 1
+frame_dig 1
+callsub option1_11
 frame_bury 0
-bytec_1 // 0x151f7c75
+bytec 6 // 0x151f7c75
 frame_dig 0
 itob
 concat
@@ -3687,213 +5384,18 @@ log
 retsub
 
 // option_2_caster
-option2caster_39:
+option2caster_24:
 proto 0 0
 intc_0 // 0
-callsub option2_13
-frame_bury 0
-bytec_1 // 0x151f7c75
-frame_dig 0
-itob
-concat
-log
-retsub
-
-// option_3_caster
-option3caster_40:
-proto 0 0
-intc_0 // 0
-callsub option3_14
-frame_bury 0
-bytec_1 // 0x151f7c75
-frame_dig 0
-itob
-concat
-log
-retsub
-
-// option_4_caster
-option4caster_41:
-proto 0 0
-intc_0 // 0
-callsub option4_15
-frame_bury 0
-bytec_1 // 0x151f7c75
-frame_dig 0
-itob
-concat
-log
-retsub
-
-// option_5_caster
-option5caster_42:
-proto 0 0
-intc_0 // 0
-callsub option5_16
-frame_bury 0
-bytec_1 // 0x151f7c75
-frame_dig 0
-itob
-concat
-log
-retsub
-
-// option_6_caster
-option6caster_43:
-proto 0 0
-intc_0 // 0
-callsub option6_17
-frame_bury 0
-bytec_1 // 0x151f7c75
-frame_dig 0
-itob
-concat
-log
-retsub
-
-// option_7_caster
-option7caster_44:
-proto 0 0
-intc_0 // 0
-callsub option7_18
-frame_bury 0
-bytec_1 // 0x151f7c75
-frame_dig 0
-itob
-concat
-log
-retsub
-
-// option_8_caster
-option8caster_45:
-proto 0 0
-intc_0 // 0
-callsub option8_19
-frame_bury 0
-bytec_1 // 0x151f7c75
-frame_dig 0
-itob
-concat
-log
-retsub
-
-// option_9_caster
-option9caster_46:
-proto 0 0
-intc_0 // 0
-callsub option9_20
-frame_bury 0
-bytec_1 // 0x151f7c75
-frame_dig 0
-itob
-concat
-log
-retsub
-
-// option_10_caster
-option10caster_47:
-proto 0 0
-intc_0 // 0
-callsub option10_21
-frame_bury 0
-bytec_1 // 0x151f7c75
-frame_dig 0
-itob
-concat
-log
-retsub
-
-// read_proposal_store_caster
-readproposalstorecaster_48:
-proto 0 0
-bytec_0 // ""
-dup
+bytec_1 // ""
 txna ApplicationArgs 1
 frame_bury 1
 frame_dig 1
-callsub readproposalstore_22
+callsub option2_12
 frame_bury 0
-bytec_1 // 0x151f7c75
+bytec 6 // 0x151f7c75
 frame_dig 0
-concat
-log
-retsub
-
-// read_asset_id_caster
-readassetidcaster_49:
-proto 0 0
-bytec_0 // ""
-dup
-txna ApplicationArgs 1
-frame_bury 1
-frame_dig 1
-callsub readassetid_23
-frame_bury 0
-bytec_1 // 0x151f7c75
-frame_dig 0
-concat
-log
-retsub
-
-// read_user_proposal_store_caster
-readuserproposalstorecaster_50:
-proto 0 0
-bytec_0 // ""
-dupn 2
-txna ApplicationArgs 1
-frame_bury 1
-txna ApplicationArgs 2
-frame_bury 2
-frame_dig 1
-frame_dig 2
-callsub readuserproposalstore_24
-frame_bury 0
-bytec_1 // 0x151f7c75
-frame_dig 0
-concat
-log
-retsub
-
-// read_user_asset_store_caster
-readuserassetstorecaster_51:
-proto 0 0
-bytec_0 // ""
-dupn 3
-txna ApplicationArgs 1
-frame_bury 1
-txna ApplicationArgs 2
-frame_bury 2
-txna ApplicationArgs 3
-frame_bury 3
-frame_dig 1
-frame_dig 2
-frame_dig 3
-callsub readuserassetstore_25
-frame_bury 0
-bytec_1 // 0x151f7c75
-frame_dig 0
-concat
-log
-retsub
-
-// read_user_response_caster
-readuserresponsecaster_52:
-proto 0 0
-bytec_0 // ""
-dupn 3
-txna ApplicationArgs 1
-frame_bury 1
-txna ApplicationArgs 2
-frame_bury 2
-txna ApplicationArgs 3
-frame_bury 3
-frame_dig 1
-frame_dig 2
-frame_dig 3
-callsub readuserresponse_26
-frame_bury 0
-bytec_1 // 0x151f7c75
-frame_dig 0
+itob
 concat
 log
 retsub

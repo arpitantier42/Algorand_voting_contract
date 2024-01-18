@@ -202,14 +202,55 @@
             }
         },
         {
+            "name": "read_options",
+            "args": [
+                {
+                    "type": "string",
+                    "name": "question_id"
+                }
+            ],
+            "returns": {
+                "type": "(string,uint64,uint64,uint64,uint64,uint64,uint64,uint64)"
+            }
+        },
+        {
             "name": "read_remaining",
-            "args": [],
+            "args": [
+                {
+                    "type": "string",
+                    "name": "proposal_id"
+                }
+            ],
             "returns": {
-                "type": "uint64"
+                "type": "(string,uint64)"
             }
         },
         {
-            "name": "option_1",
+            "name": "read_proposal_store",
+            "args": [
+                {
+                    "type": "string",
+                    "name": "proposal_id"
+                }
+            ],
+            "returns": {
+                "type": "(string,string,uint64,uint64)"
+            }
+        },
+        {
+            "name": "read_asset_id",
+            "args": [
+                {
+                    "type": "string",
+                    "name": "asset_id"
+                }
+            ],
+            "returns": {
+                "type": "(string,string)"
+            }
+        },
+        {
+            "name": "read_result",
             "args": [
                 {
                     "type": "string",
@@ -217,19 +258,63 @@
                 }
             ],
             "returns": {
-                "type": "uint64"
+                "type": "(string,uint64)"
             }
         },
         {
-            "name": "option_2",
+            "name": "read_user_proposal_store",
             "args": [
                 {
                     "type": "string",
-                    "name": "question_id"
+                    "name": "proposal_id"
+                },
+                {
+                    "type": "string",
+                    "name": "user_id"
                 }
             ],
             "returns": {
-                "type": "uint64"
+                "type": "(string,string)"
+            }
+        },
+        {
+            "name": "read_user_asset_store",
+            "args": [
+                {
+                    "type": "string",
+                    "name": "proposal_id"
+                },
+                {
+                    "type": "string",
+                    "name": "user_id"
+                },
+                {
+                    "type": "string",
+                    "name": "asset_id"
+                }
+            ],
+            "returns": {
+                "type": "(string,string,uint64)"
+            }
+        },
+        {
+            "name": "read_user_response",
+            "args": [
+                {
+                    "type": "string",
+                    "name": "user_id"
+                },
+                {
+                    "type": "string",
+                    "name": "question_id"
+                },
+                {
+                    "type": "string",
+                    "name": "proposal_id"
+                }
+            ],
+            "returns": {
+                "type": "(string,uint64,uint64,string)"
             }
         }
     ],

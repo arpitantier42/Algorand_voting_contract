@@ -214,7 +214,7 @@
             }
         },
         {
-            "name": "read_remaining",
+            "name": "read_proposal_store",
             "args": [
                 {
                     "type": "string",
@@ -222,11 +222,11 @@
                 }
             ],
             "returns": {
-                "type": "(string,uint64)"
+                "type": "(string,string,uint64,uint64)"
             }
         },
         {
-            "name": "read_proposal_store",
+            "name": "read_current_proposal_store",
             "args": [
                 {
                     "type": "string",

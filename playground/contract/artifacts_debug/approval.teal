@@ -3673,10 +3673,6 @@ intc_0 // 0
 dupn 2
 bytec_0 // ""
 dup
-intc_0 // 0
-dupn 2
-bytec_0 // ""
-dup
 bytec 7 // "Q"
 frame_dig -1
 extract 2 0
@@ -3768,35 +3764,6 @@ frame_dig 12
 >
 bnz Result_9_l20
 Result_9_l6:
-intc_1 // 1
-frame_bury 13
-frame_dig -1
-frame_bury 17
-frame_dig 17
-frame_bury 16
-pushint 10 // 10
-frame_bury 14
-frame_dig 14
-itob
-extract 6 0
-frame_dig 13
-itob
-concat
-frame_dig 16
-concat
-frame_bury 3
-bytec 4 // "R"
-frame_dig -1
-extract 2 0
-concat
-box_del
-pop
-bytec 4 // "R"
-frame_dig -1
-extract 2 0
-concat
-frame_dig 3
-box_put
 frame_dig 12
 frame_dig 5
 ==
@@ -3838,49 +3805,6 @@ frame_dig 0
 concat
 frame_bury 0
 pushint 7 // 7
-frame_bury 48
-frame_dig -1
-frame_bury 52
-frame_dig 52
-frame_bury 51
-pushint 10 // 10
-frame_bury 49
-frame_dig 49
-itob
-extract 6 0
-frame_dig 48
-itob
-concat
-frame_dig 51
-concat
-frame_bury 3
-bytec 4 // "R"
-frame_dig -1
-extract 2 0
-concat
-box_del
-pop
-bytec 4 // "R"
-frame_dig -1
-extract 2 0
-concat
-frame_dig 3
-box_put
-b Result_9_l26
-Result_9_l14:
-pushbytes 0x6f7074696f6e20362069732077696e6e65722c20 // "option 6 is winner, "
-frame_dig -1
-extract 2 0
-concat
-frame_bury 0
-frame_dig 0
-len
-itob
-extract 6 0
-frame_dig 0
-concat
-frame_bury 0
-pushint 6 // 6
 frame_bury 43
 frame_dig -1
 frame_bury 47
@@ -3910,8 +3834,8 @@ concat
 frame_dig 3
 box_put
 b Result_9_l26
-Result_9_l15:
-pushbytes 0x6f7074696f6e20352069732077696e6e65722c20 // "option 5 is winner, "
+Result_9_l14:
+pushbytes 0x6f7074696f6e20362069732077696e6e65722c20 // "option 6 is winner, "
 frame_dig -1
 extract 2 0
 concat
@@ -3923,7 +3847,7 @@ extract 6 0
 frame_dig 0
 concat
 frame_bury 0
-pushint 5 // 5
+pushint 6 // 6
 frame_bury 38
 frame_dig -1
 frame_bury 42
@@ -3953,8 +3877,8 @@ concat
 frame_dig 3
 box_put
 b Result_9_l26
-Result_9_l16:
-pushbytes 0x6f7074696f6e20342069732077696e6e65722c20 // "option 4 is winner, "
+Result_9_l15:
+pushbytes 0x6f7074696f6e20352069732077696e6e65722c20 // "option 5 is winner, "
 frame_dig -1
 extract 2 0
 concat
@@ -3966,7 +3890,7 @@ extract 6 0
 frame_dig 0
 concat
 frame_bury 0
-pushint 4 // 4
+pushint 5 // 5
 frame_bury 33
 frame_dig -1
 frame_bury 37
@@ -3996,8 +3920,8 @@ concat
 frame_dig 3
 box_put
 b Result_9_l26
-Result_9_l17:
-pushbytes 0x6f7074696f6e20332069732077696e6e65722c20 // "option 3 is winner, "
+Result_9_l16:
+pushbytes 0x6f7074696f6e20342069732077696e6e65722c20 // "option 4 is winner, "
 frame_dig -1
 extract 2 0
 concat
@@ -4009,7 +3933,7 @@ extract 6 0
 frame_dig 0
 concat
 frame_bury 0
-pushint 3 // 3
+pushint 4 // 4
 frame_bury 28
 frame_dig -1
 frame_bury 32
@@ -4039,8 +3963,8 @@ concat
 frame_dig 3
 box_put
 b Result_9_l26
-Result_9_l18:
-pushbytes 0x6f7074696f6e20322069732077696e6e65722c20 // "option 2 is winner, "
+Result_9_l17:
+pushbytes 0x6f7074696f6e20332069732077696e6e65722c20 // "option 3 is winner, "
 frame_dig -1
 extract 2 0
 concat
@@ -4052,7 +3976,7 @@ extract 6 0
 frame_dig 0
 concat
 frame_bury 0
-pushint 2 // 2
+pushint 3 // 3
 frame_bury 23
 frame_dig -1
 frame_bury 27
@@ -4082,8 +4006,8 @@ concat
 frame_dig 3
 box_put
 b Result_9_l26
-Result_9_l19:
-pushbytes 0x6f7074696f6e20312069732077696e6e65722c20 // "option 1 is winner, "
+Result_9_l18:
+pushbytes 0x6f7074696f6e20322069732077696e6e65722c20 // "option 2 is winner, "
 frame_dig -1
 extract 2 0
 concat
@@ -4095,7 +4019,7 @@ extract 6 0
 frame_dig 0
 concat
 frame_bury 0
-intc_1 // 1
+pushint 2 // 2
 frame_bury 18
 frame_dig -1
 frame_bury 22
@@ -4110,6 +4034,49 @@ frame_dig 18
 itob
 concat
 frame_dig 21
+concat
+frame_bury 3
+bytec 4 // "R"
+frame_dig -1
+extract 2 0
+concat
+box_del
+pop
+bytec 4 // "R"
+frame_dig -1
+extract 2 0
+concat
+frame_dig 3
+box_put
+b Result_9_l26
+Result_9_l19:
+pushbytes 0x6f7074696f6e20312069732077696e6e65722c20 // "option 1 is winner, "
+frame_dig -1
+extract 2 0
+concat
+frame_bury 0
+frame_dig 0
+len
+itob
+extract 6 0
+frame_dig 0
+concat
+frame_bury 0
+intc_1 // 1
+frame_bury 13
+frame_dig -1
+frame_bury 17
+frame_dig 17
+frame_bury 16
+pushint 10 // 10
+frame_bury 14
+frame_dig 14
+itob
+extract 6 0
+frame_dig 13
+itob
+concat
+frame_dig 16
 concat
 frame_bury 3
 bytec 4 // "R"

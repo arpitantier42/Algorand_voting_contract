@@ -63,7 +63,8 @@ class Proposal_Record_State:
     result_rec= BoxMapping(pt.abi.String,Result_store,prefix=pt.Bytes("R"))
     option_rec= BoxMapping(pt.abi.String,option_store,prefix=pt.Bytes("O"))
 
-# Some Global Variable declaration
+# ---------------------------Some Global Variable declaration----------------------------
+    
     user_amount_chk = bk.GlobalStateValue(
         stack_type=pt.TealType.uint64,
         default=pt.Int(0),
@@ -78,7 +79,8 @@ app =(
      .apply(bk.unconditional_create_approval,initialize_global_state=True)
      )
  
-# Function to Register Proposal
+# ----------------------------Function to Register Proposal-----------------------------
+
 @app.external
 def Register_proposal(proposal_id:pt.abi.String, proposal_name:pt.abi.String,asset_count:pt.abi.Uint64,Amount:pt.abi.Uint64,* ,output:Proposal_Record) -> pt.Expr:
 
@@ -98,7 +100,8 @@ def Register_proposal(proposal_id:pt.abi.String, proposal_name:pt.abi.String,ass
 
     ) 
  
-#Function to Register Multiple Questions
+#-------------------------Function to Register Multiple Questions------------------------
+
 @app.external
 def RegisterQues(proposal_id:pt.abi.String,question_id:pt.abi.String,question:pt.abi.String,* ,output:Question_store)->pt.Expr:
 
@@ -110,7 +113,7 @@ def RegisterQues(proposal_id:pt.abi.String,question_id:pt.abi.String,question:pt
     
     app.state.proposal_question_chk.set(pt.Bytes("0")),
     # //options
-    (option_1 := pt.abi.Uint64()).set(pt.Int(0)),
+    (option_1 :=pt.abi.Uint64()).set(pt.Int(0)),
     (option_2 :=pt.abi.Uint64()).set(pt.Int(0)),
     (option_3 :=pt.abi.Uint64()).set(pt.Int(0)),
     (option_4 :=pt.abi.Uint64()).set(pt.Int(0)),
@@ -129,7 +132,8 @@ def RegisterQues(proposal_id:pt.abi.String,question_id:pt.abi.String,question:pt
     app.state.option_rec[question_id.get()].set(option_get),
     )
  
-#Function to Register user per proposal
+#------------------------Function to Register user per proposal-------------------------
+
 @app.external
 def Registred_user_per_proposal(proposal_id:pt.abi.String,user_id:pt.abi.String,*,output:User_per_proposal_record)-> pt.Expr:
 
@@ -146,7 +150,8 @@ def Registred_user_per_proposal(proposal_id:pt.abi.String,user_id:pt.abi.String,
     app.state.user_rec[user_id.get()].store_into(output),
     ) 
                                                                         
-#Function to Register Assets in the proposal 
+#---------------------Function to Register Assets in the proposal------------------------
+
 @app.external
 def asset_register(proposal_id:pt.abi.String,asset_id:pt.abi.String,*,output:asset_store)->pt.Expr:
     
@@ -162,7 +167,8 @@ def asset_register(proposal_id:pt.abi.String,asset_id:pt.abi.String,*,output:ass
     app.state.asset_str[asset_id.get()].store_into(output),
     )      
     
-#Function to Register user per asset
+#---------------------------Function to Register user per asset-------------------------
+
 @app.external
 def Register_user_asset(proposal_id:pt.abi.String,user_id:pt.abi.String,
      asset_id:pt.abi.String,token_count:pt.abi.Uint64,*,output:pt.abi.String)-> pt.Expr:
@@ -212,7 +218,8 @@ def Register_user_asset(proposal_id:pt.abi.String,user_id:pt.abi.String,
     ),
     )
 
-#Function for Voting per proposal
+#-------------------------Function for ""Voting for Question in a Proposal""------------------------------
+
 @app.external
 def Voting_Record(proposal_id:pt.abi.String,user_id:pt.abi.String,
                   token_count:pt.abi.Uint64,question_id:pt.abi.String,
@@ -263,49 +270,54 @@ def Voting_Record(proposal_id:pt.abi.String,user_id:pt.abi.String,
 
   
     pt.If (user_response.get() == pt.Int(1)).Then(
-    # app.state.option1.increment(token_count.get())
     option_get.decode(app.state.option_rec[question_id.get()].get()),
     option_1_store.set(option_1_store.get()+ token_count.get()),
     option_get.set(question_id,option_1_store,option_2_store,option_3_store,option_4_store,option_5_store,option_6_store,option_7_store),
     app.state.option_rec[(question_id).get()].set(option_get),
+
     ).ElseIf(
+
     user_response.get() == pt.Int(2)).Then(
-    # app.state.option2.increment(token_count.get())
     option_get.decode(app.state.option_rec[question_id.get()].get()),
     option_2_store.set(option_2_store.get()+token_count.get()),
     option_get.set(question_id,option_1_store,option_2_store,option_3_store,option_4_store,option_5_store,option_6_store,option_7_store),
     app.state.option_rec[(question_id).get()].set(option_get),
+
     ).ElseIf(
+
     user_response.get() == pt.Int(3)).Then(
-    # app.state.option3.increment(token_count.get())
     option_get.decode(app.state.option_rec[question_id.get()].get()),
     option_3_store.set(option_3_store.get()+token_count.get()),
     option_get.set(question_id,option_1_store,option_2_store,option_3_store,option_4_store,option_5_store,option_6_store,option_7_store),
     app.state.option_rec[(question_id).get()].set(option_get),
+
     ).ElseIf(
+
     user_response.get() == pt.Int(4)).Then(
-    # app.state.option4.increment(token_count.get())
     option_get.decode(app.state.option_rec[question_id.get()].get()),
     option_4_store.set(option_4_store.get()+token_count.get()),
     option_get.set(question_id,option_1_store,option_2_store,option_3_store,option_4_store,option_5_store,option_6_store,option_7_store),
     app.state.option_rec[(question_id).get()].set(option_get),
+
     ).ElseIf(
+
     user_response.get() == pt.Int(5)).Then(
-        # app.state.option5.increment(token_count.get())
     option_get.decode(app.state.option_rec[question_id.get()].get()),
     option_5_store.set(option_5_store.get()+token_count.get()),
     option_get.set(question_id,option_1_store,option_2_store,option_3_store,option_4_store,option_5_store,option_6_store,option_7_store),
     app.state.option_rec[(question_id).get()].set(option_get),
+
     ).ElseIf(
+
     user_response.get() == pt.Int(6)).Then(
-        # app.state.option6.increment(token_count.get())
     option_get.decode(app.state.option_rec[question_id.get()].get()),
     option_6_store.set(option_6_store.get()+token_count.get()),
     option_get.set(question_id,option_1_store,option_2_store,option_3_store,option_4_store,option_5_store,option_6_store,option_7_store),
     app.state.option_rec[(question_id).get()].set(option_get),
+
     ).ElseIf(
+
     user_response.get() == pt.Int(7)).Then(
-        # app.state.option7.increment(token_count.get())
     option_get.decode(app.state.option_rec[question_id.get()].get()),
     option_7_store.set(option_7_store.get()+token_count.get()),
     option_get.set(question_id,option_1_store,option_2_store,option_3_store,option_4_store,option_5_store,option_6_store,option_7_store),
@@ -313,7 +325,8 @@ def Voting_Record(proposal_id:pt.abi.String,user_id:pt.abi.String,
     ),
     )    
 
-#Function to buy tokens in secondary market place
+#-----------------------Function to buy tokens in secondary market place------------------------
+
 @app.external
 def token_buy(proposal_id:pt.abi.String,
               user_id:pt.abi.String,question_id:pt.abi.String,user_response:pt.abi.Uint64,
@@ -377,58 +390,64 @@ def token_buy(proposal_id:pt.abi.String,
     (option_7_store:=pt.abi.make(pt.abi.Uint64)).set(option_get.option_7),
   
     pt.If(user_response.get() == pt.Int(1)).Then(
-            # app.state.option1.increment(token_buy.get())
     option_get.decode(app.state.option_rec[question_id.get()].get()),
-    option_1_store.set(option_1_store.get()+ token_buy.get()),
+    option_1_store.set(option_1_store.get() + token_buy.get()),
     option_get.set(question_id,option_1_store,option_2_store,option_3_store,option_4_store,option_5_store,option_6_store,option_7_store),
     app.state.option_rec[(question_id).get()].set(option_get),
+
             ).ElseIf
+
     (user_response.get() == pt.Int(2)).Then(
-            # app.state.option2.increment(token_buy.get())
     option_get.decode(app.state.option_rec[question_id.get()].get()),
-    option_2_store.set(option_2_store.get()+ token_buy.get()),
+    option_2_store.set(option_2_store.get() + token_buy.get()),
     option_get.set(question_id,option_1_store,option_2_store,option_3_store,option_4_store,option_5_store,option_6_store,option_7_store),
     app.state.option_rec[(question_id).get()].set(option_get),
+
             ).ElseIf
+
     (user_response.get() == pt.Int(3)).Then(
-            # app.state.option3.increment(token_buy.get())
     option_get.decode(app.state.option_rec[question_id.get()].get()),
-    option_3_store.set(option_3_store.get()+ token_buy.get()),
+    option_3_store.set(option_3_store.get() + token_buy.get()),
     option_get.set(question_id,option_1_store,option_2_store,option_3_store,option_4_store,option_5_store,option_6_store,option_7_store),
     app.state.option_rec[(question_id).get()].set(option_get),
+
             ).ElseIf
+
     (user_response.get() == pt.Int(4)).Then(
-            # app.state.option4.increment(token_buy.get())
     option_get.decode(app.state.option_rec[question_id.get()].get()),
-    option_4_store.set(option_4_store.get()+ token_buy.get()),
+    option_4_store.set(option_4_store.get() + token_buy.get()),
     option_get.set(question_id,option_1_store,option_2_store,option_3_store,option_4_store,option_5_store,option_6_store,option_7_store),
     app.state.option_rec[(question_id).get()].set(option_get),
+
             ).ElseIf
+
     (user_response.get() == pt.Int(5)).Then(
-            # app.state.option5.increment(token_buy.get())
     option_get.decode(app.state.option_rec[question_id.get()].get()),
-    option_5_store.set(option_5_store.get()+ token_buy.get()),
+    option_5_store.set(option_5_store.get() + token_buy.get()),
     option_get.set(question_id,option_1_store,option_2_store,option_3_store,option_4_store,option_5_store,option_6_store,option_7_store),
     app.state.option_rec[(question_id).get()].set(option_get),
+
             ).ElseIf
+
     (user_response.get() == pt.Int(6)).Then(
-            # app.state.option6.increment(token_buy.get())
     option_get.decode(app.state.option_rec[question_id.get()].get()),
-    option_6_store.set(option_6_store.get()+ token_buy.get()),
+    option_6_store.set(option_6_store.get() + token_buy.get()),
     option_get.set(question_id,option_1_store,option_2_store,option_3_store,option_4_store,option_5_store,option_6_store,option_7_store),
     app.state.option_rec[(question_id).get()].set(option_get),
-        ).ElseIf
+
+           ).ElseIf
+
     (user_response.get() == pt.Int(7)).Then(
-            # app.state.option7.increment(token_buy.get())
     option_get.decode(app.state.option_rec[question_id.get()].get()),
-    option_7_store.set(option_7_store.get()+ token_buy.get()),
+    option_7_store.set(option_7_store.get() + token_buy.get()),
     option_get.set(question_id,option_1_store,option_2_store,option_3_store,option_4_store,option_5_store,option_6_store,option_7_store),
     app.state.option_rec[(question_id).get()].set(option_get),
 
     ),
     )
 
-#Function to sell tokens in secondary market place
+#---------------------Function to sell tokens in secondary market place------------------------
+
 @app.external
 def token_sell(proposal_id:pt.abi.String,user_id:pt.abi.String,question_id:pt.abi.String,
                user_response:pt.abi.Uint64,
@@ -470,7 +489,7 @@ def token_sell(proposal_id:pt.abi.String,user_id:pt.abi.String,question_id:pt.ab
     (amt_chk1:= pt.abi.String()).set(user_asset_store.get()),
     asset_store.set(user_id,amt_chk1,amt_chk),
     app.state.asset_rec[user_id.get()].set(asset_store),
-
+ 
     (user_response_store :=pt.abi.make(pt.abi.Uint64)).set(response_get.User_Token),
     (amt_chk2:= pt.abi.Uint64()).set(user_response_store.get()-token_sell.get()),
     response_get.set(user_id,amt_chk2,user_response,question_id),
@@ -491,57 +510,63 @@ def token_sell(proposal_id:pt.abi.String,user_id:pt.abi.String,question_id:pt.ab
     (option_7_store:=pt.abi.make(pt.abi.Uint64)).set(option_get.option_7),
  
  pt.If(user_response.get() == pt.Int(1)).Then(
-            # app.state.option1.increment(token_buy.get())
     option_get.decode(app.state.option_rec[question_id.get()].get()),
-    option_1_store.set(option_1_store.get()- token_sell.get()),
+    option_1_store.set(option_1_store.get() - token_sell.get()),
     option_get.set(question_id,option_1_store,option_2_store,option_3_store,option_4_store,option_5_store,option_6_store,option_7_store),
     app.state.option_rec[(question_id).get()].set(option_get),
+
             ).ElseIf
+
     (user_response.get() == pt.Int(2)).Then(
-            # app.state.option2.increment(token_buy.get())
     option_get.decode(app.state.option_rec[question_id.get()].get()),
-    option_2_store.set(option_2_store.get()- token_sell.get()),
+    option_2_store.set(option_2_store.get() - token_sell.get()),
     option_get.set(question_id,option_1_store,option_2_store,option_3_store,option_4_store,option_5_store,option_6_store,option_7_store),
     app.state.option_rec[(question_id).get()].set(option_get),
+
             ).ElseIf
+
     (user_response.get() == pt.Int(3)).Then(
-            # app.state.option3.increment(token_buy.get())
     option_get.decode(app.state.option_rec[question_id.get()].get()),
-    option_3_store.set(option_3_store.get()-token_sell.get()),
+    option_3_store.set(option_3_store.get() - token_sell.get()),
     option_get.set(question_id,option_1_store,option_2_store,option_3_store,option_4_store,option_5_store,option_6_store,option_7_store),
     app.state.option_rec[(question_id).get()].set(option_get),
+
             ).ElseIf
+
     (user_response.get() == pt.Int(4)).Then(
-            # app.state.option4.increment(token_buy.get())
     option_get.decode(app.state.option_rec[question_id.get()].get()),
-    option_4_store.set(option_4_store.get()-token_sell.get()),
+    option_4_store.set(option_4_store.get() - token_sell.get()),
     option_get.set(question_id,option_1_store,option_2_store,option_3_store,option_4_store,option_5_store,option_6_store,option_7_store),
     app.state.option_rec[(question_id).get()].set(option_get),
+
             ).ElseIf
+
     (user_response.get() == pt.Int(5)).Then(
-            # app.state.option5.increment(token_buy.get())
     option_get.decode(app.state.option_rec[question_id.get()].get()),
-    option_5_store.set(option_5_store.get()-token_sell.get()),
+    option_5_store.set(option_5_store.get() - token_sell.get()),
     option_get.set(question_id,option_1_store,option_2_store,option_3_store,option_4_store,option_5_store,option_6_store,option_7_store),
     app.state.option_rec[(question_id).get()].set(option_get),
+
             ).ElseIf
+
     (user_response.get() == pt.Int(6)).Then(
-            # app.state.option6.increment(token_buy.get())
     option_get.decode(app.state.option_rec[question_id.get()].get()),
-    option_6_store.set(option_6_store.get()- token_sell.get()),
+    option_6_store.set(option_6_store.get() - token_sell.get()),
     option_get.set(question_id,option_1_store,option_2_store,option_3_store,option_4_store,option_5_store,option_6_store,option_7_store),
     app.state.option_rec[(question_id).get()].set(option_get),
-        ).ElseIf
+
+            ).ElseIf
+
     (user_response.get() == pt.Int(7)).Then(
-            # app.state.option7.increment(token_buy.get())
     option_get.decode(app.state.option_rec[question_id.get()].get()),
-    option_7_store.set(option_7_store.get()- token_sell.get()),
+    option_7_store.set(option_7_store.get() - token_sell.get()),
     option_get.set(question_id,option_1_store,option_2_store,option_3_store,option_4_store,option_5_store,option_6_store,option_7_store),
     app.state.option_rec[(question_id).get()].set(option_get),
     ),
     )                           
 
-#Function to Calculate Result of the voting
+#-------------------------------Function to Calculate Result of the voting--------------------------------
+
 @app.external   
 def Result(proposal_id:pt.abi.String,question_id:pt.abi.String,*,output:pt.abi.String)-> pt.Expr:
              
@@ -550,13 +575,12 @@ def Result(proposal_id:pt.abi.String,question_id:pt.abi.String,*,output:pt.abi.S
     result_store1=Result_store()
     option_get=option_store()
 
-
     return pt.Seq(
-    question_store1.decode(app.state.question_rec[question_id.get()].get()),
+    question_store1.decode(app.state.question_rec[question_id.get()].get()), 
     proposal_get.decode(app.state.proposal_rec[proposal_id.get()].get()),
 
  # //Options
-    option_get.decode(app.state.option_rec[question_id.get()].get()),
+     option_get.decode(app.state.option_rec[question_id.get()].get()),
     (option_1_store:=pt.abi.make(pt.abi.Uint64)).set(option_get.option_1),
     (option_2_store:=pt.abi.make(pt.abi.Uint64)).set(option_get.option_2),
     (option_3_store:=pt.abi.make(pt.abi.Uint64)).set(option_get.option_3),
@@ -564,30 +588,27 @@ def Result(proposal_id:pt.abi.String,question_id:pt.abi.String,*,output:pt.abi.S
     (option_5_store:=pt.abi.make(pt.abi.Uint64)).set(option_get.option_5),
     (option_6_store:=pt.abi.make(pt.abi.Uint64)).set(option_get.option_6),
     (option_7_store:=pt.abi.make(pt.abi.Uint64)).set(option_get.option_7),
-  
+      
     (maxi := pt.abi.Uint64()).set(option_1_store.get()),
-    pt.If (option_2_store.get() > maxi.get()).Then(
+
+    pt.If(option_2_store.get() > maxi.get()).Then(
                 maxi.set(option_2_store.get())
                 ),
     pt.If(option_3_store.get() > maxi.get()).Then(
                 maxi.set(option_3_store.get())
                 ),
-    pt.If(option_4_store.get()> maxi.get()).Then(
+    pt.If(option_4_store.get() > maxi.get()).Then(
                 maxi.set(option_4_store.get())
                 ),
-    pt.If(option_5_store.get()>maxi.get()).Then(
+    pt.If(option_5_store.get() > maxi.get()).Then(
                 maxi.set(option_5_store.get())
                 ),
-    pt.If(option_6_store.get()>maxi.get()).Then(          
+    pt.If(option_6_store.get() > maxi.get()).Then(          
                 maxi.set(option_6_store.get())
                 ),
-    pt.If(option_7_store.get()>maxi.get()).Then(
+    pt.If(option_7_store.get() > maxi.get()).Then(
                 maxi.set(option_7_store.get())
                 ),
-
-    (result:= pt.abi.Uint64()).set(pt.Int(1)),  
-    result_store1.set(question_id,result),
-    app.state.result_rec[question_id.get()].set(result_store1),
 
     pt.If(maxi.get() == option_1_store.get()).Then(
     output.set(pt.Concat(pt.Bytes("option 1 is winner, "), question_id.get())),
@@ -595,35 +616,41 @@ def Result(proposal_id:pt.abi.String,question_id:pt.abi.String,*,output:pt.abi.S
     result_store1.set(question_id,result),
     app.state.result_rec[question_id.get()].set(result_store1),
      
+
     ).ElseIf(maxi.get() == option_2_store.get()).Then(
     output.set(pt.Concat(pt.Bytes("option 2 is winner, "), question_id.get())),
     (result:= pt.abi.Uint64()).set(pt.Int(2)),
     result_store1.set(question_id,result),
     app.state.result_rec[question_id.get()].set(result_store1),
              
+
     ).ElseIf(maxi.get() == option_3_store.get()).Then(
     output.set(pt.Concat(pt.Bytes("option 3 is winner, "), question_id.get())),
     (result:= pt.abi.Uint64()).set(pt.Int(3)),
     result_store1.set(question_id,result),
     app.state.result_rec[question_id.get()].set(result_store1),
 
+
     ).ElseIf(maxi.get() == option_4_store.get()).Then(
     output.set(pt.Concat(pt.Bytes("option 4 is winner, "), question_id.get())),
     (result:= pt.abi.Uint64()).set(pt.Int(4)),
     result_store1.set(question_id,result),
     app.state.result_rec[question_id.get()].set(result_store1),
-    
+
+
     ).ElseIf(maxi.get() == option_5_store.get()).Then(
     output.set(pt.Concat(pt.Bytes("option 5 is winner, "), question_id.get())),
     (result:= pt.abi.Uint64()).set(pt.Int(5)),
     result_store1.set(question_id,result),
     app.state.result_rec[question_id.get()].set(result_store1),
 
+
     ).ElseIf(maxi.get() == option_6_store.get()).Then(
     output.set(pt.Concat(pt.Bytes("option 6 is winner, "), question_id.get())),
     (result:= pt.abi.Uint64()).set(pt.Int(6)),
     result_store1.set(question_id,result),
     app.state.result_rec[question_id.get()].set(result_store1),
+
 
     ).ElseIf(maxi.get() == option_7_store.get()).Then(
     output.set(pt.Concat(pt.Bytes("option 7 is winner, "), question_id.get())),
@@ -634,7 +661,8 @@ def Result(proposal_id:pt.abi.String,question_id:pt.abi.String,*,output:pt.abi.S
     ),
     )
 
-#read functions
+#---------------------------read functions-----------------------------
+
 @app.external 
 def read_options(question_id:pt.abi.String,*,output:option_store)-> pt.Expr:
     option_get=option_store()
@@ -687,8 +715,11 @@ def read_user_response(user_id:pt.abi.String,question_id:pt.abi.String,proposal_
     app.state.response_rec[user_id.get()].store_into(output)
     )
 
+# -------------------------app build---------------------------
+
 if __name__=="__main__":
     spec=app.build()
     print("Contract Created Successfully!!!!!!!!!!")
     spec.export("artifacts_debug")
 
+   

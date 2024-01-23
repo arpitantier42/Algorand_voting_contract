@@ -190,10 +190,6 @@
             "args": [
                 {
                     "type": "string",
-                    "name": "proposal_id"
-                },
-                {
-                    "type": "string",
                     "name": "question_id"
                 }
             ],
@@ -250,18 +246,6 @@
             }
         },
         {
-            "name": "read_result",
-            "args": [
-                {
-                    "type": "string",
-                    "name": "question_id"
-                }
-            ],
-            "returns": {
-                "type": "(string,uint64)"
-            }
-        },
-        {
             "name": "read_user_proposal_store",
             "args": [
                 {
@@ -282,15 +266,7 @@
             "args": [
                 {
                     "type": "string",
-                    "name": "proposal_id"
-                },
-                {
-                    "type": "string",
                     "name": "user_id"
-                },
-                {
-                    "type": "string",
-                    "name": "asset_id"
                 }
             ],
             "returns": {
@@ -307,10 +283,6 @@
                 {
                     "type": "string",
                     "name": "question_id"
-                },
-                {
-                    "type": "string",
-                    "name": "proposal_id"
                 }
             ],
             "returns": {

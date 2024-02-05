@@ -2,7 +2,7 @@
     "name": "Voting_Contract_fn_test",
     "methods": [
         {
-            "name": "Register_proposal",
+            "name": "register_proposal",
             "args": [
                 {
                     "type": "string",
@@ -26,7 +26,7 @@
             }
         },
         {
-            "name": "RegisterQues",
+            "name": "register_ques",
             "args": [
                 {
                     "type": "string",
@@ -46,7 +46,7 @@
             }
         },
         {
-            "name": "Registred_user_per_proposal",
+            "name": "registred_user_per_proposal",
             "args": [
                 {
                     "type": "string",
@@ -78,7 +78,7 @@
             }
         },
         {
-            "name": "Register_user_asset",
+            "name": "register_user_asset",
             "args": [
                 {
                     "type": "string",
@@ -102,7 +102,31 @@
             }
         },
         {
-            "name": "Voting_Record",
+            "name": "de_register_user_asset",
+            "args": [
+                {
+                    "type": "string",
+                    "name": "proposal_id"
+                },
+                {
+                    "type": "string",
+                    "name": "user_id"
+                },
+                {
+                    "type": "string",
+                    "name": "asset_id"
+                },
+                {
+                    "type": "uint64",
+                    "name": "token_count"
+                }
+            ],
+            "returns": {
+                "type": "string"
+            }
+        },
+        {
+            "name": "voting_record",
             "args": [
                 {
                     "type": "string",
@@ -186,7 +210,7 @@
             }
         },
         {
-            "name": "Result",
+            "name": "result",
             "args": [
                 {
                     "type": "string",
@@ -206,7 +230,7 @@
                 }
             ],
             "returns": {
-                "type": "(string,uint64,uint64,uint64,uint64,uint64,uint64,uint64)"
+                "type": "(string,uint64,uint64,uint64,uint64,uint64)"
             }
         },
         {
